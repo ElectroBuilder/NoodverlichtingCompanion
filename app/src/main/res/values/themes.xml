@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Noodverlichting" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Kleuren naar wens -->
+        <item name="colorPrimary">#0061A8</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+    </style>
+</resources>

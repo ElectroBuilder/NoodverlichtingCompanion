@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/group_main">
+        <item
+            android:id="@+id/action_toggle_defects"
+            android:title="Gebreken tonen"
+            android:checkable="true"
+            android:icon="@drawable/ic_warning"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/action_columns"
+            android:title="Kolommen"
+            android:icon="@drawable/ic_view_column"
+            app:showAsAction="ifRoom" />
+    </group>
+</menu>

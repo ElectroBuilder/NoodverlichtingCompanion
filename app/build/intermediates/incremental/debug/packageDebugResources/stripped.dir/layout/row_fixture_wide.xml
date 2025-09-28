@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nl.mikekemmink.noodverlichting.ui.SyncHorizontalScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/hscrollRow"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:fillViewport="true"
+android:scrollbars="none">
+
+    <LinearLayout
+        android:id="@+id/rowContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        >
+
+
+    <!-- Nr -->
+        <TextView
+            android:id="@+id/tvNr"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#222"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Verdieping -->
+        <TextView
+            android:id="@+id/tvVerdieping"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#333"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Soort -->
+        <TextView
+            android:id="@+id/tvSoort"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#333"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Merk -->
+        <TextView
+            android:id="@+id/tvMerk"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#333"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Type -->
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#333"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Pictogram -->
+        <TextView
+            android:id="@+id/tvPictogram"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#333"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Duurtest -->
+        <TextView
+            android:id="@+id/tvDuurtest"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#333"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvOpTekening"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvCode"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvMontagewijze"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvAccuType"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvArtikelNr"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvAccuLeeftijd"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvOpmerking"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:id="@+id/tvATS"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:textColor="#555"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+    </LinearLayout>
+</nl.mikekemmink.noodverlichting.ui.SyncHorizontalScrollView>
