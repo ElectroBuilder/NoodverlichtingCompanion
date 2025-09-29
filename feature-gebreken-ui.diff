@@ -27,7 +27,7 @@ index 0000000..1111111
 --- /dev/null
 +++ b/app/src/main/java/com/example/noodverlichting/ui/gebreken/EditGebrekDialog.java
 @@ -0,0 +1,64 @@
-+package com.example.noodverlichting.ui.gebreken;
++package nl.mikekemmink.noodverlichting.ui.gebreken;
 +
 +import android.app.Dialog;
 +import android.os.Bundle;
@@ -80,7 +80,7 @@ index 0000000..2222222
 --- /dev/null
 +++ b/app/src/main/java/com/example/noodverlichting/ui/gebreken/GebrekenActivity.java
 @@ -0,0 +1,134 @@
-+package com.example.noodverlichting.ui.gebreken;
++package nl.mikekemmink.noodverlichting.ui.gebreken;
 +
 +import android.os.Bundle;
 +import androidx.activity.OnBackPressedCallback;
@@ -88,7 +88,7 @@ index 0000000..2222222
 +import androidx.appcompat.app.AppCompatActivity;
 +import androidx.recyclerview.widget.ItemTouchHelper;
 +import androidx.recyclerview.widget.RecyclerView;
-+import com.example.noodverlichting.R;
++import nl.mikekemmink.noodverlichting.R;
 +import com.google.android.material.appbar.MaterialToolbar;
 +import com.google.android.material.snackbar.Snackbar;
 +import java.util.ArrayList;
@@ -200,7 +200,7 @@ index 0000000..3333333
 --- /dev/null
 +++ b/app/src/main/java/com/example/noodverlichting/ui/gebreken/GebrekenAdapter.java
 @@ -0,0 +1,82 @@
-+package com.example.noodverlichting.ui.gebreken;
++package nl.mikekemmink.noodverlichting.ui.gebreken;
 +
 +import android.view.LayoutInflater;
 +import android.view.View;
@@ -208,7 +208,7 @@ index 0000000..3333333
 +import android.widget.TextView;
 +import androidx.annotation.NonNull;
 +import androidx.recyclerview.widget.RecyclerView;
-+import com.example.noodverlichting.R;
++import nl.mikekemmink.noodverlichting.R;
 +import java.util.List;
 +
 +public class GebrekenAdapter extends RecyclerView.Adapter<GebrekenAdapter.VH> {
@@ -254,7 +254,7 @@ index 0000000..4444444
 --- /dev/null
 +++ b/app/src/main/java/com/example/noodverlichting/ui/gebreken/Gebrek.java
 @@ -0,0 +1,27 @@
-+package com.example.noodverlichting.ui.gebreken;
++package nl.mikekemmink.noodverlichting.ui.gebreken;
 +
 +class Gebrek {
 +    long id;           // lokaal of DB-id
@@ -270,7 +270,7 @@ index 0000000..5555555
 --- /dev/null
 +++ b/app/src/main/java/com/example/noodverlichting/ui/gebreken/SwipeCallback.java
 @@ -0,0 +1,115 @@
-+package com.example.noodverlichting.ui.gebreken;
++package nl.mikekemmink.noodverlichting.ui.gebreken;
 +
 +import android.content.Context;
 +import android.graphics.Canvas;
@@ -281,7 +281,7 @@ index 0000000..5555555
 +import androidx.core.content.ContextCompat;
 +import androidx.recyclerview.widget.ItemTouchHelper;
 +import androidx.recyclerview.widget.RecyclerView;
-+import com.example.noodverlichting.R;
++import nl.mikekemmink.noodverlichting.R;
 +
 +public abstract class SwipeCallback extends ItemTouchHelper.SimpleCallback {
 +

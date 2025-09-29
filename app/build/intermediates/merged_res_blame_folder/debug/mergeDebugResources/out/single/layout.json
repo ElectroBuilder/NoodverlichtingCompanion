@@ -20,6 +20,14 @@
         "source": "nl.mikekemmink.noodverlichting.app-main-34:/layout/include_toolbar.xml"
     },
     {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-31:/layout/activity_gebreken.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-34:/layout/activity_gebreken.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-31:/layout/item_gebrek.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-34:/layout/item_gebrek.xml"
+    },
+    {
         "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-31:/layout/row_fixture_wide.xml",
         "source": "nl.mikekemmink.noodverlichting.app-main-34:/layout/row_fixture_wide.xml"
     },
