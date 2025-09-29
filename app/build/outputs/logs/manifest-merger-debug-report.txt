@@ -11,10 +11,10 @@ INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidMa
 	android:name
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:21:13-62
 manifest
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-62:12
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-62:12
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-62:12
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-62:12
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-70:12
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-70:12
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-70:12
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:1:1-70:12
 MERGED from [androidx.databinding:viewbinding:8.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\433455941a1460a5c83ee65b2382278d\transformed\viewbinding-8.13.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\19b095360640f691ba3bb287ec99086c\transformed\appcompat-resources-1.7.0\AndroidManifest.xml:2:1-7:12
@@ -88,8 +88,8 @@ ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManif
 	android:name
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:10:22-78
 application
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-60:19
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-60:19
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-68:19
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-68:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\ee210f75d0f39382ea427d00dc0432c9\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
@@ -170,6 +170,12 @@ ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManif
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:58:57-81
 	android:name
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:58:19-56
+activity#nl.mikekemmink.noodverlichting.ui.gebreken.GebrekenActivity
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:59:9-66:20
+	android:exported
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:61:13-36
+	android:name
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:60:13-87
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:25:13-27:54
 	android:resource
