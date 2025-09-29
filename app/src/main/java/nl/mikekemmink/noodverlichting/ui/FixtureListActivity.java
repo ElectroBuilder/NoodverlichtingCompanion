@@ -113,7 +113,7 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
         String soortCol      = firstExisting(cols, "Soort","soort","Type","type");
         String verdiepingCol = firstExisting(cols, "Verdieping","verdieping","Floor","floor","Etage","etage");
         String opTekCol      = firstExisting(cols, "Op tekening","Op_Tekening","OpTekening","op_tekening","optekening");
-        String typeCol       = firstExisting(cols, "Type","type");
+        String typeCol       = firstExisting(cols, "Type","type", "Armatuur type");
         String merkCol       = firstExisting(cols, "Merk","merk","Armatuur merk","armatuur_merk","ArmatuurMerk");
         String montageCol    = firstExisting(cols, "Montagewijze","montagewijze","Montage","montage");
         String pictogramCol  = firstExisting(cols, "Pictogram","pictogram");
