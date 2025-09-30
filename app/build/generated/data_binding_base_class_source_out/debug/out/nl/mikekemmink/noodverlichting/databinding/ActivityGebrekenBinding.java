@@ -24,13 +24,13 @@ public final class ActivityGebrekenBinding implements ViewBinding {
   public final RecyclerView recyclerGebreken;
 
   @NonNull
-  public final MaterialToolbar toolbar;
+  public final MaterialToolbar toolbarGebreken;
 
   private ActivityGebrekenBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull RecyclerView recyclerGebreken, @NonNull MaterialToolbar toolbar) {
+      @NonNull RecyclerView recyclerGebreken, @NonNull MaterialToolbar toolbarGebreken) {
     this.rootView = rootView;
     this.recyclerGebreken = recyclerGebreken;
-    this.toolbar = toolbar;
+    this.toolbarGebreken = toolbarGebreken;
   }
 
   @Override
@@ -66,13 +66,14 @@ public final class ActivityGebrekenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.toolbar;
-      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
-      if (toolbar == null) {
+      id = R.id.toolbarGebreken;
+      MaterialToolbar toolbarGebreken = ViewBindings.findChildViewById(rootView, id);
+      if (toolbarGebreken == null) {
         break missingId;
       }
 
-      return new ActivityGebrekenBinding((CoordinatorLayout) rootView, recyclerGebreken, toolbar);
+      return new ActivityGebrekenBinding((CoordinatorLayout) rootView, recyclerGebreken,
+          toolbarGebreken);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
