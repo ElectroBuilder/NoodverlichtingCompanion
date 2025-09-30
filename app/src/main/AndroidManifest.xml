@@ -56,15 +56,10 @@
             android:exported="false" />
 
         <activity android:name=".ui.DefectListActivity" android:exported="false"/>
-        <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.gebreken.GebrekenActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
+        <activity
+            android:name=".gebreken.GebrekenActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

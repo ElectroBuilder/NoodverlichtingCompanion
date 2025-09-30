@@ -71,14 +71,8 @@
             android:name="nl.mikekemmink.noodverlichting.ui.DefectListActivity"
             android:exported="false" />
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.gebreken.GebrekenActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name="nl.mikekemmink.noodverlichting.gebreken.GebrekenActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

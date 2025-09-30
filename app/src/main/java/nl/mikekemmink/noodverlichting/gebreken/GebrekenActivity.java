@@ -1,4 +1,4 @@
-package nl.mikekemmink.noodverlichting.ui.gebreken;
+package nl.mikekemmink.noodverlichting.gebreken;
 
 import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
