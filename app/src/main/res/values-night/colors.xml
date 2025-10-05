@@ -1,0 +1,19 @@
+<!-- res/values-night/colors.xml -->
+<resources>
+    <!-- Je mag primary/secondary gelijk houden aan licht, of wat lichter maken in dark -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryVariant">#90CAF9</color> <!-- iets lichter voor dark -->
+    <color name="colorSecondary">#FF9800</color>
+    <color name="colorSecondaryVariant">#FFB74D</color>
+
+    <!-- Belangrijk voor achtergrond/tekstkleur in dark -->
+    <color name="colorBackground">#121212</color>
+    <color name="colorSurface">#1E1E1E</color>
+    <color name="colorError">#CF6679</color>
+
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#000000</color> <!-- oranje 500 leest vaak goed met zwart -->
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOnError">#000000</color>
+</resources>

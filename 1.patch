@@ -1,0 +1,51 @@
+diff --git a/app/src/main/java/nl/mikekemmink/noodverlichting/ui/FixtureListActivity.java b/app/src/main/java/nl/mikekemmink/noodverlichting/ui/FixtureListActivity.java
+index 0000000..1111111 100644
+--- a/app/src/main/java/nl/mikekemmink/noodverlichting/ui/FixtureListActivity.java
++++ b/app/src/main/java/nl/mikekemmink/noodverlichting/ui/FixtureListActivity.java
+@@ -1,5 +1,5 @@
+ package nl.mikekemmink.noodverlichting.ui;
+- 
++
+ import android.content.Context;
+ import android.content.Intent;
+ import android.database.Cursor;
+@@ -74,6 +74,7 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
+         defectProvider = new DefectProvider(dbHelper);
+         list = findViewById(R.id.listArmaturen);
+         list.setOnItemClickListener((parent, view, position, id) -> {
+             if (adapter == null) return;
+             Cursor c = (Cursor) adapter.getItem(position);
+             if (c == null) return;
+             int idx = c.getColumnIndex("inspectieid");
+             if (idx >= 0) {
+                 int inspectieid = c.getInt(idx);
+                 Log.d("ArmatuurKlik", "OnItemClick inspectieid = " + inspectieid);
+                 showPlattegrondWithMarker(inspectieid);
+             } else {
+                 Log.e("ArmatuurKlik", "Kolom 'inspectieid' niet gevonden in cursor");
+             }
+         });
+-        list.setLongClickable(true);
++        // ▼▼▼ LONG-CLICK: toon bestaand rij-menu ▼▼▼
++        list.setLongClickable(true);
++        list.setOnItemLongClickListener((parent, view, position, id) -> {
++            if (adapter == null) return true;
++            Cursor c = (Cursor) adapter.getItem(position);
++            if (c == null) return true;
++            int idxId = c.getColumnIndex("inspectieid");
++            if (idxId < 0) {
++                Log.e(TAG, "Kolom 'inspectieid' niet gevonden in cursor (long-click)");
++                return true;
++            }
++            int idxCode = c.getColumnIndex("code"); // alias 'code' uit SELECT
++            int inspectieid = c.getInt(idxId);
++            String fixtureCode = (idxCode >= 0 ? c.getString(idxCode) : null);
++            // Haptische feedback, dan jouw bestaande menu
++            view.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS);
++            showRowMenu(inspectieid, fixtureCode);
++            return true;
++        });
+         list.setItemsCanFocus(false);
+         copyMarkersFromAssetsIfNeeded();
+         loadMarkersFromJson();
+         load(locatie);

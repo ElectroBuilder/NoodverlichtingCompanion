@@ -1,0 +1,21 @@
+<!-- fragment_plattegrond.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pdfContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Snelle placeholder uit disk-cache -->
+    <ImageView
+        android:id="@+id/pdfPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:visibility="gone" />
+
+    <!-- Bestaande PDFView -->
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
