@@ -1,7 +1,0 @@
-
-// (Optioneel, extra veilig) Voeg dit bovenaan in bindView(...) toe om re-registratie te forceren
-// als een row-view gerecycled/reattached is:
-View sv = view.findViewById(R.id.hscrollRow);
-if (sv instanceof SyncHorizontalScrollView && syncManager != null) {
-    ((SyncHorizontalScrollView) sv).setSyncer(syncManager);
-}

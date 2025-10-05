@@ -1,16 +1,10 @@
 
 package nl.mikekemmink.noodverlichting.ui;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.appbar.MaterialToolbar;
+
 import nl.mikekemmink.noodverlichting.BaseActivity;
 import nl.mikekemmink.noodverlichting.IToolbarActions;
 import nl.mikekemmink.noodverlichting.R;
@@ -19,12 +13,6 @@ public class LocationListFragment extends Fragment implements IToolbarActions {
 
     private boolean showDefects = false;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_location_list, container, false);
-        return root;
-    }
 
     @Override
     public void onResume() {

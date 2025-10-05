@@ -3,9 +3,6 @@ package nl.mikekemmink.noodverlichting.ui;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,9 +36,13 @@ public class LocationListActivity extends BaseActivity implements SimpleAdapter.
         setContentView(R.layout.activity_with_toolbar);
 
         // 2) Toolbar koppelen (één keer per Activity)
+
         MaterialToolbar tb = findViewById(R.id.toolbar);
         attachToolbar(tb);
-        // (optioneel back: getSupportActionBar().setDisplayHomeAsUpEnabled(true); )
+
+        // Terugknop laten werken
+        tb.setNavigationOnClickListener(v -> finish());
+
 
         // 3) JOUW content in de container zetten
         getLayoutInflater().inflate(
@@ -55,13 +56,6 @@ public class LocationListActivity extends BaseActivity implements SimpleAdapter.
         recycler.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SimpleAdapter(filtered, this);
         recycler.setAdapter(adapter);
-
-        EditText edt = findViewById(R.id.edtFilter);
-        edt.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { filter(s.toString()); }
-            @Override public void afterTextChanged(Editable s) {}
-        });
 
         SQLiteDatabase db = DBInspecties.tryOpenReadOnly(this);
         if (db != null) {

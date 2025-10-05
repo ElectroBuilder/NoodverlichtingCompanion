@@ -4,7 +4,6 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +20,11 @@ public final class ActivityLocationListBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final EditText edtFilter;
-
-  @NonNull
   public final RecyclerView recycler;
 
-  private ActivityLocationListBinding(@NonNull LinearLayout rootView, @NonNull EditText edtFilter,
+  private ActivityLocationListBinding(@NonNull LinearLayout rootView,
       @NonNull RecyclerView recycler) {
     this.rootView = rootView;
-    this.edtFilter = edtFilter;
     this.recycler = recycler;
   }
 
@@ -60,19 +55,13 @@ public final class ActivityLocationListBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.edtFilter;
-      EditText edtFilter = ViewBindings.findChildViewById(rootView, id);
-      if (edtFilter == null) {
-        break missingId;
-      }
-
       id = R.id.recycler;
       RecyclerView recycler = ViewBindings.findChildViewById(rootView, id);
       if (recycler == null) {
         break missingId;
       }
 
-      return new ActivityLocationListBinding((LinearLayout) rootView, edtFilter, recycler);
+      return new ActivityLocationListBinding((LinearLayout) rootView, recycler);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

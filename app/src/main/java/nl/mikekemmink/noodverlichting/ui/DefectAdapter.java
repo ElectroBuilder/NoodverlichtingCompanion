@@ -68,7 +68,9 @@ public class DefectAdapter extends RecyclerView.Adapter<DefectAdapter.VH> {
             h.img.setImageResource(android.R.drawable.ic_menu_report_image);
         }
     }
-
+    public Item getItemAt(int position) {
+        return items.get(position);
+    }
     @Override public int getItemCount() { return items.size(); }
 
     static class VH extends RecyclerView.ViewHolder {

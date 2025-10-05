@@ -4,6 +4,7 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -18,13 +19,16 @@ import nl.mikekemmink.noodverlichting.ui.SyncHorizontalScrollView;
 
 public final class RowFixtureWideBinding implements ViewBinding {
   @NonNull
-  private final SyncHorizontalScrollView rootView;
+  private final FrameLayout rootView;
 
   @NonNull
   public final SyncHorizontalScrollView hscrollRow;
 
   @NonNull
   public final LinearLayout rowContainer;
+
+  @NonNull
+  public final FrameLayout rowRoot;
 
   @NonNull
   public final TextView tvATS;
@@ -71,16 +75,21 @@ public final class RowFixtureWideBinding implements ViewBinding {
   @NonNull
   public final TextView tvVerdieping;
 
-  private RowFixtureWideBinding(@NonNull SyncHorizontalScrollView rootView,
+  @NonNull
+  public final TextView tvinspectieid;
+
+  private RowFixtureWideBinding(@NonNull FrameLayout rootView,
       @NonNull SyncHorizontalScrollView hscrollRow, @NonNull LinearLayout rowContainer,
-      @NonNull TextView tvATS, @NonNull TextView tvAccuLeeftijd, @NonNull TextView tvAccuType,
-      @NonNull TextView tvArtikelNr, @NonNull TextView tvCode, @NonNull TextView tvDuurtest,
-      @NonNull TextView tvMerk, @NonNull TextView tvMontagewijze, @NonNull TextView tvNr,
-      @NonNull TextView tvOpTekening, @NonNull TextView tvOpmerking, @NonNull TextView tvPictogram,
-      @NonNull TextView tvSoort, @NonNull TextView tvType, @NonNull TextView tvVerdieping) {
+      @NonNull FrameLayout rowRoot, @NonNull TextView tvATS, @NonNull TextView tvAccuLeeftijd,
+      @NonNull TextView tvAccuType, @NonNull TextView tvArtikelNr, @NonNull TextView tvCode,
+      @NonNull TextView tvDuurtest, @NonNull TextView tvMerk, @NonNull TextView tvMontagewijze,
+      @NonNull TextView tvNr, @NonNull TextView tvOpTekening, @NonNull TextView tvOpmerking,
+      @NonNull TextView tvPictogram, @NonNull TextView tvSoort, @NonNull TextView tvType,
+      @NonNull TextView tvVerdieping, @NonNull TextView tvinspectieid) {
     this.rootView = rootView;
     this.hscrollRow = hscrollRow;
     this.rowContainer = rowContainer;
+    this.rowRoot = rowRoot;
     this.tvATS = tvATS;
     this.tvAccuLeeftijd = tvAccuLeeftijd;
     this.tvAccuType = tvAccuType;
@@ -96,11 +105,12 @@ public final class RowFixtureWideBinding implements ViewBinding {
     this.tvSoort = tvSoort;
     this.tvType = tvType;
     this.tvVerdieping = tvVerdieping;
+    this.tvinspectieid = tvinspectieid;
   }
 
   @Override
   @NonNull
-  public SyncHorizontalScrollView getRoot() {
+  public FrameLayout getRoot() {
     return rootView;
   }
 
@@ -125,13 +135,19 @@ public final class RowFixtureWideBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      SyncHorizontalScrollView hscrollRow = (SyncHorizontalScrollView) rootView;
+      id = R.id.hscrollRow;
+      SyncHorizontalScrollView hscrollRow = ViewBindings.findChildViewById(rootView, id);
+      if (hscrollRow == null) {
+        break missingId;
+      }
 
       id = R.id.rowContainer;
       LinearLayout rowContainer = ViewBindings.findChildViewById(rootView, id);
       if (rowContainer == null) {
         break missingId;
       }
+
+      FrameLayout rowRoot = (FrameLayout) rootView;
 
       id = R.id.tvATS;
       TextView tvATS = ViewBindings.findChildViewById(rootView, id);
@@ -223,10 +239,16 @@ public final class RowFixtureWideBinding implements ViewBinding {
         break missingId;
       }
 
-      return new RowFixtureWideBinding((SyncHorizontalScrollView) rootView, hscrollRow,
-          rowContainer, tvATS, tvAccuLeeftijd, tvAccuType, tvArtikelNr, tvCode, tvDuurtest, tvMerk,
+      id = R.id.tvinspectieid;
+      TextView tvinspectieid = ViewBindings.findChildViewById(rootView, id);
+      if (tvinspectieid == null) {
+        break missingId;
+      }
+
+      return new RowFixtureWideBinding((FrameLayout) rootView, hscrollRow, rowContainer, rowRoot,
+          tvATS, tvAccuLeeftijd, tvAccuType, tvArtikelNr, tvCode, tvDuurtest, tvMerk,
           tvMontagewijze, tvNr, tvOpTekening, tvOpmerking, tvPictogram, tvSoort, tvType,
-          tvVerdieping);
+          tvVerdieping, tvinspectieid);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -4,7 +4,6 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -13,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -23,13 +24,13 @@ public final class ActivityAddDefectBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
-  public final Button btnCamera;
+  public final MaterialButton btnCamera;
 
   @NonNull
-  public final Button btnGalerij;
+  public final MaterialButton btnGalerij;
 
   @NonNull
-  public final Button btnOpslaan;
+  public final MaterialButton btnOpslaan;
 
   @NonNull
   public final ImageView imgFoto;
@@ -38,17 +39,22 @@ public final class ActivityAddDefectBinding implements ViewBinding {
   public final Spinner spOmschrijving;
 
   @NonNull
+  public final MaterialToolbar toolbar;
+
+  @NonNull
   public final TextView txtFixture;
 
-  private ActivityAddDefectBinding(@NonNull ScrollView rootView, @NonNull Button btnCamera,
-      @NonNull Button btnGalerij, @NonNull Button btnOpslaan, @NonNull ImageView imgFoto,
-      @NonNull Spinner spOmschrijving, @NonNull TextView txtFixture) {
+  private ActivityAddDefectBinding(@NonNull ScrollView rootView, @NonNull MaterialButton btnCamera,
+      @NonNull MaterialButton btnGalerij, @NonNull MaterialButton btnOpslaan,
+      @NonNull ImageView imgFoto, @NonNull Spinner spOmschrijving, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView txtFixture) {
     this.rootView = rootView;
     this.btnCamera = btnCamera;
     this.btnGalerij = btnGalerij;
     this.btnOpslaan = btnOpslaan;
     this.imgFoto = imgFoto;
     this.spOmschrijving = spOmschrijving;
+    this.toolbar = toolbar;
     this.txtFixture = txtFixture;
   }
 
@@ -80,19 +86,19 @@ public final class ActivityAddDefectBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btnCamera;
-      Button btnCamera = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnCamera = ViewBindings.findChildViewById(rootView, id);
       if (btnCamera == null) {
         break missingId;
       }
 
       id = R.id.btnGalerij;
-      Button btnGalerij = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnGalerij = ViewBindings.findChildViewById(rootView, id);
       if (btnGalerij == null) {
         break missingId;
       }
 
       id = R.id.btnOpslaan;
-      Button btnOpslaan = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnOpslaan = ViewBindings.findChildViewById(rootView, id);
       if (btnOpslaan == null) {
         break missingId;
       }
@@ -109,6 +115,12 @@ public final class ActivityAddDefectBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.toolbar;
+      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      if (toolbar == null) {
+        break missingId;
+      }
+
       id = R.id.txtFixture;
       TextView txtFixture = ViewBindings.findChildViewById(rootView, id);
       if (txtFixture == null) {
@@ -116,7 +128,7 @@ public final class ActivityAddDefectBinding implements ViewBinding {
       }
 
       return new ActivityAddDefectBinding((ScrollView) rootView, btnCamera, btnGalerij, btnOpslaan,
-          imgFoto, spOmschrijving, txtFixture);
+          imgFoto, spOmschrijving, toolbar, txtFixture);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

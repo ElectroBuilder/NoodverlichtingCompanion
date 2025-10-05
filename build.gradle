@@ -4,3 +4,11 @@ buildscript {
 }
 
 tasks.register('clean', Delete) { delete rootProject.layout.buildDirectory }
+
+
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core:1.12.0'
+        force 'androidx.appcompat:appcompat:1.7.0'
+    }
+}

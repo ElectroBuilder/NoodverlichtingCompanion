@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,20 +18,24 @@ import nl.mikekemmink.noodverlichting.R;
 
 public final class ActivityFixtureListBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final LinearLayout rootView;
 
   @NonNull
   public final ListView listArmaturen;
 
-  private ActivityFixtureListBinding(@NonNull FrameLayout rootView,
-      @NonNull ListView listArmaturen) {
+  @NonNull
+  public final FrameLayout plattegrondContainer;
+
+  private ActivityFixtureListBinding(@NonNull LinearLayout rootView,
+      @NonNull ListView listArmaturen, @NonNull FrameLayout plattegrondContainer) {
     this.rootView = rootView;
     this.listArmaturen = listArmaturen;
+    this.plattegrondContainer = plattegrondContainer;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -61,7 +66,14 @@ public final class ActivityFixtureListBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityFixtureListBinding((FrameLayout) rootView, listArmaturen);
+      id = R.id.plattegrondContainer;
+      FrameLayout plattegrondContainer = ViewBindings.findChildViewById(rootView, id);
+      if (plattegrondContainer == null) {
+        break missingId;
+      }
+
+      return new ActivityFixtureListBinding((LinearLayout) rootView, listArmaturen,
+          plattegrondContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-30:/values-lv/values-lv.xml",
+            "outputFile": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-31:/values-lv/values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\MKk2\\.gradle\\caches\\8.13\\transforms\\d115fb15f09a2deca6409087d5fef1dc\\transformed\\core-1.13.0\\res\\values-lv\\values-lv.xml",

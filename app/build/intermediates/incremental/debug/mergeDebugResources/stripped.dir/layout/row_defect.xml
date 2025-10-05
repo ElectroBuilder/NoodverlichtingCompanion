@@ -1,38 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp">
 
     <ImageView
         android:id="@+id/imgThumb"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_report_image"/>
+        android:layout_width="24dp"
 
-    <LinearLayout
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="12dp">
-
-        <TextView
-            android:id="@+id/tvOmschrijving"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#222"
-            android:maxLines="2"
-            android:ellipsize="end"/>
-
-        <TextView
-            android:id="@+id/tvDatum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#666"
-            android:textSize="12sp"/>
-    </LinearLayout>
-
+        android:text="Voorbeeld gebrek" />
 </LinearLayout>

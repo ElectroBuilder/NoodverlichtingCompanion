@@ -1,10 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <!-- Sticky header -->
+    <include layout="@layout/header_fixture_columns" />
+
+    <!-- Scrollbare lijst -->
     <ListView
+
         android:id="@+id/listArmaturen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</FrameLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        android:choiceMode="singleChoice"
+        android:listSelector="@android:color/transparent"
+        android:drawSelectorOnTop="false"
+
+        android:clickable="false"
+
+        />
+
+    <!-- Onderste helft: plattegrondviewer -->
+    <FrameLayout
+        android:id="@+id/plattegrondContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:background="#eeeeee" />
+</LinearLayout>

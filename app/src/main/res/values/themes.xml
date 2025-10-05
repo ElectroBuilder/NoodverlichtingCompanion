@@ -1,7 +1,21 @@
-<resources>
+<!-- res/values/themes.xml -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- App-thema -->
     <style name="Theme.Noodverlichting" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Kleuren naar wens -->
-        <item name="colorPrimary">#0061A8</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <!-- Gebruik je eigen kleuren; dit zijn placeholders -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+
+        <!-- (optioneel) status bar -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
+
 </resources>

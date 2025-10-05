@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -23,18 +22,9 @@ public final class RowDefectBinding implements ViewBinding {
   @NonNull
   public final ImageView imgThumb;
 
-  @NonNull
-  public final TextView tvDatum;
-
-  @NonNull
-  public final TextView tvOmschrijving;
-
-  private RowDefectBinding(@NonNull LinearLayout rootView, @NonNull ImageView imgThumb,
-      @NonNull TextView tvDatum, @NonNull TextView tvOmschrijving) {
+  private RowDefectBinding(@NonNull LinearLayout rootView, @NonNull ImageView imgThumb) {
     this.rootView = rootView;
     this.imgThumb = imgThumb;
-    this.tvDatum = tvDatum;
-    this.tvOmschrijving = tvOmschrijving;
   }
 
   @Override
@@ -70,19 +60,7 @@ public final class RowDefectBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvDatum;
-      TextView tvDatum = ViewBindings.findChildViewById(rootView, id);
-      if (tvDatum == null) {
-        break missingId;
-      }
-
-      id = R.id.tvOmschrijving;
-      TextView tvOmschrijving = ViewBindings.findChildViewById(rootView, id);
-      if (tvOmschrijving == null) {
-        break missingId;
-      }
-
-      return new RowDefectBinding((LinearLayout) rootView, imgThumb, tvDatum, tvOmschrijving);
+      return new RowDefectBinding((LinearLayout) rootView, imgThumb);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -17,6 +17,7 @@ public class ColumnConfigManager {
     // Standaard set (en volgorde) – pas aan naar jouw voorkeur
     public static List<ColumnConfig> getDefault() {
         List<ColumnConfig> list = new ArrayList<>();
+        list.add(new ColumnConfig("inspectieid", "Inspectie-ID", true));
         list.add(new ColumnConfig("nr",            "Nr.",            false));
         list.add(new ColumnConfig("code",          "Code",           true));
         list.add(new ColumnConfig("soort",         "Soort",          true));

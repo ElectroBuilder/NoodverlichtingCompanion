@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- dekt /Android/data/<pkg>/files/** inclusief export/photos -->
-    <external-files-path name="all" path="." />
+    <external-files-path
+        name="photos"
+        path="export/photos/" />
 </paths>

@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -18,32 +20,42 @@ import nl.mikekemmink.noodverlichting.R;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final Button btnExport;
 
   @NonNull
-  public final Button btnImport;
+  public final Button btnImportZip;
 
   @NonNull
   public final Button btnStart;
 
   @NonNull
+  public final CircularProgressIndicator progressImport;
+
+  @NonNull
+  public final MaterialToolbar toolbar;
+
+  @NonNull
   public final TextView txtInfo;
 
-  private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull Button btnExport,
-      @NonNull Button btnImport, @NonNull Button btnStart, @NonNull TextView txtInfo) {
+  private ActivityMainBinding(@NonNull CoordinatorLayout rootView, @NonNull Button btnExport,
+      @NonNull Button btnImportZip, @NonNull Button btnStart,
+      @NonNull CircularProgressIndicator progressImport, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView txtInfo) {
     this.rootView = rootView;
     this.btnExport = btnExport;
-    this.btnImport = btnImport;
+    this.btnImportZip = btnImportZip;
     this.btnStart = btnStart;
+    this.progressImport = progressImport;
+    this.toolbar = toolbar;
     this.txtInfo = txtInfo;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -74,9 +86,9 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnImport;
-      Button btnImport = ViewBindings.findChildViewById(rootView, id);
-      if (btnImport == null) {
+      id = R.id.btnImportZip;
+      Button btnImportZip = ViewBindings.findChildViewById(rootView, id);
+      if (btnImportZip == null) {
         break missingId;
       }
 
@@ -86,14 +98,26 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressImport;
+      CircularProgressIndicator progressImport = ViewBindings.findChildViewById(rootView, id);
+      if (progressImport == null) {
+        break missingId;
+      }
+
+      id = R.id.toolbar;
+      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      if (toolbar == null) {
+        break missingId;
+      }
+
       id = R.id.txtInfo;
       TextView txtInfo = ViewBindings.findChildViewById(rootView, id);
       if (txtInfo == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((LinearLayout) rootView, btnExport, btnImport, btnStart,
-          txtInfo);
+      return new ActivityMainBinding((CoordinatorLayout) rootView, btnExport, btnImportZip,
+          btnStart, progressImport, toolbar, txtInfo);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

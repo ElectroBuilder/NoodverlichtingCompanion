@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.appbar.MaterialToolbar;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -22,10 +23,14 @@ public final class ActivityDefectListBinding implements ViewBinding {
   @NonNull
   public final RecyclerView rvDefects;
 
-  private ActivityDefectListBinding(@NonNull LinearLayout rootView,
-      @NonNull RecyclerView rvDefects) {
+  @NonNull
+  public final MaterialToolbar toolbar;
+
+  private ActivityDefectListBinding(@NonNull LinearLayout rootView, @NonNull RecyclerView rvDefects,
+      @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
     this.rvDefects = rvDefects;
+    this.toolbar = toolbar;
   }
 
   @Override
@@ -61,7 +66,13 @@ public final class ActivityDefectListBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityDefectListBinding((LinearLayout) rootView, rvDefects);
+      id = R.id.toolbar;
+      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      if (toolbar == null) {
+        break missingId;
+      }
+
+      return new ActivityDefectListBinding((LinearLayout) rootView, rvDefects, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
