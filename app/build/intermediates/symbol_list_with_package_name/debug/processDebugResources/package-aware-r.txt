@@ -3191,6 +3191,7 @@ id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
 id action_about
+id action_add
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -3201,6 +3202,7 @@ id action_bar_title
 id action_columns
 id action_container
 id action_context_bar
+id action_defects
 id action_divider
 id action_export_csv
 id action_help
@@ -3210,9 +3212,11 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
+id action_refresh
 id action_search
 id action_settings
 id action_text
+id action_toggle_defects
 id action_toggle_view
 id actions
 id activity_chooser_view_content
@@ -3286,7 +3290,6 @@ id confirm_button
 id container
 id content
 id contentPanel
-id content_container
 id contiguous
 id coordinator
 id cos
@@ -3356,6 +3359,7 @@ id fitStart
 id fitToContents
 id fitXY
 id fixed
+id fixture_list_root
 id flip
 id floating
 id forever
@@ -3411,6 +3415,7 @@ id listArmaturen
 id listMode
 id list_item
 id locale
+id location_list_root
 id ltr
 id m3_side_sheet
 id marquee
@@ -3549,6 +3554,8 @@ id row_index_key
 id rtl
 id rvColumns
 id rvDefects
+id rvFixtures
+id rvLocations
 id rvStroom
 id save_non_transition_alpha
 id save_overlay_view
@@ -3830,7 +3837,6 @@ layout activity_nen3140_cards
 layout activity_scaffold
 layout activity_select_inspection_cards
 layout activity_stroom_overzicht
-layout activity_with_toolbar
 layout content_nen3140_cards
 layout content_select_inspection_cards
 layout custom_dialog
@@ -3850,6 +3856,8 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout expand_button
+layout fragment_fixture_list
+layout fragment_location_list
 layout fragment_plattegrond
 layout header_fixture_columns
 layout image_frame
@@ -3974,6 +3982,11 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_add
+string action_columns
+string action_hide_defects
+string action_refresh
+string action_show_defects
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -4008,7 +4021,6 @@ string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
 string kies_omschrijving
-string kolommen
 string m3_exceed_max_badge_text_suffix
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
@@ -4124,6 +4136,8 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
 string summary_collapsed_preference_list
+string title_fixtures
+string title_locations
 string v7_preference_off
 string v7_preference_on
 style AlertDialog_AppCompat

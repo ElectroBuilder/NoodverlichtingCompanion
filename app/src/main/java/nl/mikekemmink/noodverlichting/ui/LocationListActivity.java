@@ -19,12 +19,10 @@ import com.google.android.material.chip.Chip;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.mikekemmink.noodverlichting.BaseActivity;
-import nl.mikekemmink.noodverlichting.IToolbarActions;
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.data.DBInspecties;
 
-public class LocationListActivity extends BaseActivity implements LocationsAdapter.OnItemClick, IToolbarActions {
+public class LocationListActivity extends BaseToolbarActivity implements LocationsAdapter.OnItemClick {
 
     public static final String EXTRA_LOCATIE = "nl.mikekemmink.noodverlichting.extra.LOCATIE";
 
@@ -45,25 +43,6 @@ public class LocationListActivity extends BaseActivity implements LocationsAdapt
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 1) Outer layout met AppBar + Toolbar
-        setContentView(R.layout.activity_with_toolbar);
-
-        // 2) Toolbar koppelen
-        MaterialToolbar tb = findViewById(R.id.toolbar);
-        attachToolbar(tb);
-        tb.setNavigationOnClickListener(v -> finish());
-
-        // 2b) Menu toevoegen + listener
-        tb.inflateMenu(R.menu.menu_locations);
-        tb.setOnMenuItemClickListener(this::onToolbarMenuItem);
-
-        // 3) Eigen content in de container
-        getLayoutInflater().inflate(
-                R.layout.activity_location_list,
-                findViewById(R.id.content_container),
-                true
-        );
 
         // Views
         recycler   = findViewById(R.id.recycler);
@@ -101,8 +80,6 @@ public class LocationListActivity extends BaseActivity implements LocationsAdapt
     @Override
     protected void onResume() {
         super.onResume();
-        // Bestaande toolbar-actie mechaniek
-        setToolbarActions(this);
 
         // Toggle-icoon en titel syncen met huidige state
         MaterialToolbar tb = findViewById(R.id.toolbar);
@@ -116,8 +93,7 @@ public class LocationListActivity extends BaseActivity implements LocationsAdapt
     @Override
     protected void onPause() {
         super.onPause();
-        setToolbarActions(null);
-    }
+            }
 
     // Toolbar-menu handler (if/else, geen switch)
     private boolean onToolbarMenuItem(MenuItem item) {

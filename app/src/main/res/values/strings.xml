@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Noodverlichting Companion</string>
-    <string name="kolommen">Kolommen</string>
+    <string name="action_columns">Kolommen</string>
     <string name="kies_omschrijving">kies omschrijving...</string>
     <string name="defect_foto" />
     <string name="content_open_locaties"> open locaties</string>
     <string name="content_status"> status</string>
+    <string name="title_fixtures">Armaturen</string>
+    <string name="action_add">Toevoegen</string>
+    <string name="action_refresh">Verversen</string>
+    <string name="action_show_defects">Gebreken tonen</string>
+    <string name="action_hide_defects">Gebreken verbergen</string>
+    <string name="title_locations">Locaties</string>
+
 </resources>

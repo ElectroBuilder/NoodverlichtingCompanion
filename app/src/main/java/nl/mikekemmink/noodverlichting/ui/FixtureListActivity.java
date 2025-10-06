@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -32,8 +31,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.github.barteksc.pdfviewer.PDFView;
 
-import com.google.android.material.appbar.MaterialToolbar;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -53,8 +50,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import nl.mikekemmink.noodverlichting.BaseActivity;
-import nl.mikekemmink.noodverlichting.IToolbarActions;
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.columns.ColumnConfig;
 import nl.mikekemmink.noodverlichting.columns.ColumnConfigManager;
@@ -62,9 +57,7 @@ import nl.mikekemmink.noodverlichting.columns.ColumnSettingsActivity;
 import nl.mikekemmink.noodverlichting.data.DBHelper;
 import nl.mikekemmink.noodverlichting.pdf.PdfPageCache;
 
-import nl.mikekemmink.noodverlichting.data.DBField;
-
-public class FixtureListActivity extends BaseActivity implements IToolbarActions {
+public class FixtureListActivity extends BaseToolbarActivity {
 
     private void invalidateDefectCachesAndRefresh() {
         // Cache voor snelle booleans (hasDefects) leeg
@@ -307,28 +300,33 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
         } catch (Exception e) { Log.e(TAG, "Fout in markers.json", e); }
     }
 
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_with_toolbar);
-        MaterialToolbar tb = findViewById(R.id.toolbar); attachToolbar(tb);
-        if (getSupportActionBar()!=null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getLayoutInflater().inflate(R.layout.activity_fixture_list, findViewById(R.id.content_container), true);
+        // 1) Alleen je content inflaten onder de gedeelde toolbar
+        setContentLayout(R.layout.activity_fixture_list);
 
-        String locatie = getIntent()!=null? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE): null;
+        // 2) Toolbar-titel/palet/up-knop via BaseToolbarActivity
+        setTitle("Armaturen");                 // wordt zo meteen overschreven door locatie-naam
+        applyPalette(Palette.NOOD);            // of Palette.NEN als dit scherm bij NEN3140 hoort
+        setUpEnabled(true);
+
+        // --- vanaf hier je bestaande init (ongelaten) ---
+        String locatie = getIntent()!=null ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE): null;
         if (locatie==null || locatie.trim().isEmpty())
             locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
         if (locatie==null || locatie.trim().isEmpty()) { startActivity(new Intent(this, LocationListActivity.class)); finish(); return; }
         getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(KEY_LAST_LOCATIE, locatie).apply();
+
         if (getSupportActionBar()!=null) getSupportActionBar().setTitle(locatie);
 
-
         dbHelper = new DBHelper(this);
-        // defectProvider = new DefectProvider(dbHelper);
-        defectProvider = new DefectProvider(this); // <-- veld nu gebaseerd op DBField
-
+        defectProvider = new DefectProvider(this);
 
         list = findViewById(R.id.listArmaturen);
+
         list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -380,12 +378,12 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
         if (adapter != null) adapter.notifyDataSetChanged();      // lijstkolom ‘Gebreken’
         if (pdfView != null) pdfView.postInvalidateOnAnimation(); // marker overlay
 
-        setToolbarActions(this);
+
         if (!didWarmOpen) { warmOpenLastPdfIfAny(); didWarmOpen = true; }
         reload();
     }
 
-    @Override protected void onPause() { super.onPause(); setToolbarActions(null); }
+    @Override protected void onPause() { super.onPause(); }
 
     private void ensurePlattegrondView(FrameLayout container) {
         if (plattegrondView!=null && plattegrondView.getParent()==container && pdfView!=null) return;
@@ -706,15 +704,44 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
         if (locatie!=null) { if (getSupportActionBar()!=null) getSupportActionBar().setTitle(locatie); load(locatie); }
     }
 
-    // IToolbarActions
-    @Override public boolean isDefectsShown() { return showDefects; }
-    @Override public void onToggleDefects(boolean show) { showDefects=show; Map<String,Integer> colW=computeColumnWidthsPx(); List<ColumnConfig> cfg=ColumnConfigManager.load(this); buildHeader(cfg,colW,showDefects); if (adapter!=null) adapter.setShowDefects(showDefects); }
-    @Override public void onColumnsClicked() { startActivity(new Intent(this, ColumnSettingsActivity.class)); }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) { if (item.getItemId()==android.R.id.home){ finish(); return true;} if (item.getItemId()==R.id.action_columns){ startActivity(new Intent(this, ColumnSettingsActivity.class)); return true;} return super.onOptionsItemSelected(item);}
+        if (id == android.R.id.home) { finish(); return true; }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) { getMenuInflater().inflate(R.menu.menu_fixture_list, menu); return true; }
+        if (id == R.id.action_columns) {
+            startActivity(new Intent(this, ColumnSettingsActivity.class));
+            return true;
+        }
 
+        if (id == R.id.action_defects) {
+            // Toggle checkmark
+            boolean newState = !item.isChecked();
+            item.setChecked(newState);
+
+            // Update state + UI
+            showDefects = newState;
+            Map<String,Integer> colW = computeColumnWidthsPx();
+            List<ColumnConfig> cfg = ColumnConfigManager.load(this);
+            buildHeader(cfg, colW, showDefects);
+            if (adapter != null) adapter.setShowDefects(showDefects);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_fixture_list, menu);
+
+        // Zorg dat de check-state in sync is met showDefects
+        MenuItem m = menu.findItem(R.id.action_defects);
+        if (m != null) m.setChecked(showDefects);
+
+        return true;
+    }
     @Override protected void onDestroy() { super.onDestroy(); if (cursor!=null && !cursor.isClosed()) cursor.close(); }
 
     // === Helpers ===

@@ -1,8 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    never
+
+    <item
+        android:id="@+id/action_toggle_defects"
+        android:title="@string/action_show_defects"
+        android:checkable="true"
+    />
     <item
         android:id="@+id/action_columns"
-        android:title="@string/kolommen"
-        android:icon="@drawable/ic_view_column"
-        />
+        android:title="@string/action_columns"/>
+    <item
+        android:id="@+id/action_defects"
+        android:title="@string/action_columns"/>
+    <item
+        android:id="@+id/action_add"
+        android:title="@string/action_columns"/>
+    <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_columns"/>
 </menu>
