@@ -3014,6 +3014,7 @@ drawable design_snackbar_background
 drawable ic_arrow_back
 drawable ic_arrow_back_black_24
 drawable ic_arrow_down_24dp
+drawable ic_bolt_24
 drawable ic_call_answer
 drawable ic_call_answer_low
 drawable ic_call_answer_video
@@ -3195,6 +3196,7 @@ id action_columns
 id action_container
 id action_context_bar
 id action_divider
+id action_export_csv
 id action_help
 id action_image
 id action_menu_divider
@@ -3240,6 +3242,7 @@ id btnOpslaan
 id btnSave
 id btnStart
 id btnStatusAction
+id btnStroomOverzicht
 id btn_cancel
 id btn_open_measurements
 id btn_save
@@ -3318,6 +3321,7 @@ id edit_text_id
 id elastic
 id embed
 id emptyState
+id emptyView
 id end
 id endToStart
 id enterAlways
@@ -3532,10 +3536,12 @@ id root
 id rounded
 id rowContainer
 id rowRoot
+id rowStroom
 id row_index_key
 id rtl
 id rvColumns
 id rvDefects
+id rvStroom
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3666,6 +3672,7 @@ id tvSoort
 id tvType
 id tvVerdieping
 id tvinspectieid
+id txtDate
 id txtFixture
 id txtInfo
 id txtStatusTitle
@@ -3811,6 +3818,7 @@ layout activity_fixture_list
 layout activity_location_list
 layout activity_main
 layout activity_measurements
+layout activity_stroom_overzicht
 layout activity_with_toolbar
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3839,6 +3847,7 @@ layout item_location_grid
 layout item_location_grid_simple
 layout item_location_list
 layout item_location_list_simple
+layout item_stroom_waarde
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3921,6 +3930,7 @@ layout support_simple_spinner_dropdown_item
 menu menu_fixture_list
 menu menu_locations
 menu menu_main
+menu menu_stroom_overzicht
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description

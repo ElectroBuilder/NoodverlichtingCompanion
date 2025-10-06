@@ -71,6 +71,7 @@
             android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
             android:exported="false"
             android:parentActivityName="nl.mikekemmink.noodverlichting.MainActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

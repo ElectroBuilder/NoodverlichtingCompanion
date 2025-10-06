@@ -125,15 +125,43 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp" />
 
+
+        <!-- Rij met 2 knoppen naast elkaar -->
+        <LinearLayout
+            android:id="@+id/rowStroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_open_measurements"
-                android:layout_width="wrap_content"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Stroomwaarden invoeren"
-                android:layout_margin="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:icon="@drawable/ic_bolt_24"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp" />
+
+            <!-- horizontale tussenruimte -->
+            <View
+                android:layout_width="8dp"
+                android:layout_height="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStroomOverzicht"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Stroomwaardes overzicht"
+                app:icon="@drawable/ic_list_24"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp" />
+        </LinearLayout>
+
 
             <!-- Scheiding -->
             <com.google.android.material.divider.MaterialDivider

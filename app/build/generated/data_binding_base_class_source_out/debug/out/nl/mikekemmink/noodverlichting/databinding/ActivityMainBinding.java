@@ -4,6 +4,7 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialButton btnStatusAction;
 
   @NonNull
+  public final MaterialButton btnStroomOverzicht;
+
+  @NonNull
   public final MaterialCardView cardStatus;
 
   @NonNull
@@ -67,6 +71,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final CoordinatorLayout root;
 
   @NonNull
+  public final LinearLayout rowStroom;
+
+  @NonNull
   public final NestedScrollView scroll;
 
   @NonNull
@@ -81,10 +88,11 @@ public final class ActivityMainBinding implements ViewBinding {
   private ActivityMainBinding(@NonNull CoordinatorLayout rootView, @NonNull AppBarLayout appbar,
       @NonNull MaterialButton btnExport, @NonNull MaterialButton btnImportZip,
       @NonNull MaterialButton btnOpenMeasurements, @NonNull MaterialButton btnStart,
-      @NonNull MaterialButton btnStatusAction, @NonNull MaterialCardView cardStatus,
-      @NonNull FloatingActionButton fabPrimary, @NonNull ShapeableImageView imgStatus,
-      @NonNull TextView labelData, @NonNull TextView labelHoofd,
-      @NonNull CircularProgressIndicator progressImport, @NonNull CoordinatorLayout root,
+      @NonNull MaterialButton btnStatusAction, @NonNull MaterialButton btnStroomOverzicht,
+      @NonNull MaterialCardView cardStatus, @NonNull FloatingActionButton fabPrimary,
+      @NonNull ShapeableImageView imgStatus, @NonNull TextView labelData,
+      @NonNull TextView labelHoofd, @NonNull CircularProgressIndicator progressImport,
+      @NonNull CoordinatorLayout root, @NonNull LinearLayout rowStroom,
       @NonNull NestedScrollView scroll, @NonNull MaterialToolbar toolbar, @NonNull TextView txtInfo,
       @NonNull TextView txtStatusTitle) {
     this.rootView = rootView;
@@ -94,6 +102,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.btnOpenMeasurements = btnOpenMeasurements;
     this.btnStart = btnStart;
     this.btnStatusAction = btnStatusAction;
+    this.btnStroomOverzicht = btnStroomOverzicht;
     this.cardStatus = cardStatus;
     this.fabPrimary = fabPrimary;
     this.imgStatus = imgStatus;
@@ -101,6 +110,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.labelHoofd = labelHoofd;
     this.progressImport = progressImport;
     this.root = root;
+    this.rowStroom = rowStroom;
     this.scroll = scroll;
     this.toolbar = toolbar;
     this.txtInfo = txtInfo;
@@ -170,6 +180,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnStroomOverzicht;
+      MaterialButton btnStroomOverzicht = ViewBindings.findChildViewById(rootView, id);
+      if (btnStroomOverzicht == null) {
+        break missingId;
+      }
+
       id = R.id.cardStatus;
       MaterialCardView cardStatus = ViewBindings.findChildViewById(rootView, id);
       if (cardStatus == null) {
@@ -208,6 +224,12 @@ public final class ActivityMainBinding implements ViewBinding {
 
       CoordinatorLayout root = (CoordinatorLayout) rootView;
 
+      id = R.id.rowStroom;
+      LinearLayout rowStroom = ViewBindings.findChildViewById(rootView, id);
+      if (rowStroom == null) {
+        break missingId;
+      }
+
       id = R.id.scroll;
       NestedScrollView scroll = ViewBindings.findChildViewById(rootView, id);
       if (scroll == null) {
@@ -233,8 +255,9 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       return new ActivityMainBinding((CoordinatorLayout) rootView, appbar, btnExport, btnImportZip,
-          btnOpenMeasurements, btnStart, btnStatusAction, cardStatus, fabPrimary, imgStatus,
-          labelData, labelHoofd, progressImport, root, scroll, toolbar, txtInfo, txtStatusTitle);
+          btnOpenMeasurements, btnStart, btnStatusAction, btnStroomOverzicht, cardStatus,
+          fabPrimary, imgStatus, labelData, labelHoofd, progressImport, root, rowStroom, scroll,
+          toolbar, txtInfo, txtStatusTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -13,6 +13,7 @@ color colorSecondary
 color colorSecondaryVariant
 color colorSurface
 drawable ic_arrow_back
+drawable ic_bolt_24
 drawable ic_camera
 drawable ic_delete_24
 drawable ic_download_24
@@ -42,6 +43,7 @@ drawable outline_chat_info_24
 drawable row_bg
 id action_about
 id action_columns
+id action_export_csv
 id action_help
 id action_search
 id action_settings
@@ -56,6 +58,7 @@ id btnOpslaan
 id btnSave
 id btnStart
 id btnStatusAction
+id btnStroomOverzicht
 id btn_cancel
 id btn_open_measurements
 id btn_save
@@ -70,6 +73,7 @@ id chipWithIssues
 id chipsFilter
 id content_container
 id emptyState
+id emptyView
 id et_kastnaam
 id et_l1
 id et_l2
@@ -96,8 +100,10 @@ id recycler
 id root
 id rowContainer
 id rowRoot
+id rowStroom
 id rvColumns
 id rvDefects
+id rvStroom
 id scroll
 id spOmschrijving
 id swipeRefresh
@@ -121,6 +127,7 @@ id tvSoort
 id tvType
 id tvVerdieping
 id tvinspectieid
+id txtDate
 id txtFixture
 id txtInfo
 id txtStatusTitle
@@ -133,6 +140,7 @@ layout activity_fixture_list
 layout activity_location_list
 layout activity_main
 layout activity_measurements
+layout activity_stroom_overzicht
 layout activity_with_toolbar
 layout fragment_plattegrond
 layout header_fixture_columns
@@ -141,11 +149,13 @@ layout item_location_grid
 layout item_location_grid_simple
 layout item_location_list
 layout item_location_list_simple
+layout item_stroom_waarde
 layout row_column_item
 layout row_fixture_wide
 menu menu_fixture_list
 menu menu_locations
 menu menu_main
+menu menu_stroom_overzicht
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

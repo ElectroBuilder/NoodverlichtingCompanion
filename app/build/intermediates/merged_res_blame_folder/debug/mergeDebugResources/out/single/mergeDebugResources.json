@@ -72,6 +72,10 @@
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
+        "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/drawable_ic_bolt_24.xml.flat",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/drawable/ic_bolt_24.xml"
+    },
+    {
         "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/drawable_ic_settings_24.xml.flat",
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/drawable/ic_settings_24.xml"
     },
@@ -128,6 +132,10 @@
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/drawable/ic_launcher_foreground.xml"
     },
     {
+        "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/layout_activity_stroom_overzicht.xml.flat",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_stroom_overzicht.xml"
+    },
+    {
         "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/drawable_ic_refresh_24.xml.flat",
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/drawable/ic_refresh_24.xml"
     },
@@ -178,6 +186,10 @@
     {
         "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/drawable_ic_delete_24.xml.flat",
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/drawable/ic_delete_24.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/layout_item_stroom_waarde.xml.flat",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_stroom_waarde.xml"
     },
     {
         "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/layout_item_location_grid.xml.flat",
@@ -234,6 +246,10 @@
     {
         "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/drawable_ic_warning.xml.flat",
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/drawable/ic_warning.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/menu_menu_stroom_overzicht.xml.flat",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/menu/menu_stroom_overzicht.xml"
     },
     {
         "merged": "nl.mikekemmink.noodverlichting.app-debug-42:/drawable_ic_help_24.xml.flat",

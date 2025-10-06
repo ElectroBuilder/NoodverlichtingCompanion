@@ -64,6 +64,14 @@
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_gebrek.xml"
     },
     {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_stroom_waarde.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_stroom_waarde.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_stroom_overzicht.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_stroom_overzicht.xml"
+    },
+    {
         "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_add_defect.xml",
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_add_defect.xml"
     }

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,10 @@ import java.util.zip.ZipInputStream;
 import nl.mikekemmink.noodverlichting.data.DBField;
 import nl.mikekemmink.noodverlichting.data.DBInspecties;
 import nl.mikekemmink.noodverlichting.export.ExportHelper;
+import nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity;
 import nl.mikekemmink.noodverlichting.ui.Measurement;
+import nl.mikekemmink.noodverlichting.stroom.StroomRepo;
+import nl.mikekemmink.noodverlichting.stroom.StroomWaardeEntry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -136,6 +140,13 @@ public class MainActivity extends AppCompatActivity {
             // startActivity(intent);
         });
 
+
+        Button btnStroomOverzicht = findViewById(R.id.btnStroomOverzicht);
+        btnStroomOverzicht.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, StroomOverzichtActivity.class));
+            }
+        });
 
     txtInfo = findViewById(R.id.txtInfo);
         Button btnImportZip = findViewById(R.id.btnImportZip);
