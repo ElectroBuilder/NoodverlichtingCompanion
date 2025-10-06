@@ -22,7 +22,6 @@ import java.util.Locale;
 
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.ui.BaseToolbarActivity;
-import nl.mikekemmink.noodverlichting.ui.MeasurementsActivity;
 
 public class StroomOverzichtActivity extends BaseToolbarActivity {
 

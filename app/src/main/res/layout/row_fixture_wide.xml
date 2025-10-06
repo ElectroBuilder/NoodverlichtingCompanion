@@ -8,7 +8,7 @@
     android:focusable="false">
 
     <!-- Horizontale scroller binnen de rij (zelf geen background/click) -->
-    <nl.mikekemmink.noodverlichting.ui.SyncHorizontalScrollView
+    <nl.mikekemmink.noodverlichting.noodverlichting.SyncHorizontalScrollView
         android:id="@+id/hscrollRow"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -188,5 +188,5 @@
                 android:singleLine="true" />
 
         </LinearLayout>
-    </nl.mikekemmink.noodverlichting.ui.SyncHorizontalScrollView>
+    </nl.mikekemmink.noodverlichting.noodverlichting.SyncHorizontalScrollView>
 </FrameLayout>

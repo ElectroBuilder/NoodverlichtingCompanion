@@ -10,7 +10,8 @@ import androidx.annotation.Nullable;
 import com.google.android.material.card.MaterialCardView;
 
 import nl.mikekemmink.noodverlichting.R;
-import nl.mikekemmink.noodverlichting.NoodverlichtingActivity;
+import nl.mikekemmink.noodverlichting.nen3140.Nen3140Activity;
+import nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity;
 
 public class SelectInspectionActivity extends BaseToolbarActivity {
 

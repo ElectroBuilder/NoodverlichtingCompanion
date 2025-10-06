@@ -13,7 +13,7 @@ import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 import nl.mikekemmink.noodverlichting.R;
-import nl.mikekemmink.noodverlichting.ui.SyncHorizontalScrollView;
+import nl.mikekemmink.noodverlichting.noodverlichting.SyncHorizontalScrollView;
 
 public final class HeaderFixtureColumnsBinding implements ViewBinding {
   @NonNull

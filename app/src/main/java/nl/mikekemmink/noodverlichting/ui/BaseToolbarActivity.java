@@ -93,7 +93,7 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
     }
 
     /** Pas kleuren van toolbar + statusbar aan per palette. */
-    protected void applyPalette(Palette p) {
+    public void applyPalette(Palette p) {
         currentPalette = p;
         int bgRes; int onRes; int statusRes;
         switch (p) {

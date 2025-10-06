@@ -17,7 +17,7 @@ import java.io.FileOutputStream;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import nl.mikekemmink.noodverlichting.data.DBField;
+import nl.mikekemmink.noodverlichting.noodverlichting.data.DBField;
 
 public class ExportHelper {
     public static String exportToZip(Context ctx) throws Exception {

@@ -70,44 +70,44 @@
 43        </provider>
 44
 45        <activity
-45-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:33:9-36:69
-46            android:name="nl.mikekemmink.noodverlichting.ui.LocationListActivity"
-46-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:34:13-82
+45-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:33:9-36:85
+46            android:name="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity"
+46-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:34:13-95
 47            android:exported="false"
 47-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:35:13-37
-48            android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
-48-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:36:13-66
+48            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity" />
+48-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:36:13-82
 49        <activity
-49-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:38:9-41:69
-50            android:name="nl.mikekemmink.noodverlichting.ui.FixtureListActivity"
-50-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:39:13-81
+49-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:38:9-41:82
+50            android:name="nl.mikekemmink.noodverlichting.noodverlichting.FixtureListActivity"
+50-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:39:13-94
 51            android:exported="false"
 51-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:40:13-37
-52            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.LocationListActivity" />
-52-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:41:13-66
-53        <activity android:name="nl.mikekemmink.noodverlichting.columns.ColumnSettingsActivity" />
-53-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:9-98
-53-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:19-95
+52            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity" />
+52-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:41:13-79
+53        <activity android:name="nl.mikekemmink.noodverlichting.noodverlichting.columns.ColumnSettingsActivity" />
+53-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:9-84
+53-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:19-81
 54        <activity
 54-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:44:9-46:40
-55            android:name="nl.mikekemmink.noodverlichting.ui.AddDefectActivity"
-55-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:45:13-79
+55            android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddDefectActivity"
+55-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:45:13-92
 56            android:exported="false" />
 56-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:46:13-37
 57        <activity
 57-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:48:9-50:39
-58            android:name="nl.mikekemmink.noodverlichting.ui.DefectListActivity"
-58-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:49:13-50
+58            android:name="nl.mikekemmink.noodverlichting.noodverlichting.DefectListActivity"
+58-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:49:13-63
 59            android:exported="false" />
 59-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:50:13-37
 60        <activity
-60-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:51:9-54:69
-61            android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
-61-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:13-82
+60-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:51:9-54:85
+61            android:name="nl.mikekemmink.noodverlichting.nen3140.MeasurementsActivity"
+61-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:13-87
 62            android:exported="false"
 62-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:53:13-37
-63            android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
-63-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:54:13-66
+63            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity" />
+63-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:54:13-82
 64        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.StroomOverzichtActivity" />
 64-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:56:9-69
 64-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:56:19-66
@@ -134,8 +134,8 @@
 77        <!-- 2) NEN3140 dashboard -->
 78        <activity
 78-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:69:9-72:73
-79            android:name="nl.mikekemmink.noodverlichting.ui.Nen3140Activity"
-79-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:70:13-47
+79            android:name="nl.mikekemmink.noodverlichting.nen3140.Nen3140Activity"
+79-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:70:13-52
 80            android:exported="false"
 80-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:71:13-37
 81            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
@@ -144,18 +144,18 @@
 83        <!-- 3) Noodverlichting hoofdscherm (na hernoemen van MainActivity) -->
 84        <activity
 84-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:75:9-78:73
-85            android:name="nl.mikekemmink.noodverlichting.NoodverlichtingActivity"
-85-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:76:13-52
+85            android:name="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity"
+85-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:76:13-68
 86            android:exported="false"
 86-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:77:13-37
 87            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
 87-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:78:13-70
-88        <activity android:name="nl.mikekemmink.noodverlichting.ui.NenLocationListActivity" />
-88-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:80:9-64
-88-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:80:19-61
-89        <activity android:name="nl.mikekemmink.noodverlichting.ui.NenBoardsActivity" />
-89-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:81:9-58
-89-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:81:19-55
+88        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity" />
+88-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:80:9-69
+88-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:80:19-66
+89        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity" />
+89-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:81:9-63
+89-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:81:19-60
 90
 91        <provider
 91-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20

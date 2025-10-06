@@ -23,7 +23,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.VH> 
     private final OnItemClick onItemClick;
     private boolean isGrid;
 
-    interface OnItemClick {
+    public interface OnItemClick {
         void onClick(String locationName);
     }
 

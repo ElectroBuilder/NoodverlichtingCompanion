@@ -31,27 +31,27 @@
 
 
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.LocationListActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity"
             android:exported="false"
-            android:parentActivityName=".NoodverlichtingActivity" />
+            android:parentActivityName=".noodverlichting.NoodverlichtingActivity" />
 
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.FixtureListActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.FixtureListActivity"
             android:exported="false"
-            android:parentActivityName=".ui.LocationListActivity" />
+            android:parentActivityName=".noodverlichting.LocationListActivity" />
 
-        <activity android:name="nl.mikekemmink.noodverlichting.columns.ColumnSettingsActivity" />
+        <activity android:name=".noodverlichting.columns.ColumnSettingsActivity" />
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.AddDefectActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddDefectActivity"
             android:exported="false" />
 
         <activity
-            android:name=".ui.DefectListActivity"
+            android:name=".noodverlichting.DefectListActivity"
             android:exported="false"/>
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
+            android:name="nl.mikekemmink.noodverlichting.nen3140.MeasurementsActivity"
             android:exported="false"
-            android:parentActivityName=".NoodverlichtingActivity" />
+            android:parentActivityName=".noodverlichting.NoodverlichtingActivity" />
 
         <activity android:name=".nen3140.StroomOverzichtActivity" />
 
@@ -67,18 +67,18 @@
 
         <!-- 2) NEN3140 dashboard -->
         <activity
-            android:name=".ui.Nen3140Activity"
+            android:name=".nen3140.Nen3140Activity"
             android:exported="false"
             android:parentActivityName=".ui.SelectInspectionActivity" />
 
         <!-- 3) Noodverlichting hoofdscherm (na hernoemen van MainActivity) -->
         <activity
-            android:name=".NoodverlichtingActivity"
+            android:name=".noodverlichting.NoodverlichtingActivity"
             android:exported="false"
             android:parentActivityName=".ui.SelectInspectionActivity" />
 
-        <activity android:name=".ui.NenLocationListActivity" />
-        <activity android:name=".ui.NenBoardsActivity" />
+        <activity android:name=".nen3140.NenLocationListActivity" />
+        <activity android:name=".nen3140.NenBoardsActivity" />
 
     </application>
 

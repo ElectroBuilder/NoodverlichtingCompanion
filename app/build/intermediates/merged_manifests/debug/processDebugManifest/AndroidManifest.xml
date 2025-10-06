@@ -43,24 +43,24 @@
         </provider>
 
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.LocationListActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity"
             android:exported="false"
-            android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
+            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity" />
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.FixtureListActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.FixtureListActivity"
             android:exported="false"
-            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.LocationListActivity" />
-        <activity android:name="nl.mikekemmink.noodverlichting.columns.ColumnSettingsActivity" />
+            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.noodverlichting.columns.ColumnSettingsActivity" />
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.AddDefectActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddDefectActivity"
             android:exported="false" />
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.DefectListActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.DefectListActivity"
             android:exported="false" />
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
+            android:name="nl.mikekemmink.noodverlichting.nen3140.MeasurementsActivity"
             android:exported="false"
-            android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
+            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity" />
         <activity android:name="nl.mikekemmink.noodverlichting.nen3140.StroomOverzichtActivity" />
 
         <!-- 1) Nieuwe launcher activity -->
@@ -76,17 +76,17 @@
 
         <!-- 2) NEN3140 dashboard -->
         <activity
-            android:name="nl.mikekemmink.noodverlichting.ui.Nen3140Activity"
+            android:name="nl.mikekemmink.noodverlichting.nen3140.Nen3140Activity"
             android:exported="false"
             android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
 
         <!-- 3) Noodverlichting hoofdscherm (na hernoemen van MainActivity) -->
         <activity
-            android:name="nl.mikekemmink.noodverlichting.NoodverlichtingActivity"
+            android:name="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity"
             android:exported="false"
             android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
-        <activity android:name="nl.mikekemmink.noodverlichting.ui.NenLocationListActivity" />
-        <activity android:name="nl.mikekemmink.noodverlichting.ui.NenBoardsActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
