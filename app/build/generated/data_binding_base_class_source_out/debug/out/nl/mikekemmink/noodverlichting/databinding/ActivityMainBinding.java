@@ -4,14 +4,19 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -23,16 +28,46 @@ public final class ActivityMainBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
-  public final Button btnExport;
+  public final AppBarLayout appbar;
 
   @NonNull
-  public final Button btnImportZip;
+  public final MaterialButton btnExport;
 
   @NonNull
-  public final Button btnStart;
+  public final MaterialButton btnImportZip;
+
+  @NonNull
+  public final MaterialButton btnOpenMeasurements;
+
+  @NonNull
+  public final MaterialButton btnStart;
+
+  @NonNull
+  public final MaterialButton btnStatusAction;
+
+  @NonNull
+  public final MaterialCardView cardStatus;
+
+  @NonNull
+  public final FloatingActionButton fabPrimary;
+
+  @NonNull
+  public final ShapeableImageView imgStatus;
+
+  @NonNull
+  public final TextView labelData;
+
+  @NonNull
+  public final TextView labelHoofd;
 
   @NonNull
   public final CircularProgressIndicator progressImport;
+
+  @NonNull
+  public final CoordinatorLayout root;
+
+  @NonNull
+  public final NestedScrollView scroll;
 
   @NonNull
   public final MaterialToolbar toolbar;
@@ -40,17 +75,36 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final TextView txtInfo;
 
-  private ActivityMainBinding(@NonNull CoordinatorLayout rootView, @NonNull Button btnExport,
-      @NonNull Button btnImportZip, @NonNull Button btnStart,
-      @NonNull CircularProgressIndicator progressImport, @NonNull MaterialToolbar toolbar,
-      @NonNull TextView txtInfo) {
+  @NonNull
+  public final TextView txtStatusTitle;
+
+  private ActivityMainBinding(@NonNull CoordinatorLayout rootView, @NonNull AppBarLayout appbar,
+      @NonNull MaterialButton btnExport, @NonNull MaterialButton btnImportZip,
+      @NonNull MaterialButton btnOpenMeasurements, @NonNull MaterialButton btnStart,
+      @NonNull MaterialButton btnStatusAction, @NonNull MaterialCardView cardStatus,
+      @NonNull FloatingActionButton fabPrimary, @NonNull ShapeableImageView imgStatus,
+      @NonNull TextView labelData, @NonNull TextView labelHoofd,
+      @NonNull CircularProgressIndicator progressImport, @NonNull CoordinatorLayout root,
+      @NonNull NestedScrollView scroll, @NonNull MaterialToolbar toolbar, @NonNull TextView txtInfo,
+      @NonNull TextView txtStatusTitle) {
     this.rootView = rootView;
+    this.appbar = appbar;
     this.btnExport = btnExport;
     this.btnImportZip = btnImportZip;
+    this.btnOpenMeasurements = btnOpenMeasurements;
     this.btnStart = btnStart;
+    this.btnStatusAction = btnStatusAction;
+    this.cardStatus = cardStatus;
+    this.fabPrimary = fabPrimary;
+    this.imgStatus = imgStatus;
+    this.labelData = labelData;
+    this.labelHoofd = labelHoofd;
     this.progressImport = progressImport;
+    this.root = root;
+    this.scroll = scroll;
     this.toolbar = toolbar;
     this.txtInfo = txtInfo;
+    this.txtStatusTitle = txtStatusTitle;
   }
 
   @Override
@@ -80,27 +134,83 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.appbar;
+      AppBarLayout appbar = ViewBindings.findChildViewById(rootView, id);
+      if (appbar == null) {
+        break missingId;
+      }
+
       id = R.id.btnExport;
-      Button btnExport = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnExport = ViewBindings.findChildViewById(rootView, id);
       if (btnExport == null) {
         break missingId;
       }
 
       id = R.id.btnImportZip;
-      Button btnImportZip = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnImportZip = ViewBindings.findChildViewById(rootView, id);
       if (btnImportZip == null) {
         break missingId;
       }
 
+      id = R.id.btn_open_measurements;
+      MaterialButton btnOpenMeasurements = ViewBindings.findChildViewById(rootView, id);
+      if (btnOpenMeasurements == null) {
+        break missingId;
+      }
+
       id = R.id.btnStart;
-      Button btnStart = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnStart = ViewBindings.findChildViewById(rootView, id);
       if (btnStart == null) {
+        break missingId;
+      }
+
+      id = R.id.btnStatusAction;
+      MaterialButton btnStatusAction = ViewBindings.findChildViewById(rootView, id);
+      if (btnStatusAction == null) {
+        break missingId;
+      }
+
+      id = R.id.cardStatus;
+      MaterialCardView cardStatus = ViewBindings.findChildViewById(rootView, id);
+      if (cardStatus == null) {
+        break missingId;
+      }
+
+      id = R.id.fabPrimary;
+      FloatingActionButton fabPrimary = ViewBindings.findChildViewById(rootView, id);
+      if (fabPrimary == null) {
+        break missingId;
+      }
+
+      id = R.id.imgStatus;
+      ShapeableImageView imgStatus = ViewBindings.findChildViewById(rootView, id);
+      if (imgStatus == null) {
+        break missingId;
+      }
+
+      id = R.id.labelData;
+      TextView labelData = ViewBindings.findChildViewById(rootView, id);
+      if (labelData == null) {
+        break missingId;
+      }
+
+      id = R.id.labelHoofd;
+      TextView labelHoofd = ViewBindings.findChildViewById(rootView, id);
+      if (labelHoofd == null) {
         break missingId;
       }
 
       id = R.id.progressImport;
       CircularProgressIndicator progressImport = ViewBindings.findChildViewById(rootView, id);
       if (progressImport == null) {
+        break missingId;
+      }
+
+      CoordinatorLayout root = (CoordinatorLayout) rootView;
+
+      id = R.id.scroll;
+      NestedScrollView scroll = ViewBindings.findChildViewById(rootView, id);
+      if (scroll == null) {
         break missingId;
       }
 
@@ -116,8 +226,15 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, btnExport, btnImportZip,
-          btnStart, progressImport, toolbar, txtInfo);
+      id = R.id.txtStatusTitle;
+      TextView txtStatusTitle = ViewBindings.findChildViewById(rootView, id);
+      if (txtStatusTitle == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((CoordinatorLayout) rootView, appbar, btnExport, btnImportZip,
+          btnOpenMeasurements, btnStart, btnStatusAction, cardStatus, fabPrimary, imgStatus,
+          labelData, labelHoofd, progressImport, root, scroll, toolbar, txtInfo, txtStatusTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

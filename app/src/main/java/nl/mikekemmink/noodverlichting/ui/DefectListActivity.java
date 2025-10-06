@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -29,6 +30,7 @@ import java.util.List;
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.data.DBField;
 
+import android.util.Log;
 public class DefectListActivity extends AppCompatActivity {
 
     private ActivityResultLauncher<Intent> editLauncher;
@@ -36,32 +38,42 @@ public class DefectListActivity extends AppCompatActivity {
     public static final String EXTRA_INSPECTIE_ID = "inspectie_id";
     public static final String EXTRA_TITEL = "titel";
 
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_defect_list);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_defect_list);
 
-        int inspectieId = getIntent().getIntExtra(EXTRA_INSPECTIE_ID, -1);
-        String titel = getIntent().getStringExtra(EXTRA_TITEL);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(titel != null ? titel : ("Gebreken #" + inspectieId));
+            // Extras
+            int inspectieId = getIntent().getIntExtra(EXTRA_INSPECTIE_ID, -1);
+            String titel = getIntent().getStringExtra(EXTRA_TITEL);
+
+            // Toolbar
+            MaterialToolbar tb = findViewById(R.id.toolbar);
+            setSupportActionBar(tb);
+            ActionBar ab = getSupportActionBar();
+            if (ab != null) ab.setDisplayHomeAsUpEnabled(true);
+            String titleStr = (titel != null && !titel.isEmpty()) ? titel : "Gebreken #" + inspectieId;
+            tb.setTitle(titleStr);
+            tb.setNavigationOnClickListener(v -> finish());
+
+            // ActivityResult launcher (voor bewerken)
+            editLauncher = registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> { if (result.getResultCode() == RESULT_OK) reload(); }
+            );
+
+        // 3) InspectieId valideren (vroeg terugmelden i.p.v. leeg scherm)
+        if (inspectieId <= 0) {
+            Toast.makeText(this, "Geen inspectie_id ontvangen → kan geen gebreken tonen", Toast.LENGTH_LONG).show();
+            finish(); // of laat leeg scherm staan, maar expliciet is beter
+            return;
         }
-        editLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        reload(); // herlaad de lijst na bewerken
-                    }
-                }
-        );
-        MaterialToolbar tb = findViewById(R.id.toolbar);
-        setSupportActionBar(tb); // koppelt de toolbar aan de ActionBar
-        tb.setNavigationOnClickListener(v -> finish());
 
         RecyclerView rv = findViewById(R.id.rvDefects);
         rv.setLayoutManager(new LinearLayoutManager(this));
         DefectAdapter adapter = new DefectAdapter();
         rv.setAdapter(adapter);
+
 
         ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -129,18 +141,42 @@ public class DefectListActivity extends AppCompatActivity {
 
         new ItemTouchHelper(swipeCallback).attachToRecyclerView(rv);
 
-
         try {
             SQLiteDatabase db = DBField.getInstance(this).getReadableDatabase();
-            Cursor c = db.rawQuery("SELECT id as _id, omschrijving, datum, foto_pad FROM gebreken WHERE inspectie_id = ? ORDER BY datum DESC, rowid DESC", new String[]{ String.valueOf(inspectieId) });
+            String[] args = new String[]{ String.valueOf(inspectieId) };
+            Cursor c = db.rawQuery(
+                    "SELECT id as _id, omschrijving, datum, foto_pad " +
+                            "FROM gebreken WHERE inspectie_id = ? ORDER BY datum DESC, rowid DESC", args);
+
             List<DefectAdapter.Item> list = new ArrayList<>();
-            int idxId = c.getColumnIndex("_id"); int idxOms = c.getColumnIndex("omschrijving"); int idxDt = c.getColumnIndex("datum"); int idxFoto = c.getColumnIndex("foto_pad");
-            while (c.moveToNext()) { DefectAdapter.Item it = new DefectAdapter.Item(); it.id = idxId>=0?c.getLong(idxId):0L; it.omschrijving = idxOms>=0?c.getString(idxOms):null; it.datum = idxDt>=0?c.getString(idxDt):null; it.fotoPad = idxFoto>=0?c.getString(idxFoto):null; list.add(it);} c.close();
-            adapter.submit(list); if (list.isEmpty()) Toast.makeText(this, "Geen gebreken gevonden", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) { Toast.makeText(this, "Lezen mislukt: " + e.getMessage(), Toast.LENGTH_LONG).show(); }
+            int idxId = c.getColumnIndex("_id");
+            int idxOms = c.getColumnIndex("omschrijving");
+            int idxDt = c.getColumnIndex("datum");
+            int idxFoto = c.getColumnIndex("foto_pad");
+
+            while (c.moveToNext()) {
+                DefectAdapter.Item it = new DefectAdapter.Item();
+                it.id = idxId >= 0 ? c.getLong(idxId) : 0L;
+                it.omschrijving = idxOms >= 0 ? c.getString(idxOms) : null;
+                it.datum = idxDt >= 0 ? c.getString(idxDt) : null;
+                it.fotoPad = idxFoto >= 0 ? c.getString(idxFoto) : null;
+                list.add(it);
+            }
+            c.close();
+
+            Log.d("DefectList", "Query-resultaat voor inspectieId=" + inspectieId + " → " + list.size() + " records");
+            adapter.submit(list);
+
+            if (list.isEmpty()) {
+                Toast.makeText(this, "Geen gebreken voor ID " + inspectieId, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.e("DefectList", "Lezen mislukt", e);
+            Toast.makeText(this, "Lezen mislukt: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
-    @Override public boolean onSupportNavigateUp() { onBackPressed(); return true; }
+@Override public boolean onSupportNavigateUp() { onBackPressed(); return true; }
     private void reload() {
         int inspectieId = getIntent().getIntExtra(EXTRA_INSPECTIE_ID, -1);
         RecyclerView rv = findViewById(R.id.rvDefects);
@@ -175,14 +211,21 @@ public class DefectListActivity extends AppCompatActivity {
 
     private void deleteDefect(long id) {
         SQLiteDatabase db = DBField.getInstance(this).getWritableDatabase();
-        db.delete("gebreken", "rowid = ?", new String[]{ String.valueOf(id) });
+        db.delete("gebreken", "id = ?", new String[]{ String.valueOf(id) });
         reload(); // herlaad de lijst
     }
 
     private void editDefect(long id) {
         Intent i = new Intent(this, AddDefectActivity.class);
-        i.putExtra(AddDefectActivity.EXTRA_DEFECT_ID, id); // zorg dat AddDefectActivity dit ondersteunt
-        editLauncher.launch(i);
+        i.putExtra(AddDefectActivity.EXTRA_DEFECT_ID, id);
+
+        if (editLauncher != null) {
+            editLauncher.launch(i);
+        } else {
+            // Fallback: zou niet moeten gebeuren, maar voorkomt crash en helpt debuggen
+            Log.w("DefectList", "editLauncher was null; fallback naar startActivity()");
+            startActivity(i);
+        }
     }
 
 }

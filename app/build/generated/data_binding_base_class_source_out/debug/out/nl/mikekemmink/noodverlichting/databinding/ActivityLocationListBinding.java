@@ -8,8 +8,12 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -20,12 +24,43 @@ public final class ActivityLocationListBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final MaterialCardView cardFilters;
+
+  @NonNull
+  public final Chip chipAll;
+
+  @NonNull
+  public final Chip chipNoIssues;
+
+  @NonNull
+  public final Chip chipWithIssues;
+
+  @NonNull
+  public final ChipGroup chipsFilter;
+
+  @NonNull
+  public final LinearLayout emptyState;
+
+  @NonNull
   public final RecyclerView recycler;
 
+  @NonNull
+  public final SwipeRefreshLayout swipeRefresh;
+
   private ActivityLocationListBinding(@NonNull LinearLayout rootView,
-      @NonNull RecyclerView recycler) {
+      @NonNull MaterialCardView cardFilters, @NonNull Chip chipAll, @NonNull Chip chipNoIssues,
+      @NonNull Chip chipWithIssues, @NonNull ChipGroup chipsFilter,
+      @NonNull LinearLayout emptyState, @NonNull RecyclerView recycler,
+      @NonNull SwipeRefreshLayout swipeRefresh) {
     this.rootView = rootView;
+    this.cardFilters = cardFilters;
+    this.chipAll = chipAll;
+    this.chipNoIssues = chipNoIssues;
+    this.chipWithIssues = chipWithIssues;
+    this.chipsFilter = chipsFilter;
+    this.emptyState = emptyState;
     this.recycler = recycler;
+    this.swipeRefresh = swipeRefresh;
   }
 
   @Override
@@ -55,13 +90,56 @@ public final class ActivityLocationListBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.cardFilters;
+      MaterialCardView cardFilters = ViewBindings.findChildViewById(rootView, id);
+      if (cardFilters == null) {
+        break missingId;
+      }
+
+      id = R.id.chipAll;
+      Chip chipAll = ViewBindings.findChildViewById(rootView, id);
+      if (chipAll == null) {
+        break missingId;
+      }
+
+      id = R.id.chipNoIssues;
+      Chip chipNoIssues = ViewBindings.findChildViewById(rootView, id);
+      if (chipNoIssues == null) {
+        break missingId;
+      }
+
+      id = R.id.chipWithIssues;
+      Chip chipWithIssues = ViewBindings.findChildViewById(rootView, id);
+      if (chipWithIssues == null) {
+        break missingId;
+      }
+
+      id = R.id.chipsFilter;
+      ChipGroup chipsFilter = ViewBindings.findChildViewById(rootView, id);
+      if (chipsFilter == null) {
+        break missingId;
+      }
+
+      id = R.id.emptyState;
+      LinearLayout emptyState = ViewBindings.findChildViewById(rootView, id);
+      if (emptyState == null) {
+        break missingId;
+      }
+
       id = R.id.recycler;
       RecyclerView recycler = ViewBindings.findChildViewById(rootView, id);
       if (recycler == null) {
         break missingId;
       }
 
-      return new ActivityLocationListBinding((LinearLayout) rootView, recycler);
+      id = R.id.swipeRefresh;
+      SwipeRefreshLayout swipeRefresh = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefresh == null) {
+        break missingId;
+      }
+
+      return new ActivityLocationListBinding((LinearLayout) rootView, cardFilters, chipAll,
+          chipNoIssues, chipWithIssues, chipsFilter, emptyState, recycler, swipeRefresh);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

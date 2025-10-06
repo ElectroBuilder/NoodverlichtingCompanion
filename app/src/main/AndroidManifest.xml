@@ -57,6 +57,10 @@
         <activity
             android:name=".ui.DefectListActivity"
             android:exported="false"/>
+        <activity
+            android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

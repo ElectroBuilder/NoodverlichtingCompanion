@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.shockwave.pdfium.BuildConfig;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,6 +35,7 @@ import java.util.zip.ZipInputStream;
 import nl.mikekemmink.noodverlichting.data.DBField;
 import nl.mikekemmink.noodverlichting.data.DBInspecties;
 import nl.mikekemmink.noodverlichting.export.ExportHelper;
+import nl.mikekemmink.noodverlichting.ui.Measurement;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +48,32 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS = "app_prefs";
     private static final String KEY_DATA_IMPORTED = "data_imported";
     private static final String KEY_LAST_EXPORT_PATH = "last_export_path";
+
+    // Optionele helpers
+    private void openSettings() {
+        // TODO: startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    private void openHelp() {
+        // TODO: open help-URL of start HelpActivity
+    }
+    // Opent MeasurementsActivity en ontvangt (optioneel) een resultaat terug
+    private final ActivityResultLauncher<Intent> measurementsLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Measurement m = (Measurement) result.getData().getSerializableExtra("measurement");
+                    if (m != null) {
+                        Toast.makeText(this, "Ontvangen: " + m.getKastnaam(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+    private void showAboutDialog() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Over")
+                .setMessage(getString(R.string.app_name) + "\nVersie " + BuildConfig.VERSION_NAME)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
 
     // Losse DB-import (handmatig .db/.sqlite kiezen)
     private final ActivityResultLauncher<String> pickDb =
@@ -71,10 +101,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        txtInfo = findViewById(R.id.txtInfo);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.action_settings) {
+                openSettings();
+                return true;
+            } else if (id == R.id.action_about) {
+                showAboutDialog();
+                return true;
+            } else if (id == R.id.action_help) {
+                openHelp();
+                return true;
+            }
+            return false;
+        });
+
+        Button btnMeasurements = findViewById(R.id.btn_open_measurements);
+        btnMeasurements.setOnClickListener(v -> {
+            // Debug-toast: zie je deze, dan werkt de klik
+            Toast.makeText(this, "Stroomwaarden openen…", Toast.LENGTH_SHORT).show();
+
+            // Volledige gekwalificeerde classnaam gebruiken is het meest expliciet:
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    nl.mikekemmink.noodverlichting.ui.MeasurementsActivity.class
+            );
+
+            // Gebruik óf de Activity Result API...
+            measurementsLauncher.launch(intent);
+
+            // ...of tijdelijk startActivity(intent) om snel uit te sluiten dat het aan de Result API ligt:
+            // startActivity(intent);
+        });
+
+
+    txtInfo = findViewById(R.id.txtInfo);
         Button btnImportZip = findViewById(R.id.btnImportZip);
         //Button btnImport = findViewById(R.id.btnImport);
         Button btnStart = findViewById(R.id.btnStart);
@@ -334,4 +397,20 @@ public class MainActivity extends AppCompatActivity {
             bos.flush();
         }
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            openSettings();
+            return true;
+        } else if (id == R.id.action_about) {
+            showAboutDialog();
+            return true;
+        } else if (id == R.id.action_help) {
+            openHelp();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

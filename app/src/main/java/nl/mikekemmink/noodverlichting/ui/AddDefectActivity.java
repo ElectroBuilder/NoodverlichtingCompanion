@@ -1,4 +1,3 @@
-
 package nl.mikekemmink.noodverlichting.ui;
 
 import android.content.ContentValues;
@@ -12,21 +11,17 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
 import android.net.Uri;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,17 +30,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.data.DBField;
 
 public class AddDefectActivity extends AppCompatActivity {
-
     private long defectId = -1;
     public static final String EXTRA_DEFECT_ID = "defect_id";
     public static final String EXTRA_INSPECTIE_ID = "inspectie_id";
     public static final String EXTRA_TITEL = "titel";
-
     private static final String STATE_LAST_PHOTO_PATH = "state_last_photo_path";
 
     private int inspectieid;
@@ -88,26 +80,16 @@ public class AddDefectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_defect);
 
-
-        defectId = getIntent().getLongExtra(EXTRA_DEFECT_ID, -1);
-
-        if (defectId > 0) {
-            loadDefect(); // haalt inspectieId uit de database
-        } else {
-            inspectieid = getIntent().getIntExtra(EXTRA_INSPECTIE_ID, -1);
-        }
-
-        String titel = getIntent().getStringExtra(EXTRA_TITEL);
-
+        // 1) Views eerst
         TextView txtFixture = findViewById(R.id.txtFixture);
-        txtFixture.setText(titel != null ? titel : ("ID " + inspectieid));
-
-        sp = findViewById(R.id.spOmschrijving);
+        sp  = findViewById(R.id.spOmschrijving);
         img = findViewById(R.id.imgFoto);
-        Button btnCamera = findViewById(R.id.btnCamera);
+
+        Button btnCamera  = findViewById(R.id.btnCamera);
         Button btnGalerij = findViewById(R.id.btnGalerij);
         Button btnOpslaan = findViewById(R.id.btnOpslaan);
 
+        // 2) Spinner vullen
         ArrayList<String> keuzes = new ArrayList<>();
         keuzes.add("Kapotte lamp");
         keuzes.add("Geen pictogram");
@@ -116,6 +98,7 @@ public class AddDefectActivity extends AppCompatActivity {
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(ad);
 
+        // 3) Herstel foto van rotations e.d.
         if (savedInstanceState != null) {
             String p = savedInstanceState.getString(STATE_LAST_PHOTO_PATH, null);
             if (p != null) {
@@ -127,25 +110,35 @@ public class AddDefectActivity extends AppCompatActivity {
             }
         }
 
+        // 4) Extras uitlezen (nádat views/spinner klaar zijn)
+        defectId = getIntent().getLongExtra(EXTRA_DEFECT_ID, -1);
+        String titel = getIntent().getStringExtra(EXTRA_TITEL);
+
+        if (defectId > 0) {
+            // Bewerken: laad record → zet inspectieid, spinnerkeuze, foto
+            loadDefect();
+            // Titel updaten nu we het inspectieid zeker weten
+            txtFixture.setText(titel != null ? titel : ("ID " + inspectieid));
+        } else {
+            // Nieuw: haal inspectie_id uit intent
+            inspectieid = getIntent().getIntExtra(EXTRA_INSPECTIE_ID, -1);
+            txtFixture.setText(titel != null ? titel : ("ID " + inspectieid));
+        }
+
+        // 5) Listeners
         btnCamera.setOnClickListener(v -> {
             lastPhotoFile = getNewPhotoFile();
-            lastPhotoUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", lastPhotoFile);
+            lastPhotoUri  = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", lastPhotoFile);
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.CAMERA},
-                        1001); // willekeurige requestCode
-                return; // wacht tot gebruiker toestemming geeft
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 1001);
+                return;
             }
-
             takePhoto.launch(lastPhotoUri);
         });
 
         btnGalerij.setOnClickListener(v -> pickImage.launch("image/*"));
         btnOpslaan.setOnClickListener(v -> saveDefect());
-        defectId = getIntent().getLongExtra(EXTRA_DEFECT_ID, -1);
-        loadDefect();
     }
 
     @Override
@@ -154,8 +147,12 @@ public class AddDefectActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1001) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera-toestemming verleend", Toast.LENGTH_SHORT).show();
-                // Je kunt hier eventueel direct takePhoto.launch(...) opnieuw proberen
+                // PATCH: neem direct de foto als we al een target-URI klaar hadden
+                if (lastPhotoUri != null) {
+                    takePhoto.launch(lastPhotoUri);
+                } else {
+                    Toast.makeText(this, "Camera-toestemming verleend", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "Camera-toestemming geweigerd", Toast.LENGTH_LONG).show();
             }
@@ -189,6 +186,12 @@ public class AddDefectActivity extends AppCompatActivity {
     }
 
     private void saveDefect() {
+        // PATCH: valideer inspectieid
+        if (inspectieid <= 0 && defectId <= 0) {
+            Toast.makeText(this, "Geen geldig inspectie_id – kan niet opslaan.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         String oms = (String) sp.getSelectedItem();
         String dt = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         String foto = lastPhotoFile != null ? lastPhotoFile.getAbsolutePath() : null;
@@ -209,10 +212,24 @@ public class AddDefectActivity extends AppCompatActivity {
                     setResult(RESULT_OK);
                     finish();
                 } else {
-                    Toast.makeText(this, "Bijwerken mislukt (geen rijen aangepast)", Toast.LENGTH_LONG).show();
+                    // PATCH: kan ‘geen wijziging’ zijn – check of rij bestaat
+                    boolean exists;
+                    try (Cursor c = DBField.getInstance(this).getReadableDatabase().rawQuery(
+                            "SELECT 1 FROM gebreken WHERE id = ? LIMIT 1",
+                            new String[]{String.valueOf(defectId)})) {
+                        exists = c.moveToFirst();
+                    }
+                    if (exists) {
+                        Toast.makeText(this, "Geen wijzigingen", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Bijwerken mislukt (item niet gevonden)", Toast.LENGTH_LONG).show();
+                    }
                 }
             } else {
-                long rowId = DBField.getInstance(this).getWritableDatabase().insert("gebreken", null, cv);
+                long rowId = DBField.getInstance(this).getWritableDatabase()
+                        .insert("gebreken", null, cv);
                 if (rowId > 0) {
                     Toast.makeText(this, "Gebrek opgeslagen", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
@@ -222,23 +239,20 @@ public class AddDefectActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            // Gooi niet hard naar boven; toon nette melding
+            Toast.makeText(this, "Fout bij opslaan: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
     private void loadDefect() {
         if (defectId <= 0) return;
-
-        try {
-
-            Cursor c = DBField.getInstance(this).getReadableDatabase().rawQuery(
-                    "SELECT inspectie_id, omschrijving, datum, foto_pad FROM gebreken WHERE id = ?",
-                    new String[]{ String.valueOf(defectId) });
-
+        try (Cursor c = DBField.getInstance(this).getReadableDatabase().rawQuery(
+                "SELECT inspectie_id, omschrijving, datum, foto_pad FROM gebreken WHERE id = ?",
+                new String[]{ String.valueOf(defectId) })) {
             if (c.moveToFirst()) {
-                inspectieid = c.getInt(0); // <-- fix hier
+                inspectieid = c.getInt(0);
                 String omschrijving = c.getString(1);
                 String fotoPad = c.getString(3);
-
 
                 // Selecteer juiste item in spinner
                 ArrayAdapter<String> adapter = (ArrayAdapter<String>) sp.getAdapter();
@@ -254,7 +268,6 @@ public class AddDefectActivity extends AppCompatActivity {
                     }
                 }
             }
-            c.close();
         } catch (Exception e) {
             Toast.makeText(this, "Laden mislukt: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }

@@ -4,6 +4,7 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -20,14 +21,18 @@ public final class ItemGebrekBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final ImageView imgThumb;
+
+  @NonNull
   public final TextView tvDatum;
 
   @NonNull
   public final TextView tvOmschrijving;
 
-  private ItemGebrekBinding(@NonNull LinearLayout rootView, @NonNull TextView tvDatum,
-      @NonNull TextView tvOmschrijving) {
+  private ItemGebrekBinding(@NonNull LinearLayout rootView, @NonNull ImageView imgThumb,
+      @NonNull TextView tvDatum, @NonNull TextView tvOmschrijving) {
     this.rootView = rootView;
+    this.imgThumb = imgThumb;
     this.tvDatum = tvDatum;
     this.tvOmschrijving = tvOmschrijving;
   }
@@ -59,6 +64,12 @@ public final class ItemGebrekBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.imgThumb;
+      ImageView imgThumb = ViewBindings.findChildViewById(rootView, id);
+      if (imgThumb == null) {
+        break missingId;
+      }
+
       id = R.id.tvDatum;
       TextView tvDatum = ViewBindings.findChildViewById(rootView, id);
       if (tvDatum == null) {
@@ -71,7 +82,7 @@ public final class ItemGebrekBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemGebrekBinding((LinearLayout) rootView, tvDatum, tvOmschrijving);
+      return new ItemGebrekBinding((LinearLayout) rootView, imgThumb, tvDatum, tvOmschrijving);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

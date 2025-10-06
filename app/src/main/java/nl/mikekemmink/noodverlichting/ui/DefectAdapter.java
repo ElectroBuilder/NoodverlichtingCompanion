@@ -40,11 +40,13 @@ public class DefectAdapter extends RecyclerView.Adapter<DefectAdapter.VH> {
         notifyDataSetChanged();
     }
 
-    @NonNull @Override
+    @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_defect, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_gebrek, parent, false);
         return new VH(v);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull VH h, int pos) {

@@ -2,5 +2,7 @@
     <string name="app_name">Noodverlichting Companion</string>
     <string name="kolommen">Kolommen</string>
     <string name="kies_omschrijving">kies omschrijving...</string>
-    <string name="defect_has_photo" />
+    <string name="defect_foto" />
+    <string name="content_open_locaties"> open locaties</string>
+    <string name="content_status"> status</string>
 </resources>

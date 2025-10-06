@@ -1,14 +1,20 @@
 package nl.mikekemmink.noodverlichting.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +24,23 @@ import nl.mikekemmink.noodverlichting.IToolbarActions;
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.data.DBInspecties;
 
-public class LocationListActivity extends BaseActivity implements SimpleAdapter.OnClick, IToolbarActions {
+public class LocationListActivity extends BaseActivity implements LocationsAdapter.OnItemClick, IToolbarActions {
 
     public static final String EXTRA_LOCATIE = "nl.mikekemmink.noodverlichting.extra.LOCATIE";
 
     private final List<String> all = new ArrayList<>();
     private final List<String> filtered = new ArrayList<>();
-    private SimpleAdapter adapter;
 
-    private boolean showDefects = false; // voor de toolbar-toggle
+    private LocationsAdapter adapter;
+    private RecyclerView recycler;
+    private View emptyState;
+
+    private boolean showDefects = false;   // bestaande toggle uit IToolbarActions
+    private boolean isGrid = false;        // nieuwe toggle
+    private SharedPreferences prefs;
+
+    private GridSpacingItemDecoration gridDecoration;
+    private static final int GRID_SPACING_DP = 12;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,28 +49,46 @@ public class LocationListActivity extends BaseActivity implements SimpleAdapter.
         // 1) Outer layout met AppBar + Toolbar
         setContentView(R.layout.activity_with_toolbar);
 
-        // 2) Toolbar koppelen (één keer per Activity)
-
+        // 2) Toolbar koppelen
         MaterialToolbar tb = findViewById(R.id.toolbar);
         attachToolbar(tb);
-
-        // Terugknop laten werken
         tb.setNavigationOnClickListener(v -> finish());
 
+        // 2b) Menu toevoegen + listener
+        tb.inflateMenu(R.menu.menu_locations);
+        tb.setOnMenuItemClickListener(this::onToolbarMenuItem);
 
-        // 3) JOUW content in de container zetten
+        // 3) Eigen content in de container
         getLayoutInflater().inflate(
                 R.layout.activity_location_list,
                 findViewById(R.id.content_container),
                 true
         );
 
-        // ---- Originele init-code (ongewijzigd) ----
-        RecyclerView recycler = findViewById(R.id.recycler);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SimpleAdapter(filtered, this);
-        recycler.setAdapter(adapter);
+        // Views
+        recycler   = findViewById(R.id.recycler);
+        emptyState = findViewById(R.id.emptyState);
 
+        // Prefs (list/grid onthouden)
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        isGrid = prefs.getBoolean("view_grid_locations", false);
+
+        // Adapter
+        adapter = new LocationsAdapter(filtered, isGrid, this);
+        recycler.setAdapter(adapter);
+        updateLayoutManager();
+
+        // Swipe to refresh
+        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipe = findViewById(R.id.swipeRefresh);
+        swipe.setOnRefreshListener(() -> {
+            reloadData();
+            swipe.setRefreshing(false);
+        });
+
+        // Filterchips
+        setupChips();
+
+        // Data laden
         SQLiteDatabase db = DBInspecties.tryOpenReadOnly(this);
         if (db != null) {
             all.clear();
@@ -69,14 +101,108 @@ public class LocationListActivity extends BaseActivity implements SimpleAdapter.
     @Override
     protected void onResume() {
         super.onResume();
-        // Toolbar-knoppen zichtbaar maken + state laten syncen
+        // Bestaande toolbar-actie mechaniek
         setToolbarActions(this);
+
+        // Toggle-icoon en titel syncen met huidige state
+        MaterialToolbar tb = findViewById(R.id.toolbar);
+        MenuItem toggle = tb.getMenu().findItem(R.id.action_toggle_view);
+        if (toggle != null) {
+            toggle.setIcon(isGrid ? R.drawable.ic_list_24 : R.drawable.ic_grid_24);
+            toggle.setTitle(isGrid ? "Lijst weergeven" : "Grid weergeven");
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         setToolbarActions(null);
+    }
+
+    // Toolbar-menu handler (if/else, geen switch)
+    private boolean onToolbarMenuItem(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_toggle_view) {
+            isGrid = !isGrid;
+            prefs.edit().putBoolean("view_grid_locations", isGrid).apply();
+            updateLayoutManager();
+            adapter.setGrid(isGrid);
+            adapter.notifyDataSetChanged();
+            item.setIcon(isGrid ? R.drawable.ic_list_24 : R.drawable.ic_grid_24);
+            item.setTitle(isGrid ? "Lijst weergeven" : "Grid weergeven");
+            return true;
+        } else if (id == R.id.action_search) {
+            // TODO: implementeer SearchView of navigeer naar een zoekscherm
+            return true;
+        }
+        return false;
+    }
+
+    private void updateLayoutManager() {
+        // Oude decoration weghalen (voorkomt dubbele spacing)
+        if (gridDecoration != null) {
+            recycler.removeItemDecoration(gridDecoration);
+            gridDecoration = null;
+        }
+        if (isGrid) {
+            int span = getSpanCount();
+            recycler.setLayoutManager(new GridLayoutManager(this, span));
+            gridDecoration = new GridSpacingItemDecoration(span, dpToPx(GRID_SPACING_DP), true);
+            recycler.addItemDecoration(gridDecoration);
+        } else {
+            recycler.setLayoutManager(new LinearLayoutManager(this));
+        }
+    }
+
+    private int getSpanCount() {
+        // Mik op ~180dp tegelbreedte
+        int minWidthPx = dpToPx(180);
+        int width = getResources().getDisplayMetrics().widthPixels;
+        return Math.max(2, width / minWidthPx);
+    }
+
+    private int dpToPx(int dp) {
+        float d = getResources().getDisplayMetrics().density;
+        return Math.round(dp * d);
+    }
+
+    private void setupChips() {
+        Chip chipAll = findViewById(R.id.chipAll);
+        Chip chipWithIssues = findViewById(R.id.chipWithIssues);
+        Chip chipNoIssues = findViewById(R.id.chipNoIssues);
+
+        View.OnClickListener listener = v -> applyFilter();
+        if (chipAll != null)        chipAll.setOnClickListener(listener);
+        if (chipWithIssues != null) chipWithIssues.setOnClickListener(listener);
+        if (chipNoIssues != null)   chipNoIssues.setOnClickListener(listener);
+    }
+
+    private void applyFilter() {
+        Chip chipAll = findViewById(R.id.chipAll);
+        Chip chipWithIssues = findViewById(R.id.chipWithIssues);
+
+        filtered.clear();
+        if (chipAll != null && chipAll.isChecked()) {
+            filtered.addAll(all);
+        } else if (chipWithIssues != null && chipWithIssues.isChecked()) {
+            // TODO: echte filter op locaties met gebreken
+            filtered.addAll(all);
+        } else {
+            // TODO: echte filter op locaties zonder gebreken
+            filtered.addAll(all);
+        }
+        adapter.notifyDataSetChanged();
+        emptyState.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
+    }
+
+    private void reloadData() {
+        SQLiteDatabase db = DBInspecties.tryOpenReadOnly(this);
+        if (db != null) {
+            all.clear();
+            all.addAll(DBInspecties.getDistinctLocaties(db));
+            db.close();
+        }
+        applyFilter();
     }
 
     private void filter(String q) {
@@ -86,28 +212,18 @@ public class LocationListActivity extends BaseActivity implements SimpleAdapter.
             if (qq.isEmpty() || s.toLowerCase().contains(qq)) filtered.add(s);
         }
         adapter.notifyDataSetChanged();
+        emptyState.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
+    // Klik op een locatie -> naar armaturenlijst
     @Override
-    public void onItemClick(String value) {
+    public void onClick(String value) {
         Intent i = new Intent(this, FixtureListActivity.class);
         i.putExtra(LocationListActivity.EXTRA_LOCATIE, value);
         startActivity(i);
     }
 
-    // -------- IToolbarActions ----------
+    // IToolbarActions (bestaand mechanisme)
     @Override public boolean isDefectsShown() { return showDefects; }
-
-    @Override public void onToggleDefects(boolean show) {
-        showDefects = show;
-        // TODO: als je hier iets wilt doen (bijv. locaties met open gebreken filteren/highlighten)
-        // Voor nu geen-opdracht: de toggle onthoudt alleen de stand.
-    }
-
-    @Override public void onColumnsClicked() {
-        // Locatiescherm heeft (waarschijnlijk) geen kolominstellingen.
-        // Je kunt hier desgewenst een dialoog tonen of niets doen.
-        // Bijvoorbeeld:
-        // Toast.makeText(this, "Kolommen zijn alleen beschikbaar bij Armaturen", Toast.LENGTH_SHORT).show();
-    }
-}
+    @Override public void onToggleDefects(boolean show) { showDefects = show; }
+    @Override public void onColumnsClicked() { /* niet van toepassing voor locaties */ }}

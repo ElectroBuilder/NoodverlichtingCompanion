@@ -62,7 +62,29 @@ import nl.mikekemmink.noodverlichting.columns.ColumnSettingsActivity;
 import nl.mikekemmink.noodverlichting.data.DBHelper;
 import nl.mikekemmink.noodverlichting.pdf.PdfPageCache;
 
+import nl.mikekemmink.noodverlichting.data.DBField;
+
 public class FixtureListActivity extends BaseActivity implements IToolbarActions {
+
+    private void invalidateDefectCachesAndRefresh() {
+        // Cache voor snelle booleans (hasDefects) leeg
+        defectFlagCache.clear();
+
+        // LruCache met summaries leeg
+        if (defectProvider != null) {
+            defectProvider.invalidate();
+        }
+
+        // Lijst/kolom ‘Gebreken’ up‑to‑date
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+
+        // PDF‑overlay (markers) opnieuw tekenen
+        if (pdfView != null) {
+            pdfView.postInvalidateOnAnimation();
+        }
+    }
 
     // Animatie voor pulserende ring
     private android.animation.ValueAnimator markerPulse;
@@ -300,7 +322,11 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
         getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(KEY_LAST_LOCATIE, locatie).apply();
         if (getSupportActionBar()!=null) getSupportActionBar().setTitle(locatie);
 
-        dbHelper = new DBHelper(this); defectProvider = new DefectProvider(dbHelper);
+
+        dbHelper = new DBHelper(this);
+        // defectProvider = new DefectProvider(dbHelper);
+        defectProvider = new DefectProvider(this); // <-- veld nu gebaseerd op DBField
+
 
         list = findViewById(R.id.listArmaturen);
         list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -344,13 +370,18 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
 
     @Override protected void onNewIntent(Intent intent) { super.onNewIntent(intent); setIntent(intent); reload(); }
 
-    @Override protected void onResume() {
+    @Override
+    protected void onResume() {
         super.onResume();
+
+        // Caches invalideren + UI verversen zodat marker-kleuren kloppen
+        defectFlagCache.clear();            // jouw boolean cache voor hasDefects(...)
+        if (defectProvider != null) defectProvider.invalidate();
+        if (adapter != null) adapter.notifyDataSetChanged();      // lijstkolom ‘Gebreken’
+        if (pdfView != null) pdfView.postInvalidateOnAnimation(); // marker overlay
+
         setToolbarActions(this);
-        if (!didWarmOpen) {
-            warmOpenLastPdfIfAny(); // <<-- hier
-            didWarmOpen = true;
-        }
+        if (!didWarmOpen) { warmOpenLastPdfIfAny(); didWarmOpen = true; }
         reload();
     }
 
@@ -858,7 +889,71 @@ public class FixtureListActivity extends BaseActivity implements IToolbarActions
         }
     }
 
-    static class DefectProvider { private final DBHelper helper; private final LruCache<Integer,String> cache=new LruCache<>(256); DefectProvider(DBHelper helper){ this.helper=helper; } String summaryFor(int inspectieid){ String v=cache.get(inspectieid); if (v!=null) return v; SQLiteDatabase db=null; Cursor d=null; try { db=helper.getReadableDatabase(); try { d=db.rawQuery("SELECT COUNT(*) AS cnt, GROUP_CONCAT(omschrijving, ' \n ') AS oms FROM gebreken WHERE inspectie_id = ?", new String[]{ String.valueOf(inspectieid)}); if (d.moveToFirst()){ int cnt=d.getInt(d.getColumnIndexOrThrow("cnt")); String oms=null; int idx=d.getColumnIndex("oms"); if (idx>=0) oms=d.getString(idx); v=(cnt<=0)? "" : (cnt+"× "+(oms!=null? oms: "gebrek")); } } catch (Exception e){ if (d!=null) { d.close(); d=null; } d=db.rawQuery("SELECT COUNT(*) AS cnt FROM gebreken WHERE inspectie_id = ?", new String[]{ String.valueOf(inspectieid)}); if (d.moveToFirst()){ int cnt=d.getInt(d.getColumnIndexOrThrow("cnt")); v=(cnt<=0)? "": (cnt+"× gebrek(en)"); } } } catch(Exception ignore){ v=""; } finally { if (d!=null) d.close(); } if (v==null) v=""; cache.put(inspectieid, v); return v; } }
+    // -- VERVANG DEZE INNER CLASS --
+    // PATCH: DefectProvider -> leest nu uit field.db (DBField) i.p.v. inspecties.db
+    static class DefectProvider {
+        private final android.content.Context ctx;
+        private final LruCache<Integer, String> cache = new LruCache<>(256);
+
+        DefectProvider(android.content.Context ctx) {
+            this.ctx = ctx.getApplicationContext();
+        }
+
+        /** Levert een korte samenvatting; lege string = geen gebreken. Bron: field.db (DBField). */
+        String summaryFor(int inspectieid) {
+            String v = cache.get(inspectieid);
+            if (v != null) return v;
+
+            SQLiteDatabase db = null;
+            Cursor d = null;
+            try {
+                db = nl.mikekemmink.noodverlichting.data.DBField
+                        .getInstance(ctx)
+                        .getReadableDatabase();
+
+                // Probeer uitgebreid met GROUP_CONCAT
+                try {
+                    d = db.rawQuery(
+                            "SELECT COUNT(*) AS cnt, GROUP_CONCAT(omschrijving, ' \n ') AS oms " +
+                                    "FROM gebreken WHERE inspectie_id = ?",
+                            new String[]{ String.valueOf(inspectieid) }
+                    );
+                    if (d.moveToFirst()) {
+                        int cnt = d.getInt(d.getColumnIndexOrThrow("cnt"));
+                        String oms = null;
+                        int idx = d.getColumnIndex("oms");
+                        if (idx >= 0) oms = d.getString(idx);
+                        v = (cnt <= 0) ? "" : (cnt + "× " + (oms != null ? oms : "gebrek"));
+                    }
+                } catch (Exception e) {
+                    // Fallback zonder GROUP_CONCAT
+                    if (d != null) { d.close(); d = null; }
+                    d = db.rawQuery(
+                            "SELECT COUNT(*) AS cnt FROM gebreken WHERE inspectie_id = ?",
+                            new String[]{ String.valueOf(inspectieid) }
+                    );
+                    if (d.moveToFirst()) {
+                        int cnt = d.getInt(d.getColumnIndexOrThrow("cnt"));
+                        v = (cnt <= 0) ? "" : (cnt + "× gebrek(en)");
+                    }
+                }
+            } catch (Exception ignore) {
+                v = "";
+            } finally {
+                if (d != null) d.close();
+            }
+
+            if (v == null) v = "";
+            cache.put(inspectieid, v);
+            return v;
+        }
+
+        /** Maakt de cache leeg zodat kleuren/samenvattingen weer kloppen na wijzigingen. */
+        void invalidate() {
+            cache.evictAll();
+        }
+    } // <— LET OP: deze sluit alleen de DefectProvider class
+
 
     private static long optLongAny(JSONObject o, String[] keys, long def){ for(String k: keys) if (o.has(k)){ try { return o.getLong(k);} catch(Exception ignore){} try { return (long) o.getDouble(k);} catch(Exception ignore){} try { return Long.parseLong(o.getString(k));} catch(Exception ignore){} } return def; }
     private static int optIntAny(JSONObject o, String[] keys, int def){ for(String k: keys) if (o.has(k)){ try { return o.getInt(k);} catch(Exception ignore){} try { return (int) o.getDouble(k);} catch(Exception ignore){} try { return Integer.parseInt(o.getString(k));} catch(Exception ignore){} } return def; }
