@@ -52,7 +52,7 @@ public class FixtureListFragment extends Fragment
             a.getSupportActionBar().setTitle(R.string.title_fixtures);
         }
         // applyPalette is 'protected' in dezelfde package => kan direct aangeroepen worden
-        a.applyPalette(BaseToolbarActivity.Palette.NEN);
+        a.applyPalette(BaseToolbarActivity.Palette.NOOD);
 
         // TODO: hier je RecyclerView/Adapter initialiseren en data inladen
         // RecyclerView rv = view.findViewById(R.id.rvFixtures);

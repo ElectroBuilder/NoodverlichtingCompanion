@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +14,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shockwave.pdfium.BuildConfig;
 
@@ -36,10 +33,10 @@ import java.util.zip.ZipInputStream;
 import nl.mikekemmink.noodverlichting.data.DBField;
 import nl.mikekemmink.noodverlichting.data.DBInspecties;
 import nl.mikekemmink.noodverlichting.export.ExportHelper;
-import nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity;
+import nl.mikekemmink.noodverlichting.ui.BaseToolbarActivity;
 import nl.mikekemmink.noodverlichting.ui.Measurement;
 
-public class NoodverlichtingActivity extends AppCompatActivity {
+public class NoodverlichtingActivity extends BaseToolbarActivity {
 
     private TextView txtInfo;
 
@@ -101,24 +98,9 @@ public class NoodverlichtingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setOnMenuItemClickListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.action_settings) {
-                openSettings();
-                return true;
-            } else if (id == R.id.action_about) {
-                showAboutDialog();
-                return true;
-            } else if (id == R.id.action_help) {
-                openHelp();
-                return true;
-            }
-            return false;
-        });
+        setContentLayout(R.layout.activity_main);       // <— content onder de basetoolbar
+        applyPalette(BaseToolbarActivity.Palette.NOOD); // <— kleurt de basetoolbar en statusbar
+        setUpEnabled(true);                            // <— optioneel: geen up/back in dit hoofdscherm
 
     txtInfo = findViewById(R.id.txtInfo);
         Button btnImportZip = findViewById(R.id.btnImportZip);
@@ -395,5 +377,17 @@ public class NoodverlichtingActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected int getActivityToolbarMenuRes() {
+        return R.menu.menu_main; // <— gebruik hier jouw menu resource (zie hieronder)
+    }
 
+    @Override
+    protected boolean onActivityToolbarItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) { openSettings(); return true; }
+        if (id == R.id.action_about)    { showAboutDialog(); return true; }
+        if (id == R.id.action_help)     { openHelp(); return true; }
+        return false;
+    }
 }

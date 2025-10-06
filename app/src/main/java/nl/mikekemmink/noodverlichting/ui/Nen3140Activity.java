@@ -1,40 +1,39 @@
-
 package nl.mikekemmink.noodverlichting.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.google.android.material.card.MaterialCardView;
-
 import nl.mikekemmink.noodverlichting.R;
-import nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity;
 
 public class Nen3140Activity extends BaseToolbarActivity {
+    private TextView txtInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.content_nen3140_cards);
-        setTitle("NEN 3140");
+        // Zelfde layout als noodverlichting-beginscherm
+        setContentLayout(R.layout.activity_main); // bevat txtInfo, btnStart, btnImportZip, btnExport
+        setTitle("NEN3140");
         applyPalette(Palette.NEN);
         setUpEnabled(true);
 
-        MaterialCardView cardInvoeren = findViewById(R.id.cardInvoeren);
-        MaterialCardView cardOverzicht = findViewById(R.id.cardOverzicht);
+        txtInfo = findViewById(R.id.txtInfo);
+        Button btnStart = findViewById(R.id.btnStart);
+        Button btnImportZip = findViewById(R.id.btnImportZip);
+        Button btnExport = findViewById(R.id.btnExport);
 
-        cardInvoeren.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                startActivity(new Intent(Nen3140Activity.this, MeasurementsActivity.class));
-            }
-        });
+        // START → locatiescherm (NEN-variant)
+        btnStart.setOnClickListener(v ->
+                startActivity(new android.content.Intent(this, NenLocationListActivity.class))
+        );
 
-        cardOverzicht.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                startActivity(new Intent(Nen3140Activity.this, StroomOverzichtActivity.class));
-            }
-        });
+        // (Optioneel) placeholders voor import/export NEN3140
+        btnImportZip.setOnClickListener(v -> txtInfo.setText("Import (NEN3140) nog niet geïmplementeerd"));
+        btnExport.setOnClickListener(v -> txtInfo.setText("Export (NEN3140) nog niet geïmplementeerd"));
+
+        txtInfo.setText("Klaar om te starten met NEN3140 (Locatie → Verdeelinrichting → Metingen)");
     }
 }

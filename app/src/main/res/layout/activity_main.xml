@@ -15,14 +15,6 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Noodverlichting"
-            app:titleCentered="true"
-            app:navigationIconTint="@android:color/white"
-            app:menu="@menu/menu_main"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Scrollbare content -->
@@ -62,7 +54,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:contentDescription="@string/content_status"
-                        app:srcCompat="@drawable/ic_info_circle_24"
+                        app:srcCompat="@drawable/ic_search_24"
                         app:tint="?attr/colorOnSurfaceVariant" />
 
                     <LinearLayout
@@ -72,14 +64,6 @@
                         android:orientation="vertical"
                         android:paddingStart="12dp"
                         android:paddingEnd="8dp">
-
-                        <TextView
-                            android:id="@+id/txtStatusTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Status"
-                            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                            android:textColor="?attr/colorOnSurface" />
 
                         <!-- Hergebruik van jouw statusveld -->
                         <TextView
@@ -92,15 +76,6 @@
                             tools:text="Database gevonden • 12 locaties, 87 armaturen" />
                     </LinearLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStatusAction"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Vernieuwen"
-                        app:icon="@drawable/ic_refresh_24"
-                        app:iconGravity="textStart"
-                        app:iconPadding="8dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

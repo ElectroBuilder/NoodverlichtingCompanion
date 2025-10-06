@@ -1,16 +1,13 @@
-
-// Replace package name below with your actual package
 package nl.mikekemmink.noodverlichting.ui;
 
 import java.io.Serializable;
 
 public class Measurement implements Serializable {
     private String kastnaam;
-    private Double verdeelinrichting, l1, l2, l3, n, pe;
+    private Double l1, l2, l3, n, pe;  // VI weggelaten (kan later toegevoegd worden)
 
-    public Measurement(String kastnaam, Double verdeelinrichting, Double l1, Double l2, Double l3, Double n) {
+    public Measurement(String kastnaam, Double l1, Double l2, Double l3, Double n, Double pe) {
         this.kastnaam = kastnaam;
-        this.verdeelinrichting = verdeelinrichting;
         this.l1 = l1;
         this.l2 = l2;
         this.l3 = l3;
@@ -18,8 +15,8 @@ public class Measurement implements Serializable {
         this.pe = pe;
     }
 
+
     public String getKastnaam() { return kastnaam; }
-    public Double getVerdeelinrichting() { return verdeelinrichting; }
     public Double getL1() { return l1; }
     public Double getL2() { return l2; }
     public Double getL3() { return l3; }

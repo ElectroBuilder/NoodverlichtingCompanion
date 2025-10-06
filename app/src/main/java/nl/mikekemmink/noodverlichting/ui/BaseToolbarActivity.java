@@ -29,11 +29,11 @@ import nl.mikekemmink.noodverlichting.R;
  */
 public abstract class BaseToolbarActivity extends AppCompatActivity {
 
-    // ====== NIEUW: interface + setter voor fragment-gebonden toolbar-acties ======
+    // ====== Koppelpunt voor fragmenten (ToolbarActionSource) ======
     public interface ToolbarActionSource {
         /** Retourneer 0 als je (tijdelijk) geen menu wilt tonen. */
         @MenuRes int getToolbarMenuRes();
-        /** Optioneel: menu-items dynamisch aanpassen (enable/visible etc.). */
+        /** Optioneel: menu-items dynamisch aanpassen (enable/visible). */
         default void onPrepareToolbarMenu(@NonNull Menu menu) {}
         /** Retourneer true als je het item afhandelt, anders false. */
         default boolean onToolbarItemSelected(@NonNull MenuItem item) { return false; }
@@ -45,9 +45,17 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
     /** Door fragments aan te roepen in onViewCreated(...) en opruimen in onDestroyView(). */
     public void setToolbarActions(@Nullable ToolbarActionSource source) {
         this.toolbarActionSource = source;
-        invalidateOptionsMenu(); // forceer (opnieuw) opbouwen van menu
+        invalidateOptionsMenu(); // menu opnieuw opbouwen
     }
-    // ============================================================================
+
+    // ====== Compat: laat Activities ook zélf een menu leveren ======
+    /** Override in je Activity als je een eigen menu wilt tonen. */
+    protected @MenuRes int getActivityToolbarMenuRes() { return 0; }
+    /** Laatste kans om Activity-menu dynamisch te tweaken (enable/visible). */
+    protected void onPrepareActivityToolbarMenu(@NonNull Menu menu) {}
+    /** Item-clicks uit Activity-menu afhandelen. Return true als verwerkt. */
+    protected boolean onActivityToolbarItemSelected(@NonNull MenuItem item) { return false; }
+    // ===============================================================
 
     protected MaterialToolbar toolbar;
     private int onColorRes = android.R.color.white; // menu/navigatie-icoon kleur
@@ -99,7 +107,7 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
         }
         this.onColorRes = onRes;
         // Toolbar achtergr., titel en icon-tinten
-        toolbar.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, bgRes)));
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, bgRes));
         toolbar.setTitleTextColor(ContextCompat.getColor(this, onRes));
         toolbar.setSubtitleTextColor(ContextCompat.getColor(this, onRes));
         toolbar.setNavigationIconTint(ContextCompat.getColor(this, onRes));
@@ -132,35 +140,31 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
         });
     }
 
-    // ====== NIEUW: menu van de actieve ToolbarActionSource opbouwen en doorvoeren ======
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        boolean any = false;
         if (toolbarActionSource != null) {
             int res = toolbarActionSource.getToolbarMenuRes();
-            if (res != 0) {
-                getMenuInflater().inflate(res, menu);
-            }
-            // Eerste kans om het menu te tweaken
+            if (res != 0) { getMenuInflater().inflate(res, menu); any = true; }
             toolbarActionSource.onPrepareToolbarMenu(menu);
-            // Zorg dat icon-tinting meteen goed staat
-            tintToolbarMenuIcons();
-            return true; // we hebben (mogelijk) een menu
+            any = true;
         }
-        return super.onCreateOptionsMenu(menu);
+        // Compat: ook Activity-menu toestaan
+        int actRes = getActivityToolbarMenuRes();
+        if (actRes != 0) { getMenuInflater().inflate(actRes, menu); any = true; }
+        onPrepareActivityToolbarMenu(menu);
+        tintToolbarMenuIcons();
+        return any || super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean handled = super.onPrepareOptionsMenu(menu);
-        if (toolbarActionSource != null) {
-            toolbarActionSource.onPrepareToolbarMenu(menu);
-            handled = true;
-        }
-        // Zekerheid: tint iconen telkens als menu verandert
+        if (toolbarActionSource != null) { toolbarActionSource.onPrepareToolbarMenu(menu); handled = true; }
+        onPrepareActivityToolbarMenu(menu);
         tintToolbarMenuIcons();
         return handled;
     }
-    // ================================================================================
 
     // Maak ze NIET-abstract met een veilige default:
     protected void onColumnsClicked() { /* no-op */ }
@@ -170,15 +174,11 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Up/Home
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        // ====== NIEUW: eerst de bron (fragment) laten proberen ======
-        if (toolbarActionSource != null && toolbarActionSource.onToolbarItemSelected(item)) {
-            return true;
-        }
-        // ============================================================
+        if (item.getItemId() == android.R.id.home) { onBackPressed(); return true; }
+        // Eerst de bron (fragment) laten proberen
+        if (toolbarActionSource != null && toolbarActionSource.onToolbarItemSelected(item)) return true;
+        // Compat: Activity-menu handler
+        if (onActivityToolbarItemSelected(item)) return true;
         return super.onOptionsItemSelected(item);
     }
 }

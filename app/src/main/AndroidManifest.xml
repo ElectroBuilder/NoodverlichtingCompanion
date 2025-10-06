@@ -53,7 +53,7 @@
             android:exported="false"
             android:parentActivityName=".NoodverlichtingActivity" />
 
-        <activity android:name=".stroom.StroomOverzichtActivity" />
+        <activity android:name=".nen3140.StroomOverzichtActivity" />
 
         <!-- 1) Nieuwe launcher activity -->
         <activity
@@ -76,6 +76,9 @@
             android:name=".NoodverlichtingActivity"
             android:exported="false"
             android:parentActivityName=".ui.SelectInspectionActivity" />
+
+        <activity android:name=".ui.NenLocationListActivity" />
+        <activity android:name=".ui.NenBoardsActivity" />
 
     </application>
 

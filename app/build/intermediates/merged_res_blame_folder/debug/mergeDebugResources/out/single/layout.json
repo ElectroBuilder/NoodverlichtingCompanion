@@ -1,102 +1,114 @@
 [
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\fragment_plattegrond.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\fragment_plattegrond.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/row_fixture_wide.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/row_fixture_wide.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_scaffold.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_scaffold.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_list_with_fab.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_list_with_fab.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_column_settings.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_column_settings.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_scaffold.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_scaffold.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_stroom_overzicht.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_stroom_overzicht.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_nen_measurement.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_nen_measurement.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_defect_list.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_defect_list.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_nen_simple.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_nen_simple.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\fragment_fixture_list.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\fragment_fixture_list.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_location_list.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_location_list.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_location_list.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_location_list.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_gebrek.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_gebrek.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\content_select_inspection_cards.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\content_select_inspection_cards.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_stroom_overzicht.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_stroom_overzicht.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\item_stroom_waarde.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\item_stroom_waarde.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_measurements.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_measurements.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\item_location_grid.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\item_location_grid.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/fragment_plattegrond.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/fragment_plattegrond.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_select_inspection_cards.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_select_inspection_cards.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_fixture_list.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_fixture_list.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_measurements.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_measurements.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_main.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\item_location_list_simple.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\item_location_list_simple.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_nen3140_cards.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_nen3140_cards.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\item_gebrek.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\item_gebrek.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/content_nen3140_cards.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/content_nen3140_cards.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_add_defect.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_add_defect.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_defect_list.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_defect_list.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\header_fixture_columns.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\header_fixture_columns.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/header_fixture_columns.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/header_fixture_columns.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_nen3140_cards.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_nen3140_cards.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/content_select_inspection_cards.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/content_select_inspection_cards.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\content_nen3140_cards.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\content_nen3140_cards.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/row_column_item.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/row_column_item.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_fixture_list.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_fixture_list.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/fragment_fixture_list.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/fragment_fixture_list.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\item_location_grid_simple.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\item_location_grid_simple.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_location_list_simple.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_location_list_simple.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\activity_main.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_location_list.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_location_list.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\row_column_item.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\row_column_item.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_location_grid_simple.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_location_grid_simple.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\row_fixture_wide.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\row_fixture_wide.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_column_settings.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_column_settings.xml"
     },
     {
-        "merged": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:\\layout\\item_location_list.xml",
-        "source": "C:\\Users\\MKk2\\.gradle\\daemon\\8.13\\nl.mikekemmink.noodverlichting.app-main-44:\\layout\\item_location_list.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_select_inspection_cards.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_select_inspection_cards.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_location_grid.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_location_grid.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/item_stroom_waarde.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/item_stroom_waarde.xml"
     },
     {
         "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/fragment_location_list.xml",
         "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/fragment_location_list.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_add_defect.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_add_defect.xml"
     }
 ]

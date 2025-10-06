@@ -61,7 +61,7 @@
             android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
             android:exported="false"
             android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
-        <activity android:name="nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.StroomOverzichtActivity" />
 
         <!-- 1) Nieuwe launcher activity -->
         <activity
@@ -85,6 +85,8 @@
             android:name="nl.mikekemmink.noodverlichting.NoodverlichtingActivity"
             android:exported="false"
             android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.ui.NenLocationListActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.ui.NenBoardsActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

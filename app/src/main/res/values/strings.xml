@@ -6,10 +6,48 @@
     <string name="content_open_locaties"> open locaties</string>
     <string name="content_status"> status</string>
     <string name="title_fixtures">Armaturen</string>
+
     <string name="action_add">Toevoegen</string>
     <string name="action_refresh">Verversen</string>
     <string name="action_show_defects">Gebreken tonen</string>
     <string name="action_hide_defects">Gebreken verbergen</string>
     <string name="title_locations">Locaties</string>
+
+    <!-- Titel voor de toolbar -->
+    <string name="title_measurements">Metingen</string>
+    <string name="title_measurement_edit">Meting bewerken</string>
+
+    <!-- Labels / hints voor invoervelden -->
+    <string name="hint_kastnaam">Kastnaam</string>
+    <string name="hint_l1">L1</string>
+    <string name="hint_l2">L2</string>
+    <string name="hint_l3">L3</string>
+    <string name="hint_n">N</string>
+    <string name="hint_pe">PE</string>
+
+    <!-- Knoppen -->
+    <string name="btn_save">Opslaan</string>
+    <string name="btn_cancel">Annuleren</string>
+
+    <!-- Toolbar-menu -->
+    <string name="action_save">Opslaan</string>
+
+    <!-- Foutmeldingen -->
+    <string name="error_required">Dit veld is verplicht</string>
+    <string name="error_invalid_number">Ongeldig getal: %1$s</string>
+
+    <!-- Toast-meldingen -->
+    <string name="msg_measurement_saved">Meting opgeslagen</string>
+    <string name="msg_measurement_updated">Meting bijgewerkt</string>
+
+    <string name="title_stroom_overzicht">Stroomoverzicht</string>
+    <string name="action_export_csv">Exporteer CSV</string>
+
+    <string name="msg_no_data_to_export">Geen data om te exporteren</string>
+    <string name="msg_export_ok">Geëxporteerd naar: %1$s</string>
+    <string name="msg_export_fail">Export mislukt: %1$s</string>
+    <string name="msg_deleted">Verwijderd</string>
+    <string name="msg_path_exists">Pad: %1$s\nBestaat: %2$s  size: %3$s</string>
+
 
 </resources>

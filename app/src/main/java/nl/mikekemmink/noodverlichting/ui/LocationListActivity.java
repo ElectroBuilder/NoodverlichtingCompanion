@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
@@ -43,6 +44,16 @@ public class LocationListActivity extends BaseToolbarActivity implements Locatio
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Plaats de content-layout onder de single toolbar (MOET de juiste IDs bevatten)
+        setContentLayout(R.layout.activity_location_list);
+
+        // Toolbar / status
+        setUpEnabled(true);
+        applyPalette(Palette.NOOD);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_locations);
+        }
 
         // Views
         recycler   = findViewById(R.id.recycler);
@@ -80,22 +91,16 @@ public class LocationListActivity extends BaseToolbarActivity implements Locatio
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Toggle-icoon en titel syncen met huidige state
-        MaterialToolbar tb = findViewById(R.id.toolbar);
-        MenuItem toggle = tb.getMenu().findItem(R.id.action_toggle_view);
-        if (toggle != null) {
-            toggle.setIcon(isGrid ? R.drawable.ic_list_24 : R.drawable.ic_grid_24);
-            toggle.setTitle(isGrid ? "Lijst weergeven" : "Grid weergeven");
-        }
+        // Zorg dat het menu (titel/icon van toggle) wordt bijgewerkt via onPrepareActivityToolbarMenu
+        invalidateOptionsMenu();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-            }
+    }
 
-    // Toolbar-menu handler (if/else, geen switch)
+    // Toolbar-menu handler
     private boolean onToolbarMenuItem(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_toggle_view) {
@@ -104,11 +109,9 @@ public class LocationListActivity extends BaseToolbarActivity implements Locatio
             updateLayoutManager();
             adapter.setGrid(isGrid);
             adapter.notifyDataSetChanged();
-            item.setIcon(isGrid ? R.drawable.ic_list_24 : R.drawable.ic_grid_24);
+            // Als je ic_list_24 / ic_grid_24 drawables hebt, kun je ze hier zetten:
+            // item.setIcon(isGrid ? R.drawable.ic_list_24 : R.drawable.ic_grid_24);
             item.setTitle(isGrid ? "Lijst weergeven" : "Grid weergeven");
-            return true;
-        } else if (id == R.id.action_search) {
-            // TODO: implementeer SearchView of navigeer naar een zoekscherm
             return true;
         }
         return false;
@@ -202,4 +205,26 @@ public class LocationListActivity extends BaseToolbarActivity implements Locatio
     // IToolbarActions (bestaand mechanisme)
     @Override public boolean isDefectsShown() { return showDefects; }
     @Override public void onToggleDefects(boolean show) { showDefects = show; }
-    @Override public void onColumnsClicked() { /* niet van toepassing voor locaties */ }}
+    @Override public void onColumnsClicked() { /* niet van toepassing voor locaties */ }
+
+    // ===== Activity-menu via BaseToolbarActivity compat-hooks =====
+    @Override
+    protected int getActivityToolbarMenuRes() {
+        return R.menu.menu_location_list; // nieuw menubestand
+    }
+
+    @Override
+    protected void onPrepareActivityToolbarMenu(@NonNull Menu menu) {
+        MenuItem toggle = menu.findItem(R.id.action_toggle_view);
+        if (toggle != null) {
+            // Als je drawables ic_list_24/ic_grid_24 hebt, kun je ze hier zetten:
+            // toggle.setIcon(isGrid ? R.drawable.ic_list_24 : R.drawable.ic_grid_24);
+            toggle.setTitle(isGrid ? "Lijst weergeven" : "Grid weergeven");
+        }
+    }
+
+    @Override
+    protected boolean onActivityToolbarItemSelected(@NonNull MenuItem item) {
+        return onToolbarMenuItem(item);
+    }
+}
