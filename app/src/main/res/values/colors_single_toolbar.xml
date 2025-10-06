@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nood_green">#2E7D32</color>
+    <color name="nood_on_green">#FFFFFF</color>
+    <color name="nood_green_status">#1B5E20</color>
+
+    <color name="nen_blue">#1565C0</color>
+    <color name="nen_on_blue">#FFFFFF</color>
+    <color name="nen_blue_status">#0D47A1</color>
+</resources>
