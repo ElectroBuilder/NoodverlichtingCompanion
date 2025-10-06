@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".NoodverlichtingActivity">
 
     <!-- App bar -->
     <com.google.android.material.appbar.AppBarLayout
@@ -134,32 +134,11 @@
             android:orientation="horizontal"
             android:layout_marginTop="12dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_open_measurements"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Stroomwaarden invoeren"
-                app:icon="@drawable/ic_bolt_24"
-                app:iconGravity="textStart"
-                app:iconPadding="8dp" />
-
             <!-- horizontale tussenruimte -->
             <View
                 android:layout_width="8dp"
                 android:layout_height="0dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnStroomOverzicht"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Stroomwaardes overzicht"
-                app:icon="@drawable/ic_list_24"
-                app:iconGravity="textStart"
-                app:iconPadding="8dp" />
         </LinearLayout>
 
 

@@ -11,10 +11,10 @@ INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidMa
 	android:name
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:23:13-62
 manifest
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-69:12
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-69:12
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-69:12
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-69:12
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-82:12
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-82:12
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-82:12
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:2:1-82:12
 MERGED from [androidx.databinding:viewbinding:8.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\433455941a1460a5c83ee65b2382278d\transformed\viewbinding-8.13.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.preference:preference:1.2.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\98e7611b41537aa1b28ef979efd4d737\transformed\preference-1.2.1\AndroidManifest.xml:17:1-24:12
@@ -95,8 +95,8 @@ ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManif
 	android:name
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:10:22-62
 application
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-67:19
-INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-67:19
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-80:19
+INJECTED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-80:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\ee210f75d0f39382ea427d00dc0432c9\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
@@ -134,66 +134,82 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\MKk2\.gradle\cache
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:18:9-53
 	tools:replace
 		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:19:9-52
-activity#nl.mikekemmink.noodverlichting.MainActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:33:9-40:20
-	android:exported
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:35:13-36
-	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:34:13-41
-intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:36:13-39:29
-action#android.intent.action.MAIN
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:37:17-68
-	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:37:25-66
-category#android.intent.category.LAUNCHER
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:38:17-76
-	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:38:27-74
 activity#nl.mikekemmink.noodverlichting.ui.LocationListActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:42:9-45:58
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:33:9-36:69
 	android:parentActivityName
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:45:13-55
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:36:13-66
 	android:exported
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:44:13-37
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:13-82
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:34:13-82
 activity#nl.mikekemmink.noodverlichting.ui.FixtureListActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:47:9-50:69
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:38:9-41:69
 	android:parentActivityName
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:50:13-66
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:41:13-66
 	android:exported
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:49:13-37
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:40:13-37
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:48:13-81
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:39:13-81
 activity#nl.mikekemmink.noodverlichting.columns.ColumnSettingsActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:9-98
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:9-98
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:19-95
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:19-95
 activity#nl.mikekemmink.noodverlichting.ui.AddDefectActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:53:9-55:40
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:44:9-46:40
 	android:exported
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:55:13-37
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:46:13-37
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:54:13-79
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:45:13-79
 activity#nl.mikekemmink.noodverlichting.ui.DefectListActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:57:9-59:39
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:48:9-50:39
 	android:exported
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:59:13-37
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:50:13-37
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:58:13-50
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:49:13-50
 activity#nl.mikekemmink.noodverlichting.ui.MeasurementsActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:60:9-63:58
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:51:9-54:69
 	android:parentActivityName
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:63:13-55
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:54:13-66
 	android:exported
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:62:13-37
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:53:13-37
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:61:13-82
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:13-82
 activity#nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity
-ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:65:9-68
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:56:9-68
 	android:name
-		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:65:19-65
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:56:19-65
+activity#nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:59:9-66:20
+	android:exported
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:61:13-36
+	android:name
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:60:13-56
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:62:13-65:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:63:17-69
+	android:name
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:63:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:64:17-77
+	android:name
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:64:27-74
+activity#nl.mikekemmink.noodverlichting.ui.Nen3140Activity
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:69:9-72:73
+	android:parentActivityName
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:72:13-70
+	android:exported
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:71:13-37
+	android:name
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:70:13-47
+activity#nl.mikekemmink.noodverlichting.NoodverlichtingActivity
+ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:75:9-78:73
+	android:parentActivityName
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:78:13-70
+	android:exported
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:77:13-37
+	android:name
+		ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:76:13-52
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:27:13-29:54
 	android:resource

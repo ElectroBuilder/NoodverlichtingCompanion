@@ -42,20 +42,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- Hoofdscherm: de enige LAUNCHER -->
-        <activity
-            android:name="nl.mikekemmink.noodverlichting.MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="nl.mikekemmink.noodverlichting.ui.LocationListActivity"
             android:exported="false"
-            android:parentActivityName="nl.mikekemmink.noodverlichting.MainActivity" />
+            android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
         <activity
             android:name="nl.mikekemmink.noodverlichting.ui.FixtureListActivity"
             android:exported="false"
@@ -70,8 +60,31 @@
         <activity
             android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
             android:exported="false"
-            android:parentActivityName="nl.mikekemmink.noodverlichting.MainActivity" />
+            android:parentActivityName="nl.mikekemmink.noodverlichting.NoodverlichtingActivity" />
         <activity android:name="nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity" />
+
+        <!-- 1) Nieuwe launcher activity -->
+        <activity
+            android:name="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 2) NEN3140 dashboard -->
+        <activity
+            android:name="nl.mikekemmink.noodverlichting.ui.Nen3140Activity"
+            android:exported="false"
+            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
+
+        <!-- 3) Noodverlichting hoofdscherm (na hernoemen van MainActivity) -->
+        <activity
+            android:name="nl.mikekemmink.noodverlichting.NoodverlichtingActivity"
+            android:exported="false"
+            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

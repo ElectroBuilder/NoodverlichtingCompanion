@@ -12,6 +12,12 @@
     <color name="colorSecondary">#FF9800</color>
     <color name="colorSecondaryVariant">#F57C00</color>
     <color name="colorSurface">#F5F5F5</color>
+    <color name="nen_blue">#1565C0</color>
+    <color name="nen_blue_status">#0D47A1</color>
+    <color name="nen_on_blue">#FFFFFF</color>
+    <color name="nood_green">#2E7D32</color>
+    <color name="nood_green_status">#1B5E20</color>
+    <color name="nood_on_green">#FFFFFF</color>
     <string name="app_name">Noodverlichting Companion</string>
     <string name="content_open_locaties"> open locaties</string>
     <string name="content_status"> status</string>

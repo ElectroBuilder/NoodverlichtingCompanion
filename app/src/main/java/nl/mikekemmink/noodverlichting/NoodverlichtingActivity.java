@@ -38,10 +38,8 @@ import nl.mikekemmink.noodverlichting.data.DBInspecties;
 import nl.mikekemmink.noodverlichting.export.ExportHelper;
 import nl.mikekemmink.noodverlichting.stroom.StroomOverzichtActivity;
 import nl.mikekemmink.noodverlichting.ui.Measurement;
-import nl.mikekemmink.noodverlichting.stroom.StroomRepo;
-import nl.mikekemmink.noodverlichting.stroom.StroomWaardeEntry;
 
-public class MainActivity extends AppCompatActivity {
+public class NoodverlichtingActivity extends AppCompatActivity {
 
     private TextView txtInfo;
 
@@ -120,32 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             return false;
-        });
-
-        Button btnMeasurements = findViewById(R.id.btn_open_measurements);
-        btnMeasurements.setOnClickListener(v -> {
-            // Debug-toast: zie je deze, dan werkt de klik
-            Toast.makeText(this, "Stroomwaarden openen…", Toast.LENGTH_SHORT).show();
-
-            // Volledige gekwalificeerde classnaam gebruiken is het meest expliciet:
-            Intent intent = new Intent(
-                    MainActivity.this,
-                    nl.mikekemmink.noodverlichting.ui.MeasurementsActivity.class
-            );
-
-            // Gebruik óf de Activity Result API...
-            measurementsLauncher.launch(intent);
-
-            // ...of tijdelijk startActivity(intent) om snel uit te sluiten dat het aan de Result API ligt:
-            // startActivity(intent);
-        });
-
-
-        Button btnStroomOverzicht = findViewById(R.id.btnStroomOverzicht);
-        btnStroomOverzicht.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, StroomOverzichtActivity.class));
-            }
         });
 
     txtInfo = findViewById(R.id.txtInfo);

@@ -29,20 +29,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- Hoofdscherm: de enige LAUNCHER -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
         <activity
             android:name="nl.mikekemmink.noodverlichting.ui.LocationListActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".NoodverlichtingActivity" />
 
         <activity
             android:name="nl.mikekemmink.noodverlichting.ui.FixtureListActivity"
@@ -60,9 +51,31 @@
         <activity
             android:name="nl.mikekemmink.noodverlichting.ui.MeasurementsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".NoodverlichtingActivity" />
 
         <activity android:name=".stroom.StroomOverzichtActivity" />
+
+        <!-- 1) Nieuwe launcher activity -->
+        <activity
+            android:name=".ui.SelectInspectionActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 2) NEN3140 dashboard -->
+        <activity
+            android:name=".ui.Nen3140Activity"
+            android:exported="false"
+            android:parentActivityName=".ui.SelectInspectionActivity" />
+
+        <!-- 3) Noodverlichting hoofdscherm (na hernoemen van MainActivity) -->
+        <activity
+            android:name=".NoodverlichtingActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.SelectInspectionActivity" />
 
     </application>
 

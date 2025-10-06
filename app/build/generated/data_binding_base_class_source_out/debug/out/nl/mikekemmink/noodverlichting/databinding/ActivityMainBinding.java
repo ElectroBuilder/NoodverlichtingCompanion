@@ -38,16 +38,10 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialButton btnImportZip;
 
   @NonNull
-  public final MaterialButton btnOpenMeasurements;
-
-  @NonNull
   public final MaterialButton btnStart;
 
   @NonNull
   public final MaterialButton btnStatusAction;
-
-  @NonNull
-  public final MaterialButton btnStroomOverzicht;
 
   @NonNull
   public final MaterialCardView cardStatus;
@@ -87,8 +81,7 @@ public final class ActivityMainBinding implements ViewBinding {
 
   private ActivityMainBinding(@NonNull CoordinatorLayout rootView, @NonNull AppBarLayout appbar,
       @NonNull MaterialButton btnExport, @NonNull MaterialButton btnImportZip,
-      @NonNull MaterialButton btnOpenMeasurements, @NonNull MaterialButton btnStart,
-      @NonNull MaterialButton btnStatusAction, @NonNull MaterialButton btnStroomOverzicht,
+      @NonNull MaterialButton btnStart, @NonNull MaterialButton btnStatusAction,
       @NonNull MaterialCardView cardStatus, @NonNull FloatingActionButton fabPrimary,
       @NonNull ShapeableImageView imgStatus, @NonNull TextView labelData,
       @NonNull TextView labelHoofd, @NonNull CircularProgressIndicator progressImport,
@@ -99,10 +92,8 @@ public final class ActivityMainBinding implements ViewBinding {
     this.appbar = appbar;
     this.btnExport = btnExport;
     this.btnImportZip = btnImportZip;
-    this.btnOpenMeasurements = btnOpenMeasurements;
     this.btnStart = btnStart;
     this.btnStatusAction = btnStatusAction;
-    this.btnStroomOverzicht = btnStroomOverzicht;
     this.cardStatus = cardStatus;
     this.fabPrimary = fabPrimary;
     this.imgStatus = imgStatus;
@@ -162,12 +153,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btn_open_measurements;
-      MaterialButton btnOpenMeasurements = ViewBindings.findChildViewById(rootView, id);
-      if (btnOpenMeasurements == null) {
-        break missingId;
-      }
-
       id = R.id.btnStart;
       MaterialButton btnStart = ViewBindings.findChildViewById(rootView, id);
       if (btnStart == null) {
@@ -177,12 +162,6 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.btnStatusAction;
       MaterialButton btnStatusAction = ViewBindings.findChildViewById(rootView, id);
       if (btnStatusAction == null) {
-        break missingId;
-      }
-
-      id = R.id.btnStroomOverzicht;
-      MaterialButton btnStroomOverzicht = ViewBindings.findChildViewById(rootView, id);
-      if (btnStroomOverzicht == null) {
         break missingId;
       }
 
@@ -255,9 +234,8 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       return new ActivityMainBinding((CoordinatorLayout) rootView, appbar, btnExport, btnImportZip,
-          btnOpenMeasurements, btnStart, btnStatusAction, btnStroomOverzicht, cardStatus,
-          fabPrimary, imgStatus, labelData, labelHoofd, progressImport, root, rowStroom, scroll,
-          toolbar, txtInfo, txtStatusTitle);
+          btnStart, btnStatusAction, cardStatus, fabPrimary, imgStatus, labelData, labelHoofd,
+          progressImport, root, rowStroom, scroll, toolbar, txtInfo, txtStatusTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
