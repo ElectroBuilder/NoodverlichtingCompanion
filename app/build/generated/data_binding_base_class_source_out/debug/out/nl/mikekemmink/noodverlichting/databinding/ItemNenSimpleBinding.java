@@ -4,32 +4,29 @@ package nl.mikekemmink.noodverlichting.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
-import androidx.viewbinding.ViewBindings;
 import java.lang.NullPointerException;
 import java.lang.Override;
-import java.lang.String;
 import nl.mikekemmink.noodverlichting.R;
 
 public final class ItemNenSimpleBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final TextView rootView;
 
   @NonNull
   public final TextView txtTitle;
 
-  private ItemNenSimpleBinding(@NonNull LinearLayout rootView, @NonNull TextView txtTitle) {
+  private ItemNenSimpleBinding(@NonNull TextView rootView, @NonNull TextView txtTitle) {
     this.rootView = rootView;
     this.txtTitle = txtTitle;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public TextView getRoot() {
     return rootView;
   }
 
@@ -50,19 +47,12 @@ public final class ItemNenSimpleBinding implements ViewBinding {
 
   @NonNull
   public static ItemNenSimpleBinding bind(@NonNull View rootView) {
-    // The body of this method is generated in a way you would not otherwise write.
-    // This is done to optimize the compiled bytecode for size and performance.
-    int id;
-    missingId: {
-      id = R.id.txtTitle;
-      TextView txtTitle = ViewBindings.findChildViewById(rootView, id);
-      if (txtTitle == null) {
-        break missingId;
-      }
-
-      return new ItemNenSimpleBinding((LinearLayout) rootView, txtTitle);
+    if (rootView == null) {
+      throw new NullPointerException("rootView");
     }
-    String missingId = rootView.getResources().getResourceName(id);
-    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
+
+    TextView txtTitle = (TextView) rootView;
+
+    return new ItemNenSimpleBinding((TextView) rootView, txtTitle);
   }
 }

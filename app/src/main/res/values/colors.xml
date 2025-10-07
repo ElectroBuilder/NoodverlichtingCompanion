@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color> <!-- Blue -->
-    <color name="colorPrimaryVariant">#1976D2</color> <!-- Darker Blue -->
-    <color name="colorSecondary">#FF9800</color> <!-- Orange -->
-    <color name="colorSecondaryVariant">#F57C00</color> <!-- Darker Orange -->
-    <color name="colorBackground">#FFFFFF</color> <!-- White -->
-    <color name="colorSurface">#F5F5F5</color> <!-- Light Gray -->
-    <color name="colorError">#B00020</color> <!-- Red -->
-    <color name="colorOnPrimary">#FFFFFF</color> <!-- Text on primary -->
-    <color name="colorOnSecondary">#000000</color> <!-- Text on secondary -->
-    <color name="colorOnBackground">#000000</color>
-    <color name="colorOnSurface">#000000</color>
-    <color name="colorOnError">#FFFFFF</color>
+    <!-- Fallback Material 3 kleuren (blauw/teal) -->
+    <color name="md3_primary">#3F51B5</color>
+    <color name="md3_onPrimary">#FFFFFF</color>
+    <color name="md3_secondary">#009688</color>
+    <color name="md3_onSecondary">#FFFFFF</color>
+    <color name="md3_tertiary">#FF9800</color>
+    <color name="md3_onTertiary">#000000</color>
+    <color name="md3_surface">#FFFFFF</color>
+    <color name="md3_onSurface">#1A1C1E</color>
+    <color name="md3_outline">#73777F</color>
+
+    <!-- Extra -->
+    <color name="nen_warning">#D32F2F</color>
+    <color name="nen_ok">#2E7D32</color>
 </resources>

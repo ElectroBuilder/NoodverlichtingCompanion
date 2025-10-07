@@ -1,3 +1,4 @@
+
 package nl.mikekemmink.noodverlichting.nen3140;
 
 import android.content.Intent;
@@ -38,7 +39,6 @@ public class NenBoardsActivity extends BaseToolbarActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
 
         List<NenBoard> boards = storage.loadBoards(locationId);
-
         adapter = new NenBoardListAdapter(boards,
                 board -> {
                     Intent i = new Intent(this, MeasurementsActivity.class);
@@ -50,20 +50,35 @@ public class NenBoardsActivity extends BaseToolbarActivity {
                     startActivity(i);
                 },
                 board -> {
-                    // VOORHEEN: direct delete → nu eerst bevestigen
+                    // Long-press: beheer gebreken + verwijderen
+                    String[] actions = new String[] { "Gebreken beheren", "Verwijderen (kast + meting)" };
                     new androidx.appcompat.app.AlertDialog.Builder(this)
-                            .setTitle("Verwijderen?")
-                            .setMessage("Kast \"" + board.getName() + "\" en ALLE metingen verwijderen? Dit kan niet ongedaan gemaakt worden.")
-                            .setPositiveButton("Verwijderen", (d, w) -> {
-                                storage.deleteBoard(locationId, board.getId());  // verwijdert ook de metingen van die kast
-                                adapter.setItems(storage.loadBoards(locationId));
-                                Toast.makeText(this, "Kast en metingen verwijderd", Toast.LENGTH_SHORT).show();
+                            .setTitle(board.getName())
+                            .setItems(actions, (d, which) -> {
+                                switch (which) {
+                                    case 0:
+                                        Intent di = new Intent(this, DefectsActivity.class);
+                                        di.putExtra("locationId", locationId);
+                                        di.putExtra("boardId", board.getId());
+                                        startActivity(di);
+                                        break;
+                                    case 1:
+                                        new androidx.appcompat.app.AlertDialog.Builder(this)
+                                                .setTitle("Verwijderen?")
+                                                .setMessage("Kast \"" + board.getName() + "\" en ALLE metingen verwijderen? Dit kan niet ongedaan gemaakt worden.")
+                                                .setPositiveButton("Verwijderen", (dd, w) -> {
+                                                    storage.deleteBoard(locationId, board.getId());
+                                                    adapter.setItems(storage.loadBoards(locationId));
+                                                    Toast.makeText(this, "Kast en meting verwijderd", Toast.LENGTH_SHORT).show();
+                                                })
+                                                .setNegativeButton(android.R.string.cancel, null)
+                                                .show();
+                                        break;
+                                }
                             })
-                            .setNegativeButton(android.R.string.cancel, null)
                             .show();
                 }
         );
-
         rv.setAdapter(adapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -73,7 +88,6 @@ public class NenBoardsActivity extends BaseToolbarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Handig als je terugkomt uit MeasurementsActivity: lijst even verversen
         if (locationId != null) {
             adapter.setItems(storage.loadBoards(locationId));
         }

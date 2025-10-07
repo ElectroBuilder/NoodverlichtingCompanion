@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorError">#B00020</color>
-    <color name="colorOnBackground">#000000</color>
-    <color name="colorOnError">#FFFFFF</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
-    <color name="colorOnSecondary">#000000</color>
-    <color name="colorOnSurface">#000000</color>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryVariant">#1976D2</color>
-    <color name="colorSecondary">#FF9800</color>
-    <color name="colorSecondaryVariant">#F57C00</color>
-    <color name="colorSurface">#F5F5F5</color>
+    <bool name="isLightTheme">true</bool>
+    <color name="md3_onPrimary">#FFFFFF</color>
+    <color name="md3_onSecondary">#FFFFFF</color>
+    <color name="md3_onSurface">#1A1C1E</color>
+    <color name="md3_onTertiary">#000000</color>
+    <color name="md3_outline">#73777F</color>
+    <color name="md3_primary">#3F51B5</color>
+    <color name="md3_secondary">#009688</color>
+    <color name="md3_surface">#FFFFFF</color>
+    <color name="md3_tertiary">#FF9800</color>
     <color name="nen_blue">#1565C0</color>
     <color name="nen_blue_status">#0D47A1</color>
+    <color name="nen_ok">#2E7D32</color>
     <color name="nen_on_blue">#FFFFFF</color>
+    <color name="nen_warning">#D32F2F</color>
     <color name="nood_green">#2E7D32</color>
     <color name="nood_green_status">#1B5E20</color>
     <color name="nood_on_green">#FFFFFF</color>
@@ -54,20 +54,37 @@
     <string name="title_stroom_overzicht">Stroomoverzicht</string>
     <style name="Theme.Noodverlichting" parent="Theme.Material3.DayNight.NoActionBar">
         
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
-        <item name="colorError">@color/colorError</item>
-        <item name="colorOnError">@color/colorOnError</item>
+        <item name="colorPrimary">@color/md3_primary</item>
+        <item name="colorOnPrimary">@color/md3_onPrimary</item>
+        <item name="colorSecondary">@color/md3_secondary</item>
+        <item name="colorOnSecondary">@color/md3_onSecondary</item>
+        <item name="colorTertiary">@color/md3_tertiary</item>
+        <item name="colorOnTertiary">@color/md3_onTertiary</item>
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_onSurface</item>
+        <item name="colorOutline">@color/md3_outline</item>
 
         
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
+        <item name="android:navigationBarColor">@color/md3_surface</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">@bool/isLightTheme</item>
 
+
+        
+        
+    </style>
+    <style name="ThemeOverlay.Noodverlichting.Toolbar" parent="ThemeOverlay.Material3.ActionBar">
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_onSurface</item>
+        <item name="toolbarStyle">@style/Widget.Noodverlichting.Toolbar</item>
+    </style>
+    <style name="Widget.Noodverlichting.InfoChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/md3_primary</item>
+        <item name="android:textColor">@color/md3_onPrimary</item>
+        <item name="chipIconVisible">false</item>
+    </style>
+    <style name="Widget.Noodverlichting.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Material3.TitleLarge</item>
     </style>
 </resources>

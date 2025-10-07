@@ -17,7 +17,6 @@
         android:id="@+id/txtSubtitle"
         android:layout_marginTop="4dp"
         android:textSize="14sp"
-        android:typeface="monospace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="L1 0.0  L2 0.0  L3 0.0  N 0.0  PE 0.0" />

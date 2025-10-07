@@ -1316,6 +1316,7 @@ attr yearTodayStyle
 bool abc_action_bar_embed_tabs
 bool abc_config_actionMenuItemAllCaps
 bool config_materialPreferenceIconSpaceReserved
+bool isLightTheme
 bool mtrl_btn_textappearance_all_caps
 color abc_background_cache_hint_selector_material_dark
 color abc_background_cache_hint_selector_material_light
@@ -1364,18 +1365,6 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
-color colorBackground
-color colorError
-color colorOnBackground
-color colorOnError
-color colorOnPrimary
-color colorOnSecondary
-color colorOnSurface
-color colorPrimary
-color colorPrimaryVariant
-color colorSecondary
-color colorSecondaryVariant
-color colorSurface
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -2023,6 +2012,15 @@ color material_timepicker_button_stroke
 color material_timepicker_clock_text_color
 color material_timepicker_clockface
 color material_timepicker_modebutton_tint
+color md3_onPrimary
+color md3_onSecondary
+color md3_onSurface
+color md3_onTertiary
+color md3_outline
+color md3_primary
+color md3_secondary
+color md3_surface
+color md3_tertiary
 color mtrl_btn_bg_color_selector
 color mtrl_btn_ripple_color
 color mtrl_btn_stroke_color_selector
@@ -2080,7 +2078,9 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color nen_blue
 color nen_blue_status
+color nen_ok
 color nen_on_blue
+color nen_warning
 color nood_green
 color nood_green_status
 color nood_on_green
@@ -3000,6 +3000,8 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_badge_rounded
+drawable bg_chip_info
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3244,6 +3246,7 @@ id blocking
 id bottom
 id bounce
 id btnCamera
+id btnDelete
 id btnExport
 id btnGalerij
 id btnImportZip
@@ -3394,6 +3397,7 @@ id ignoreRequest
 id image
 id imgAvatar
 id imgFoto
+id imgPhoto
 id imgStatus
 id imgThumb
 id indeterminate
@@ -3677,18 +3681,26 @@ id tvATS
 id tvAccuLeeftijd
 id tvAccuType
 id tvArtikelNr
+id tvBoardName
 id tvCode
+id tvCount
+id tvDate
 id tvDatum
+id tvDefects
 id tvDuurtest
 id tvLabel
+id tvMeasurementDate
+id tvMeasurementSummary
 id tvMerk
 id tvMontagewijze
+id tvName
 id tvNr
 id tvOmschrijving
 id tvOpTekening
 id tvOpmerking
 id tvPictogram
 id tvSoort
+id tvSummary
 id tvType
 id tvVerdieping
 id tvinspectieid
@@ -3869,11 +3881,15 @@ layout header_fixture_columns
 layout image_frame
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout include_toolbar_m3
+layout item_defect
 layout item_gebrek
 layout item_location_grid
 layout item_location_grid_simple
 layout item_location_list
 layout item_location_list_simple
+layout item_nen_board
+layout item_nen_board_card
 layout item_nen_simple
 layout item_stroom_waarde
 layout m3_alert_dialog
@@ -4944,6 +4960,7 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
+style ThemeOverlay_Noodverlichting_Toolbar
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar
@@ -5327,6 +5344,8 @@ style Widget_MaterialComponents_Toolbar_Primary
 style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
+style Widget_Noodverlichting_InfoChip
+style Widget_Noodverlichting_Toolbar
 style Widget_Support_CoordinatorLayout
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity

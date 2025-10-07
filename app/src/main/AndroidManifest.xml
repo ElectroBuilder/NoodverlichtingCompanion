@@ -79,6 +79,7 @@
 
         <activity android:name=".nen3140.NenLocationListActivity" />
         <activity android:name=".nen3140.NenBoardsActivity" />
+        <activity android:name=".nen3140.DefectsActivity" />
 
     </application>
 

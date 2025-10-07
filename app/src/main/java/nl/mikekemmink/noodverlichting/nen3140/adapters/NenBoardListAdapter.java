@@ -1,3 +1,4 @@
+
 package nl.mikekemmink.noodverlichting.nen3140.adapters;
 
 import android.view.LayoutInflater;
@@ -36,14 +37,23 @@ public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapte
 
     @NonNull @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nen_simple, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nen_board_card, parent, false);
         return new VH(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VH h, int position) {
         final NenBoard item = items.get(position);
-        h.title.setText(item.getName());
+
+        h.tvName.setText(item.getName());
+        h.tvSummary.setText(item.formatLatestValues());
+        String ts = item.formatLatestTimestamp();
+        h.tvDate.setText(ts.isEmpty() ? "—" : ts);
+
+        int dc = item.getDefectsCount();
+        h.tvDefects.setText(dc == 0 ? "Geen gebreken" : dc + (dc == 1 ? " gebrek" : " gebreken"));
+        h.tvDefects.setVisibility(View.VISIBLE);
+
         h.itemView.setOnClickListener(v -> { if (onClick != null) onClick.onClick(item); });
         h.itemView.setOnLongClickListener(v -> { if (onLongClick != null) onLongClick.onLongClick(item); return true; });
     }
@@ -51,10 +61,13 @@ public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapte
     @Override public int getItemCount() { return items.size(); }
 
     static class VH extends RecyclerView.ViewHolder {
-        TextView title;
+        TextView tvName, tvSummary, tvDate, tvDefects;
         VH(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.txtTitle);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvSummary = itemView.findViewById(R.id.tvSummary);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvDefects = itemView.findViewById(R.id.tvDefects);
         }
     }
 }

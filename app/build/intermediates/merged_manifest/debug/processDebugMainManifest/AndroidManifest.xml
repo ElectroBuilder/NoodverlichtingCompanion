@@ -87,6 +87,7 @@
             android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
         <activity android:name="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity" />
         <activity android:name="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity" />
+        <activity android:name="nl.mikekemmink.noodverlichting.nen3140.DefectsActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

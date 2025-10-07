@@ -1,24 +1,43 @@
-<!-- res/values/themes.xml -->
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- App-thema -->
+<resources>
+    <!-- Hoofdthema: Material 3, DayNight, zonder ActionBar (we gebruiken MaterialToolbar) -->
     <style name="Theme.Noodverlichting" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Gebruik je eigen kleuren; dit zijn placeholders -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
-        <item name="colorError">@color/colorError</item>
-        <item name="colorOnError">@color/colorOnError</item>
+        <!-- Basis kleurrollen (fallback wanneer Dynamic Color niet beschikbaar is) -->
+        <item name="colorPrimary">@color/md3_primary</item>
+        <item name="colorOnPrimary">@color/md3_onPrimary</item>
+        <item name="colorSecondary">@color/md3_secondary</item>
+        <item name="colorOnSecondary">@color/md3_onSecondary</item>
+        <item name="colorTertiary">@color/md3_tertiary</item>
+        <item name="colorOnTertiary">@color/md3_onTertiary</item>
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_onSurface</item>
+        <item name="colorOutline">@color/md3_outline</item>
 
-        <!-- (optioneel) status bar -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
+        <!-- Component tuning -->
+        <item name="android:navigationBarColor">@color/md3_surface</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">@bool/isLightTheme</item>
 
+
+        <!-- Typography (optioneel: laat default Material3) -->
+        <!-- <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item> -->
     </style>
 
+    <!-- Toolbar overlay om snel de AppBar te stylen per scherm -->
+    <style name="ThemeOverlay.Noodverlichting.Toolbar" parent="ThemeOverlay.Material3.ActionBar">
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_onSurface</item>
+        <item name="toolbarStyle">@style/Widget.Noodverlichting.Toolbar</item>
+    </style>
+
+    <style name="Widget.Noodverlichting.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Material3.TitleLarge</item>
+    </style>
+
+    <!-- Chip style voor info-badges (zoals aantal gebreken) -->
+    <style name="Widget.Noodverlichting.InfoChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/md3_primary</item>
+        <item name="android:textColor">@color/md3_onPrimary</item>
+        <item name="chipIconVisible">false</item>
+    </style>
 </resources>

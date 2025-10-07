@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBackground">#121212</color>
-    <color name="colorError">#CF6679</color>
-    <color name="colorOnBackground">#FFFFFF</color>
-    <color name="colorOnError">#000000</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
-    <color name="colorOnSecondary">#000000</color>
-    <color name="colorOnSurface">#FFFFFF</color>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryVariant">#90CAF9</color>
-    <color name="colorSecondary">#FF9800</color>
-    <color name="colorSecondaryVariant">#FFB74D</color>
-    <color name="colorSurface">#1E1E1E</color>
+    <bool name="isLightTheme">false</bool>
+    <color name="md3_onPrimary">#000000</color>
+    <color name="md3_onSecondary">#000000</color>
+    <color name="md3_onSurface">#E6E1E5</color>
+    <color name="md3_onTertiary">#000000</color>
+    <color name="md3_outline">#8A8D93</color>
+    <color name="md3_primary">#9FA8DA</color>
+    <color name="md3_secondary">#80CBC4</color>
+    <color name="md3_surface">#121212</color>
+    <color name="md3_tertiary">#FFB74D</color>
+    <color name="nen_ok">#A5D6A7</color>
+    <color name="nen_warning">#EF9A9A</color>
 </resources>
