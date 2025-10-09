@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,100 +10,233 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Meetwaardes -->
         <TextView
+            android:text="Meetwaardes"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kastnaam" />
+            android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/et_kastnaam"
+        <!-- Twee kolommen: stroom en SPD -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:inputType="textCapSentences" />
+            <!-- Linkerkolom: Stroom -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp">
 
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_l1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_l1"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_l2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_l2"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_l3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_l3"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_n"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_n"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_pe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_pe"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Rechterkolom: SPD -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_spd_l1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_spd_l1"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_spd_l2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_spd_l2"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_spd_l3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_spd_l3"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:hint="@string/hint_spd_N"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_spd_N"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Foto's naast elkaar -->
         <TextView
+            android:text="@string/label_fotos"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="L1 (A)" />
-
-        <EditText
-            android:id="@+id/et_l1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:inputType="numberDecimal"
-            android:digits="0123456789.," />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="L2 (A)" />
-
-        <EditText
-            android:id="@+id/et_l2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:inputType="numberDecimal"
-            android:digits="0123456789.," />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="L3 (A)" />
-
-        <EditText
-            android:id="@+id/et_l3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:inputType="numberDecimal"
-            android:digits="0123456789.," />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="N (A)" />
-
-        <EditText
-            android:id="@+id/et_n"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:inputType="numberDecimal"
-            android:digits="0123456789.," />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="PE (A)" />
-
-        <EditText
-            android:id="@+id/et_pe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:inputType="numberDecimal"
-            android:digits="0123456789.," />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:id="@+id/img_board"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/desc_kastfoto"
+                android:background="#EEE" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/img_info"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/desc_kastinfofoto"
+                android:background="#EEE" />
+        </LinearLayout>
+
+        <!-- Knoppen voor foto's -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btn_photo_board"
+                android:text="@string/action_foto_kast_maken"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btn_photo_info"
+                android:text="@string/action_foto_info_maken"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Acties -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/btn_cancel"
+                android:text="@string/cancel"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Annuleren" />
+                android:layout_height="wrap_content" />
 
             <Space
                 android:layout_width="12dp"
@@ -110,11 +244,11 @@
 
             <Button
                 android:id="@+id/btn_save"
+                android:text="@string/save"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Opslaan" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -46,6 +46,8 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation "androidx.preference:preference:1.2.1"
+    implementation 'androidx.exifinterface:exifinterface:1.3.7'
+
 
     // PDF viewer fork via JitPack
 

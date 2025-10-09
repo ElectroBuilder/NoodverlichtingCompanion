@@ -6,7 +6,10 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.io.File;
+
 import nl.mikekemmink.noodverlichting.R;
+import nl.mikekemmink.noodverlichting.nen3140.export.NenExporter;
 import nl.mikekemmink.noodverlichting.ui.BaseToolbarActivity;
 
 public class Nen3140Activity extends BaseToolbarActivity {
@@ -33,7 +36,15 @@ public class Nen3140Activity extends BaseToolbarActivity {
 
         // (Optioneel) placeholders voor import/export NEN3140
         btnImportZip.setOnClickListener(v -> txtInfo.setText("Import (NEN3140) nog niet geïmplementeerd"));
-        btnExport.setOnClickListener(v -> txtInfo.setText("Export (NEN3140) nog niet geïmplementeerd"));
+        btnExport.setOnClickListener(v -> {
+            try {
+                File zip = NenExporter.exportToZip(this, null);
+                txtInfo.setText("NEN3140-export gereed:\n" + zip.getAbsolutePath());
+            } catch (Exception e) {
+                txtInfo.setText("Export mislukt: " + e.getMessage());
+            }
+        });
+
 
         txtInfo.setText("Klaar om te starten met NEN3140 (Locatie → Verdeelinrichting → Metingen)");
     }

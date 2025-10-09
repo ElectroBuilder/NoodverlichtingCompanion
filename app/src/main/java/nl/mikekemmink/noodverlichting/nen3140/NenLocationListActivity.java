@@ -33,15 +33,15 @@ public class NenLocationListActivity extends BaseToolbarActivity {
 
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NenLocationListAdapter(locations,
-                loc -> {
+        adapter = new NenLocationListAdapter(
+                locations,
+                loc -> { // korte klik: naar bordenlijst
                     android.content.Intent i = new android.content.Intent(this, NenBoardsActivity.class);
                     i.putExtra("locationId", loc.getId());
                     startActivity(i);
                 },
-                loc -> {
-                    storage.deleteLocation(loc.getId());
-                    adapter.setItems(storage.loadLocations());
+                loc -> { // lange klik: toon opties
+                    showLocationOptionsDialog(loc);
                 }
         );
         rv.setAdapter(adapter);
@@ -65,4 +65,44 @@ public class NenLocationListActivity extends BaseToolbarActivity {
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
+    private void showLocationOptionsDialog(NenLocation loc) {
+        String[] items = new String[]{"Bewerken", "Verwijderen"};
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle(loc.getName())
+                .setItems(items, (d, which) -> {
+                    if (which == 0) showRenameLocationDialog(loc);
+                    else if (which == 1) confirmDeleteLocation(loc);
+                })
+                .show();
+    }
+
+    private void showRenameLocationDialog(NenLocation loc) {
+        final android.widget.EditText input = new android.widget.EditText(this);
+        input.setText(loc.getName());
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Locatie bewerken")
+                .setView(input)
+                .setPositiveButton("Opslaan", (d, w) -> {
+                    String name = input.getText().toString().trim();
+                    if (!name.isEmpty()) {
+                        new NenStorage(this).updateLocationName(loc.getId(), name);
+                        adapter.setItems(new NenStorage(this).loadLocations());
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void confirmDeleteLocation(NenLocation loc) {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Verwijderen?")
+                .setMessage("Locatie \"" + loc.getName() + "\" en alle bijbehorende borden, metingen, gebreken en foto’s worden verwijderd. Weet je het zeker?")
+                .setPositiveButton("Verwijderen", (d, w) -> {
+                    new NenStorage(this).deleteLocation(loc.getId());
+                    adapter.setItems(new NenStorage(this).loadLocations());
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
 }

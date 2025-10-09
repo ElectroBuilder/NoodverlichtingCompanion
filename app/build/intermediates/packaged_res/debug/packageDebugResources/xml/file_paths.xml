@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Alleen de map met NEN-foto's beschikbaar stellen -->
+<paths>
+    <!-- Defectfoto's (interne app-opslag) -->
     <files-path name="nen_photos" path="nen3140/photos/" />
+
+    <!-- Kast- en infoto’s (externe app-opslag) -->
+    <external-files-path name="nen_pictures" path="Pictures/nen3140/" />
 </paths>

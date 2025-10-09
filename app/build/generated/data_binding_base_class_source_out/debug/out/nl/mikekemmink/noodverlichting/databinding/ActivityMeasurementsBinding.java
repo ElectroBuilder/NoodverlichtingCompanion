@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ScrollView;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.textfield.TextInputEditText;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -18,50 +19,81 @@ import nl.mikekemmink.noodverlichting.R;
 
 public final class ActivityMeasurementsBinding implements ViewBinding {
   @NonNull
-  private final ScrollView rootView;
+  private final NestedScrollView rootView;
 
   @NonNull
   public final Button btnCancel;
 
   @NonNull
+  public final Button btnPhotoBoard;
+
+  @NonNull
+  public final Button btnPhotoInfo;
+
+  @NonNull
   public final Button btnSave;
 
   @NonNull
-  public final EditText etKastnaam;
+  public final TextInputEditText etL1;
 
   @NonNull
-  public final EditText etL1;
+  public final TextInputEditText etL2;
 
   @NonNull
-  public final EditText etL2;
+  public final TextInputEditText etL3;
 
   @NonNull
-  public final EditText etL3;
+  public final TextInputEditText etN;
 
   @NonNull
-  public final EditText etN;
+  public final TextInputEditText etPe;
 
   @NonNull
-  public final EditText etPe;
+  public final TextInputEditText etSpdL1;
 
-  private ActivityMeasurementsBinding(@NonNull ScrollView rootView, @NonNull Button btnCancel,
-      @NonNull Button btnSave, @NonNull EditText etKastnaam, @NonNull EditText etL1,
-      @NonNull EditText etL2, @NonNull EditText etL3, @NonNull EditText etN,
-      @NonNull EditText etPe) {
+  @NonNull
+  public final TextInputEditText etSpdL2;
+
+  @NonNull
+  public final TextInputEditText etSpdL3;
+
+  @NonNull
+  public final TextInputEditText etSpdN;
+
+  @NonNull
+  public final ImageView imgBoard;
+
+  @NonNull
+  public final ImageView imgInfo;
+
+  private ActivityMeasurementsBinding(@NonNull NestedScrollView rootView, @NonNull Button btnCancel,
+      @NonNull Button btnPhotoBoard, @NonNull Button btnPhotoInfo, @NonNull Button btnSave,
+      @NonNull TextInputEditText etL1, @NonNull TextInputEditText etL2,
+      @NonNull TextInputEditText etL3, @NonNull TextInputEditText etN,
+      @NonNull TextInputEditText etPe, @NonNull TextInputEditText etSpdL1,
+      @NonNull TextInputEditText etSpdL2, @NonNull TextInputEditText etSpdL3,
+      @NonNull TextInputEditText etSpdN, @NonNull ImageView imgBoard, @NonNull ImageView imgInfo) {
     this.rootView = rootView;
     this.btnCancel = btnCancel;
+    this.btnPhotoBoard = btnPhotoBoard;
+    this.btnPhotoInfo = btnPhotoInfo;
     this.btnSave = btnSave;
-    this.etKastnaam = etKastnaam;
     this.etL1 = etL1;
     this.etL2 = etL2;
     this.etL3 = etL3;
     this.etN = etN;
     this.etPe = etPe;
+    this.etSpdL1 = etSpdL1;
+    this.etSpdL2 = etSpdL2;
+    this.etSpdL3 = etSpdL3;
+    this.etSpdN = etSpdN;
+    this.imgBoard = imgBoard;
+    this.imgInfo = imgInfo;
   }
 
   @Override
   @NonNull
-  public ScrollView getRoot() {
+  public NestedScrollView getRoot() {
     return rootView;
   }
 
@@ -92,50 +124,93 @@ public final class ActivityMeasurementsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_photo_board;
+      Button btnPhotoBoard = ViewBindings.findChildViewById(rootView, id);
+      if (btnPhotoBoard == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_photo_info;
+      Button btnPhotoInfo = ViewBindings.findChildViewById(rootView, id);
+      if (btnPhotoInfo == null) {
+        break missingId;
+      }
+
       id = R.id.btn_save;
       Button btnSave = ViewBindings.findChildViewById(rootView, id);
       if (btnSave == null) {
         break missingId;
       }
 
-      id = R.id.et_kastnaam;
-      EditText etKastnaam = ViewBindings.findChildViewById(rootView, id);
-      if (etKastnaam == null) {
-        break missingId;
-      }
-
       id = R.id.et_l1;
-      EditText etL1 = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etL1 = ViewBindings.findChildViewById(rootView, id);
       if (etL1 == null) {
         break missingId;
       }
 
       id = R.id.et_l2;
-      EditText etL2 = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etL2 = ViewBindings.findChildViewById(rootView, id);
       if (etL2 == null) {
         break missingId;
       }
 
       id = R.id.et_l3;
-      EditText etL3 = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etL3 = ViewBindings.findChildViewById(rootView, id);
       if (etL3 == null) {
         break missingId;
       }
 
       id = R.id.et_n;
-      EditText etN = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etN = ViewBindings.findChildViewById(rootView, id);
       if (etN == null) {
         break missingId;
       }
 
       id = R.id.et_pe;
-      EditText etPe = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText etPe = ViewBindings.findChildViewById(rootView, id);
       if (etPe == null) {
         break missingId;
       }
 
-      return new ActivityMeasurementsBinding((ScrollView) rootView, btnCancel, btnSave, etKastnaam,
-          etL1, etL2, etL3, etN, etPe);
+      id = R.id.et_spd_l1;
+      TextInputEditText etSpdL1 = ViewBindings.findChildViewById(rootView, id);
+      if (etSpdL1 == null) {
+        break missingId;
+      }
+
+      id = R.id.et_spd_l2;
+      TextInputEditText etSpdL2 = ViewBindings.findChildViewById(rootView, id);
+      if (etSpdL2 == null) {
+        break missingId;
+      }
+
+      id = R.id.et_spd_l3;
+      TextInputEditText etSpdL3 = ViewBindings.findChildViewById(rootView, id);
+      if (etSpdL3 == null) {
+        break missingId;
+      }
+
+      id = R.id.et_spd_N;
+      TextInputEditText etSpdN = ViewBindings.findChildViewById(rootView, id);
+      if (etSpdN == null) {
+        break missingId;
+      }
+
+      id = R.id.img_board;
+      ImageView imgBoard = ViewBindings.findChildViewById(rootView, id);
+      if (imgBoard == null) {
+        break missingId;
+      }
+
+      id = R.id.img_info;
+      ImageView imgInfo = ViewBindings.findChildViewById(rootView, id);
+      if (imgInfo == null) {
+        break missingId;
+      }
+
+      return new ActivityMeasurementsBinding((NestedScrollView) rootView, btnCancel, btnPhotoBoard,
+          btnPhotoInfo, btnSave, etL1, etL2, etL3, etN, etPe, etSpdL1, etSpdL2, etSpdL3, etSpdN,
+          imgBoard, imgInfo);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
