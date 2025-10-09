@@ -33,7 +33,7 @@ public class ColumnOrderAdapter extends RecyclerView.Adapter<ColumnOrderAdapter.
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_column_item, parent, false);
+                .inflate(R.layout.nv_row_column_item, parent, false);
         return new VH(v);
     }
 

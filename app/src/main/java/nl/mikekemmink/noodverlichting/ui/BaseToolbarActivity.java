@@ -1,6 +1,5 @@
 package nl.mikekemmink.noodverlichting.ui;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -67,7 +66,7 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Zet de scaffold met 1 toolbar en content placeholder
-        setContentView(R.layout.activity_scaffold);
+        setContentView(R.layout.gedeeld_toolbar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }

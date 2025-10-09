@@ -1,7 +1,6 @@
 package nl.mikekemmink.noodverlichting.nen3140;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
@@ -14,7 +13,7 @@ public class PhotoPreviewActivity extends BaseToolbarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.activity_photo_preview);
+        setContentLayout(R.layout.nen_photo_preview);
         setTitle("Foto");
         setUpEnabled(true);
 

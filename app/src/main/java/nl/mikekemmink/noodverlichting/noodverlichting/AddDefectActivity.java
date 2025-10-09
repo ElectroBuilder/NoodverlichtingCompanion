@@ -77,7 +77,7 @@ public class AddDefectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_defect);
+        setContentView(R.layout.nv_gebrek_toevoegen);
 
         // 1) Views eerst
         TextView txtFixture = findViewById(R.id.txtFixture);

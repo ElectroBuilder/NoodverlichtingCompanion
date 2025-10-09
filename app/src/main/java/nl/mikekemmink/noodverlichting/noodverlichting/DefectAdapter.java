@@ -40,7 +40,7 @@ public class DefectAdapter extends RecyclerView.Adapter<DefectAdapter.VH> {
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_gebrek, parent, false);
+                .inflate(R.layout.nv_gebrek, parent, false);
         return new VH(v);
     }
 

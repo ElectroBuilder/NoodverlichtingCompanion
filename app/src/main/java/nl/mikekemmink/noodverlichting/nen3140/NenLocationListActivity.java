@@ -23,7 +23,7 @@ public class NenLocationListActivity extends BaseToolbarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.activity_list_with_fab);
+        setContentLayout(R.layout.nen_list_with_fab);
         setTitle("Locaties (NEN3140)");
         applyPalette(Palette.NEN);
         setUpEnabled(true);

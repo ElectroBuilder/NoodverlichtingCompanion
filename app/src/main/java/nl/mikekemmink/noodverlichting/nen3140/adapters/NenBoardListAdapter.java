@@ -40,7 +40,7 @@ public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapte
 
     @NonNull @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nen_board, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nen_verdelers, parent, false);
         return new VH(v);
     }
 

@@ -48,7 +48,7 @@ public class LocationListActivity extends BaseToolbarActivity implements Locatio
         super.onCreate(savedInstanceState);
 
         // Plaats de content-layout onder de single toolbar (MOET de juiste IDs bevatten)
-        setContentLayout(R.layout.activity_location_list);
+        setContentLayout(R.layout.nv_locaties);
 
         // Toolbar / status
         setUpEnabled(true);

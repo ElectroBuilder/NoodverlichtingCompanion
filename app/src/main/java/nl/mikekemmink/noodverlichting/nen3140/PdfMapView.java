@@ -25,11 +25,6 @@ import java.security.NoSuchAlgorithmException;
 import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 
-import android.util.LruCache;
-import android.graphics.BitmapFactory;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 
 public class PdfMapView extends FrameLayout {
     private ZoomPanImageView imageView;
@@ -67,7 +62,7 @@ public class PdfMapView extends FrameLayout {
 
     public PdfMapView(Context c, AttributeSet a) {
         super(c, a);
-        LayoutInflater.from(c).inflate(nl.mikekemmink.noodverlichting.R.layout.view_pdf_map, this, true);
+        LayoutInflater.from(c).inflate(nl.mikekemmink.noodverlichting.R.layout.nen_plattegrond, this, true);
         imageView = findViewById(nl.mikekemmink.noodverlichting.R.id.ivPage);
         overlay   = findViewById(nl.mikekemmink.noodverlichting.R.id.overlay);
         imageView.setOnMatrixChanged(m -> layoutMarkers());

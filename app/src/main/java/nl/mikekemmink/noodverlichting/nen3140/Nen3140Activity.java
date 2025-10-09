@@ -19,7 +19,7 @@ public class Nen3140Activity extends BaseToolbarActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Zelfde layout als noodverlichting-beginscherm
-        setContentLayout(R.layout.activity_main); // bevat txtInfo, btnStart, btnImportZip, btnExport
+        setContentLayout(R.layout.gedeeld_inspectiescherm); // bevat txtInfo, btnStart, btnImportZip, btnExport
         setTitle("NEN3140");
         applyPalette(Palette.NEN);
         setUpEnabled(true);

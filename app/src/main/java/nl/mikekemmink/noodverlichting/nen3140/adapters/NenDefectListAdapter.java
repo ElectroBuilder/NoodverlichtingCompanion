@@ -55,7 +55,7 @@ public class NenDefectListAdapter extends RecyclerView.Adapter<NenDefectListAdap
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_defect, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nen_gebrek, parent, false);
         return new VH(v);
     }
 

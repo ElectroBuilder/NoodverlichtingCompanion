@@ -21,7 +21,7 @@ public class FixtureListFragment extends Fragment
 
     public FixtureListFragment() {
         // Koppel je layout (zie sectie 3 hieronder)
-        super(R.layout.fragment_fixture_list);
+        super(R.layout.nv_fragment_armaturen);
     }
 
     @Override

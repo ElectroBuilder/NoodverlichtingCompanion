@@ -99,7 +99,7 @@ public class NoodverlichtingActivity extends BaseToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.activity_main);       // <— content onder de basetoolbar
+        setContentLayout(R.layout.gedeeld_inspectiescherm);       // <— content onder de basetoolbar
         applyPalette(BaseToolbarActivity.Palette.NOOD); // <— kleurt de basetoolbar en statusbar
         setUpEnabled(true);                            // <— optioneel: geen up/back in dit hoofdscherm
 

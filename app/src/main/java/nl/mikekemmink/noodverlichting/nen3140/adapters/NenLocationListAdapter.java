@@ -36,7 +36,7 @@ public class NenLocationListAdapter extends RecyclerView.Adapter<NenLocationList
 
     @NonNull @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nen_simple, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nen_item_nen_simple, parent, false);
         return new VH(v);
     }
 

@@ -43,8 +43,8 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.VH> 
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layout = (viewType == TYPE_GRID)
-                ? R.layout.item_location_grid_simple
-                : R.layout.item_location_list_simple;
+                ? R.layout.nv_locaties_grid_simple
+                : R.layout.nv_locaties_simple;
         View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         return new VH(v);
     }

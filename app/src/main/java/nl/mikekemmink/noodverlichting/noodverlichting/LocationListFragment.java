@@ -16,7 +16,7 @@ public class LocationListFragment extends Fragment
         implements BaseToolbarActivity.ToolbarActionSource {
 
     public LocationListFragment() {
-        super(R.layout.fragment_location_list); // jouw layout
+        super(R.layout.nv_fragment_locaties); // jouw layout
     }
 
     @Override

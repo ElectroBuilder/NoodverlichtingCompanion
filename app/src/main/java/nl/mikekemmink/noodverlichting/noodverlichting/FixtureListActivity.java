@@ -307,7 +307,7 @@ public class FixtureListActivity extends BaseToolbarActivity {
         super.onCreate(savedInstanceState);
 
         // 1) Alleen je content inflaten onder de gedeelde toolbar
-        setContentLayout(R.layout.activity_fixture_list);
+        setContentLayout(R.layout.nv_armaturen);
 
         // 2) Toolbar-titel/palet/up-knop via BaseToolbarActivity
         setTitle("Armaturen");                 // wordt zo meteen overschreven door locatie-naam
@@ -389,7 +389,7 @@ public class FixtureListActivity extends BaseToolbarActivity {
     private void ensurePlattegrondView(FrameLayout container) {
         if (plattegrondView!=null && plattegrondView.getParent()==container && pdfView!=null) return;
         container.removeAllViews();
-        plattegrondView = getLayoutInflater().inflate(R.layout.fragment_plattegrond, container, false);
+        plattegrondView = getLayoutInflater().inflate(R.layout.nv_fragment_plattegrond, container, false);
         container.addView(plattegrondView);
         pdfView = plattegrondView.findViewById(R.id.pdfView);
         pdfView = plattegrondView.findViewById(R.id.pdfView);

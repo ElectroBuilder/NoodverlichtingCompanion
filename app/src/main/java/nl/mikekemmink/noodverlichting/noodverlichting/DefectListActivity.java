@@ -41,7 +41,7 @@ public class DefectListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_defect_list);
+            setContentView(R.layout.nv_gebreken);
 
             // Extras
             int inspectieId = getIntent().getIntExtra(EXTRA_INSPECTIE_ID, -1);

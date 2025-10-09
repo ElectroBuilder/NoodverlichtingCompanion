@@ -85,7 +85,7 @@ public class FixtureRowAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View v = inflater.inflate(R.layout.row_fixture_wide, parent, false);
+        View v = inflater.inflate(R.layout.nv_row_fixture_wide, parent, false);
         ViewHolder h = new ViewHolder(v);
         v.setTag(h);
 

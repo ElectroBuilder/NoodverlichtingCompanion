@@ -50,7 +50,7 @@ public class MeasurementsActivity extends BaseToolbarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.activity_measurements);
+        setContentLayout(R.layout.nen_metingen);
         applyPalette(Palette.NEN);
         setUpEnabled(true);
 
