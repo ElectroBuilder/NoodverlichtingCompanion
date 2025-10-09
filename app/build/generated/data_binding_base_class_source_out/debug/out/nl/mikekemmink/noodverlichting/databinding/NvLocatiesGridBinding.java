@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.imageview.ShapeableImageView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -21,20 +20,10 @@ public final class NvLocatiesGridBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
-  public final ShapeableImageView imgAvatar;
-
-  @NonNull
-  public final TextView txtSubtitle;
-
-  @NonNull
   public final TextView txtTitle;
 
-  private NvLocatiesGridBinding(@NonNull MaterialCardView rootView,
-      @NonNull ShapeableImageView imgAvatar, @NonNull TextView txtSubtitle,
-      @NonNull TextView txtTitle) {
+  private NvLocatiesGridBinding(@NonNull MaterialCardView rootView, @NonNull TextView txtTitle) {
     this.rootView = rootView;
-    this.imgAvatar = imgAvatar;
-    this.txtSubtitle = txtSubtitle;
     this.txtTitle = txtTitle;
   }
 
@@ -65,26 +54,13 @@ public final class NvLocatiesGridBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.imgAvatar;
-      ShapeableImageView imgAvatar = ViewBindings.findChildViewById(rootView, id);
-      if (imgAvatar == null) {
-        break missingId;
-      }
-
-      id = R.id.txtSubtitle;
-      TextView txtSubtitle = ViewBindings.findChildViewById(rootView, id);
-      if (txtSubtitle == null) {
-        break missingId;
-      }
-
       id = R.id.txtTitle;
       TextView txtTitle = ViewBindings.findChildViewById(rootView, id);
       if (txtTitle == null) {
         break missingId;
       }
 
-      return new NvLocatiesGridBinding((MaterialCardView) rootView, imgAvatar, txtSubtitle,
-          txtTitle);
+      return new NvLocatiesGridBinding((MaterialCardView) rootView, txtTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

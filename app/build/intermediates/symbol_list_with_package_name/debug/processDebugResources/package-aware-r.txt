@@ -3241,7 +3241,6 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
-id badges
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3267,6 +3266,7 @@ id cancel_button
 id cardFilters
 id cardNen
 id cardNood
+id cardRoot
 id cardStatus
 id cbVisible
 id center
@@ -3279,8 +3279,6 @@ id chains
 id checkbox
 id checked
 id chipAll
-id chipCountFixtures
-id chipCountIssues
 id chipNoIssues
 id chipWithIssues
 id chipsFilter
@@ -3357,6 +3355,7 @@ id expand_activities_button
 id expanded_menu
 id fab
 id fabPrimary
+id fabToggleLayout
 id fade
 id fill
 id fill_horizontal
@@ -3397,7 +3396,6 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
-id imgAvatar
 id imgFoto
 id imgFull
 id imgPhoto
@@ -3413,6 +3411,7 @@ id is_pooling_container_tag
 id italic
 id item_touch_helper_previous_elevation
 id ivDrag
+id ivIcon
 id ivPage
 id jumpToEnd
 id jumpToStart
@@ -3715,7 +3714,6 @@ id tvinspectieid
 id txtDate
 id txtFixture
 id txtInfo
-id txtSubtitle
 id txtTitle
 id unchecked
 id uniform
@@ -3850,6 +3848,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_nen_locations
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3874,6 +3873,8 @@ layout gedeeld_toolbar_m3
 layout image_frame
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_nen_location_row
+layout item_nen_location_title
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3949,11 +3950,9 @@ layout nv_gebrek_toevoegen
 layout nv_gebreken
 layout nv_header_fixture_columns
 layout nv_kolommen
-layout nv_locatie
 layout nv_locaties
 layout nv_locaties_grid
-layout nv_locaties_grid_simple
-layout nv_locaties_simple
+layout nv_locaties_lijst
 layout nv_row_column_item
 layout nv_row_fixture_wide
 layout preference
