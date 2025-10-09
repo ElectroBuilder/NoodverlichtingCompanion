@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isLightTheme">true</bool>
+    <color name="md3_onPrimary">#FFFFFF</color>
+    <color name="md3_onSecondary">#FFFFFF</color>
+    <color name="md3_onSurface">#1A1C1E</color>
+    <color name="md3_onTertiary">#000000</color>
+    <color name="md3_outline">#73777F</color>
+    <color name="md3_primary">#3F51B5</color>
+    <color name="md3_secondary">#009688</color>
+    <color name="md3_surface">#FFFFFF</color>
+    <color name="md3_tertiary">#FF9800</color>
+    <color name="nen_blue">#1565C0</color>
+    <color name="nen_blue_status">#0D47A1</color>
+    <color name="nen_ok">#2E7D32</color>
+    <color name="nen_on_blue">#FFFFFF</color>
+    <color name="nen_warning">#D32F2F</color>
+    <color name="nood_green">#2E7D32</color>
+    <color name="nood_green_status">#1B5E20</color>
+    <color name="nood_on_green">#FFFFFF</color>
+    <string name="action_add">Toevoegen</string>
+    <string name="action_columns">Kolommen</string>
+    <string name="action_export_csv">Exporteer CSV</string>
+    <string name="action_foto_info_maken">Foto van info maken</string>
+    <string name="action_foto_kast_maken">Foto van kast maken</string>
+    <string name="action_hide_defects">Gebreken verbergen</string>
+    <string name="action_refresh">Verversen</string>
+    <string name="action_save">Opslaan</string>
+    <string name="action_show_defects">Gebreken tonen</string>
+    <string name="add">toevoegen</string>
+    <string name="app_name">Noodverlichting Companion</string>
+    <string name="btn_cancel">Annuleren</string>
+    <string name="btn_save">Opslaan</string>
+    <string name="cancel">Annuleren</string>
+    <string name="content_open_locaties"> open locaties</string>
+    <string name="content_status"> status</string>
+    <string name="defect_foto"/>
+    <string name="defect_photo">Foto van gebrek</string>
+    <string name="desc_kastfoto">Foto van de verdeelinrichting</string>
+    <string name="desc_kastinfofoto">Foto van kastinformatie</string>
+    <string name="dialog_add_defect_title">Gebrek toevoegen</string>
+    <string name="error_invalid_number">Ongeldig getal: %1$s</string>
+    <string name="error_required">Dit veld is verplicht</string>
+    <string name="hint_defect_description">Omschrijving van het gebrek</string>
+    <string name="hint_kastnaam">Kastnaam</string>
+    <string name="hint_l1">stroom L1 (A)</string>
+    <string name="hint_l2">stroom L2 (A)</string>
+    <string name="hint_l3">stroom L3 (A)</string>
+    <string name="hint_n">stroom N (A)</string>
+    <string name="hint_pe">stroom PE (A)</string>
+    <string name="hint_spd_N">spd N (V)</string>
+    <string name="hint_spd_l1">spd L1 (V)</string>
+    <string name="hint_spd_l2">spd L2 (V)</string>
+    <string name="hint_spd_l3">spd N3 (V)</string>
+    <string name="kies_omschrijving">kies omschrijving...</string>
+    <string name="label_fotos">Foto’s</string>
+    <string name="label_kastnaam">Kastnaam</string>
+    <string name="label_meetwaarden">Meetwaarden</string>
+    <string name="label_spd_optional">SPD (V) — optioneel</string>
+    <string name="menu_add_defect">Gebrek toevoegen</string>
+    <string name="menu_manage_defects">Gebreken beheren</string>
+    <string name="msg_board_unknown">Board onbekend</string>
+    <string name="msg_camera_failed">Camera starten mislukt</string>
+    <string name="msg_defect_photo_saved">Gebrek + foto opgeslagen</string>
+    <string name="msg_deleted">Verwijderd</string>
+    <string name="msg_export_fail">Export mislukt: %1$s</string>
+    <string name="msg_export_ok">Geëxporteerd naar: %1$s</string>
+    <string name="msg_measurement_saved">Meting opgeslagen</string>
+    <string name="msg_measurement_updated">Meting bijgewerkt</string>
+    <string name="msg_no_board_selected">Geen board geselecteerd</string>
+    <string name="msg_no_data_to_export">Geen data om te exporteren</string>
+    <string name="msg_no_nen_scope">Geen NEN-scope, opslaan overgeslagen.</string>
+    <string name="msg_path_exists">Pad: %1$s\nBestaat: %2$s  size: %3$s</string>
+    <string name="save">Opslaan</string>
+    <string name="title_fixtures">Armaturen</string>
+    <string name="title_locations">Locaties</string>
+    <string name="title_measurement_edit">Meting bewerken</string>
+    <string name="title_measurements">Metingen</string>
+    <string name="title_stroom_overzicht">Stroomoverzicht</string>
+    <style name="Theme.Noodverlichting" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/md3_primary</item>
+        <item name="colorOnPrimary">@color/md3_onPrimary</item>
+        <item name="colorSecondary">@color/md3_secondary</item>
+        <item name="colorOnSecondary">@color/md3_onSecondary</item>
+        <item name="colorTertiary">@color/md3_tertiary</item>
+        <item name="colorOnTertiary">@color/md3_onTertiary</item>
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_onSurface</item>
+        <item name="colorOutline">@color/md3_outline</item>
+
+        
+        <item name="android:navigationBarColor">@color/md3_surface</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">@bool/isLightTheme</item>
+
+
+        
+        
+    </style>
+    <style name="ThemeOverlay.Noodverlichting.Toolbar" parent="ThemeOverlay.Material3.ActionBar">
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_onSurface</item>
+        <item name="toolbarStyle">@style/Widget.Noodverlichting.Toolbar</item>
+    </style>
+    <style name="Widget.Noodverlichting.InfoChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/md3_primary</item>
+        <item name="android:textColor">@color/md3_onPrimary</item>
+        <item name="chipIconVisible">false</item>
+    </style>
+    <style name="Widget.Noodverlichting.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Material3.TitleLarge</item>
+    </style>
+</resources>

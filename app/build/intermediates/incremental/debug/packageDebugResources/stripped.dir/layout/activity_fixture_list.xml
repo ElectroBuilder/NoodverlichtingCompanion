@@ -1,0 +1,35 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Sticky header -->
+    <include layout="@layout/header_fixture_columns" />
+
+    <!-- Scrollbare lijst -->
+
+    <!-- Onderste helft: plattegrondviewer -->
+
+    <ListView
+
+        android:id="@+id/listArmaturen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        android:choiceMode="singleChoice"
+        android:clickable="false"
+        android:drawSelectorOnTop="false"
+
+        android:listSelector="@android:color/transparent"
+
+        />
+
+    <FrameLayout
+        android:id="@+id/plattegrondContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:background="#eeeeee" />
+</LinearLayout>
