@@ -33,8 +33,7 @@ public class StroomOverzichtActivity extends BaseToolbarActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // ✳️ Content onder de gedeelde toolbar (NIET setContentView)
-        setContentLayout(R.layout.activity_stroom_overzicht);
+
 
         // ✳️ Kies palet + Up-knop (groen NOOD of blauw NEN)
         applyPalette(Palette.NEN);      // of Palette.NEN als je dit scherm blauw wilt
@@ -42,9 +41,6 @@ public class StroomOverzichtActivity extends BaseToolbarActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.title_stroom_overzicht);
         }
-
-        rv = findViewById(R.id.rvStroom);
-        empty = findViewById(R.id.emptyView);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new StroomOverzichtAdapter();
