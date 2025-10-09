@@ -18,7 +18,7 @@ public class SelectInspectionActivity extends BaseToolbarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.content_select_inspection_cards);
+        setContentLayout(R.layout.gedeeld_hoofdscherm);
         setTitle("Kies inspectie");
         applyPalette(Palette.NEN); // of Palette.NEUTRAL als je neutraal wilt
         setUpEnabled(false);
