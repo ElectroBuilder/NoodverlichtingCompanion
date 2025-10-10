@@ -1,13 +1,9 @@
-
 package nl.mikekemmink.noodverlichting.nen3140.export;
 
 import android.content.Context;
-
 import androidx.annotation.Nullable;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,48 +16,38 @@ import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/**
- * NEN3140 export (per locatie, foto-transcoding + disk-cache, dedup, manifest)
- * met progress callback + annuleren en snellere ZIP-compressie.
- */
 public final class NenExporter {
 
-    /** Backwards-compatible: zonder callback */
     public static File exportToZip(Context ctx, File outDirOrNull, ExportOptions opts) throws Exception {
         return exportToZip(ctx, outDirOrNull, opts, null);
     }
-    // Backwards-compat: laat oude aanroepen (Context, File) werken
     public static File exportToZip(Context ctx, File outDirOrNull) throws Exception {
-        return exportToZip(ctx, outDirOrNull, (ExportOptions) null); // roept de 3-arg overload aan
+        return exportToZip(ctx, outDirOrNull, (ExportOptions) null);
     }
-    /** Met ProgressCallback (voortgang + annuleren) */
+
     public static File exportToZip(Context ctx,
                                    File outDirOrNull,
                                    @Nullable ExportOptions opts,
                                    @Nullable ProgressCallback cb) throws Exception {
         if (opts == null) opts = new ExportOptions();
-
         File baseDir = new File(ctx.getFilesDir(), "nen3140");
         if (!baseDir.exists()) throw new java.io.FileNotFoundException("nen3140 baseDir ontbreekt: " + baseDir);
 
         String stamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         File outDir = (outDirOrNull != null ? outDirOrNull : new File(ctx.getExternalFilesDir(null), "export"));
         if (!outDir.exists()) outDir.mkdirs();
-        // HUIDIG (oude naam)
-        // File outZip = new File(outDir, "nen3140_export_" + stamp + ".zip");
 
-        // NIEUW (locatieNaam + datum/tijd)
-        String baseName = resolveBaseName(ctx, opts, baseDir);       // <<-- helper hieronder
+        String baseName = resolveBaseName(ctx, opts, baseDir);
         String fileName = safeFileName(baseName) + "_" + stamp + ".zip";
         File outZip = new File(outDir, fileName);
 
@@ -70,17 +56,15 @@ public final class NenExporter {
         manifest.put("exported_at", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).format(new Date()));
         manifest.put("source_app", "Companion-Android");
         manifest.put("modules", new JSONArray().put("nen3140"));
+
         JSONArray files = new JSONArray();
+        Map<String, String> photoWritten = new HashMap<>();
 
-        Map<String, String> photoWritten = new HashMap<>(); // dedup
-
-        // --------- 0) Pre-scan: verzamel ALLE te verwerken foto’s ----------
         Set<File> boardPhotoFiles = new LinkedHashSet<>();
         Set<String> refPhotoNames = new LinkedHashSet<>();
 
         File[] top = baseDir.listFiles();
         if (top != null) {
-            // 0a) Board-foto’s uit boards_{locationId}.json die binnen filter vallen
             for (File f : top) {
                 String name = f.getName();
                 if (!(f.isFile() && name.startsWith("boards_") && name.endsWith(".json"))) continue;
@@ -104,20 +88,23 @@ public final class NenExporter {
                 }
             }
 
-            // 0b) Defect- & meet-foto’s (alleen referenced items voor gekozen locaties)
-            collectReferencedPhotos(baseDir, opts, refPhotoNames, "defects_");
-            collectReferencedPhotos(baseDir, opts, refPhotoNames, "measure_");
+            String[] measureCandidates = new String[] {
+                "measure_", "measurement_", "metingen_", "measure.json", "measurement.json", "measurements.json", "metingen.json"
+            };
+            String[] defectCandidates = new String[] {
+                "defects_", "gebreken_", "defecten_", "defects.json", "gebreken.json", "defecten.json"
+            };
+            collectReferencedPhotosFlexible(baseDir, opts, refPhotoNames, measureCandidates);
+            collectReferencedPhotosFlexible(baseDir, opts, refPhotoNames, defectCandidates);
         }
 
         int totalPhotos = boardPhotoFiles.size() + refPhotoNames.size();
         int processedPhotos = 0;
         if (cb != null) cb.onProgress("Scannen", 0, totalPhotos);
 
-        // ---------------- 1) Schrijven ----------------
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outZip))) {
-            zos.setLevel(Deflater.BEST_SPEED); // snellere zip (JPEG is al gecomprimeerd)
+            zos.setLevel(Deflater.BEST_SPEED);
 
-            // 1a) locations.json
             File locFile = new File(baseDir, "locations.json");
             if (locFile.exists() && locFile.isFile()) {
                 JSONArray locs = readArray(locFile);
@@ -135,20 +122,24 @@ public final class NenExporter {
                 }
             }
 
-            // 1b) measure_*.json & defects_*.json (filter op bestandsnaam of inhoud)
             if (top != null) {
                 for (File f : top) {
-                    String n = f.getName();
                     if (!f.isFile()) continue;
-                    boolean isMeasure = n.startsWith("measure_") && n.endsWith(".json");
-                    boolean isDefects = n.startsWith("defects_") && n.endsWith(".json");
-                    if (!(isMeasure || isDefects)) continue;
+                    String n = f.getName();
+                    boolean isMeasurement = isCandidate(n,
+                        new String[]{"measure_", "measurement_", "metingen_"},
+                        new String[]{"measure.json", "measurement.json", "measurements.json", "metingen.json"});
+                    boolean isDefect = isCandidate(n,
+                        new String[]{"defects_", "gebreken_", "defecten_"},
+                        new String[]{"defects.json", "gebreken.json", "defecten.json"});
+                    if (!(isMeasurement || isDefect)) continue;
 
                     if (opts.locationIds.isEmpty()) {
                         addFile(zos, files, f, "nen3140/" + n);
                     } else {
-                        String maybeLoc = extractSuffixId(n);
-                        if (maybeLoc != null && opts.locationIds.contains(maybeLoc)) {
+                        String suffix = extractSuffixId(n);
+                        String locFromName = firstTokenOrSelf(suffix);
+                        if (locFromName != null && opts.locationIds.contains(locFromName)) {
                             addFile(zos, files, f, "nen3140/" + n);
                         } else {
                             JSONArray src = readArray(f);
@@ -167,17 +158,14 @@ public final class NenExporter {
                 }
             }
 
-            // 1c) boards_{locationId}.json + board-foto’s (cache + progress + cancel)
             if (top != null) {
                 for (File f : top) {
                     String name = f.getName();
                     if (!(f.isFile() && name.startsWith("boards_") && name.endsWith(".json"))) continue;
-
                     String locationId = name.substring("boards_".length(), name.length() - ".json".length());
                     if (!opts.locationIds.isEmpty() && !opts.locationIds.contains(locationId)) continue;
 
                     JSONArray boards = readArray(f);
-
                     for (int i = 0; i < boards.length(); i++) {
                         if (cb != null && cb.isCancelled()) throw new InterruptedException("Geannuleerd");
                         JSONObject b = boards.optJSONObject(i);
@@ -207,37 +195,31 @@ public final class NenExporter {
                             }
                         }
                     }
-                    byte[] payload = boards.toString(2).getBytes(StandardCharsets.UTF_8);
-                    addBytes(zos, files, payload, "nen3140/" + name);
+                    addBytes(zos, files, boards.toString(2).getBytes(StandardCharsets.UTF_8), "nen3140/" + name);
                 }
             }
 
-            // 1d) Defect- & meet-foto’s (alleen referenced; cache + progress + cancel)
             File photosDir = new File(baseDir, "photos");
             for (String fn : refPhotoNames) {
                 if (cb != null && cb.isCancelled()) throw new InterruptedException("Geannuleerd");
-
                 File src = findFileByNameRecursive(photosDir, fn);
                 if (src == null) {
                     File tryAbs = resolveFile(fn);
                     if (tryAbs != null && tryAbs.exists()) src = tryAbs;
                 }
                 if (src != null && src.exists() && src.isFile()) {
-                    String arc = "nen3140/photos/" + src.getName().replaceAll("\\.[A-Za-z0-9]+$", "") + ".jpg";
+                    String nameNoExt = src.getName().replaceAll("\\.[A-Za-z0-9]+$", "");
+                    String arc = "nen3140/photos/" + nameNoExt + ".jpg";
                     writePhotoUsingCache(ctx, zos, files, photoWritten, src, arc, opts);
                 }
                 processedPhotos++; if (cb != null) cb.onProgress("Foto's", processedPhotos, totalPhotos);
             }
 
-            // 1e) manifest.json
             manifest.put("files", files);
             addBytes(zos, files, manifest.toString(2).getBytes(StandardCharsets.UTF_8), "manifest.json");
         }
-
         return outZip;
     }
-
-    // ----------------- helpers -----------------
 
     private static String extractSuffixId(String fileName) {
         if (!fileName.endsWith(".json")) return null;
@@ -245,7 +227,18 @@ public final class NenExporter {
         if (us < 0) return null;
         return fileName.substring(us + 1, fileName.length() - ".json".length());
     }
-
+    private static String firstTokenOrSelf(@Nullable String s) {
+        if (s == null) return null;
+        int us = s.indexOf('_');
+        return (us >= 0) ? s.substring(0, us) : s;
+    }
+    private static boolean isCandidate(String n, String[] prefixes, String[] exacts) {
+        if (n.endsWith(".json")) {
+            for (String p : prefixes) if (n.startsWith(p)) return true;
+            for (String e : exacts) if (n.equalsIgnoreCase(e)) return true;
+        }
+        return false;
+    }
     private static JSONArray readArray(File f) {
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
             StringBuilder sb = new StringBuilder(); String line;
@@ -254,7 +247,6 @@ public final class NenExporter {
             return s.isEmpty() ? new JSONArray() : new JSONArray(s);
         } catch (Exception e) { return new JSONArray(); }
     }
-
     private static void addFile(ZipOutputStream zos, JSONArray files, File src, String arc) throws Exception {
         zos.putNextEntry(new ZipEntry(arc));
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(src))) {
@@ -265,7 +257,6 @@ public final class NenExporter {
         fe.put("path", arc); fe.put("bytes", src.length());
         files.put(fe);
     }
-
     private static void addBytes(ZipOutputStream zos, JSONArray files, byte[] payload, String arc) throws Exception {
         zos.putNextEntry(new ZipEntry(arc));
         zos.write(payload);
@@ -274,7 +265,6 @@ public final class NenExporter {
         fe.put("path", arc); fe.put("bytes", payload.length);
         files.put(fe);
     }
-
     private static void writeZipEntryFromDisk(ZipOutputStream zos, JSONArray files, File file, String arc) throws Exception {
         zos.putNextEntry(new ZipEntry(arc));
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
@@ -286,19 +276,16 @@ public final class NenExporter {
         fe.put("bytes", file.length());
         files.put(fe);
     }
-
     private static void writePhotoUsingCache(Context ctx, ZipOutputStream zos, JSONArray files,
                                              Map<String, String> photoWritten,
                                              File src, String arc, ExportOptions opts) throws Exception {
         String key = src.getAbsolutePath();
         if (photoWritten.containsKey(key)) return;
-
         if (opts.useDiskCache) {
             File cached = PhotoDiskCache.find(ctx, src, opts);
             if (cached == null) cached = PhotoDiskCache.ensure(ctx, src, opts);
             writeZipEntryFromDisk(zos, files, cached, arc);
         } else {
-            // direct transcoderen
             zos.putNextEntry(new ZipEntry(arc));
             try {
                 android.graphics.Bitmap bmp = UtilsImage.loadScaledWithOrientation(src, opts.maxLongEdgePx);
@@ -312,10 +299,8 @@ public final class NenExporter {
             fe.put("bytes", src.length());
             files.put(fe);
         }
-
         photoWritten.put(key, arc);
     }
-
     private static File findFileByNameRecursive(File dir, String name) {
         if (dir == null || !dir.exists()) return null;
         Deque<File> stack = new ArrayDeque<>();
@@ -331,16 +316,13 @@ public final class NenExporter {
         }
         return null;
     }
-
     private static String boardPhotoName(String locationId, String boardId, String kind) {
         return "board_" + safe(locationId) + "_" + safe(boardId) + "_" + safe(kind) + ".jpg";
     }
-
     private static String safe(String s) {
         if (s == null || s.isEmpty()) return "x";
-        return s.replaceAll("[^A-Za-z0-9_-]", "_");
+        return s.replaceAll("[^A-Za-z0-9_\\-]", "_");
     }
-
     private static File resolveFile(String pathOrName) {
         if (pathOrName == null || pathOrName.trim().isEmpty()) return null;
         File f = new File(pathOrName);
@@ -348,65 +330,83 @@ public final class NenExporter {
         return null;
     }
 
-    /**
-     * Doorzoekt defects_*.json of measure_*.json bestanden en verzamelt fotonamen
-     * van records die bij de geselecteerde locaties horen. Zoekt naar keys met 'photo' of array 'photos'.
-     */
-    private static void collectReferencedPhotos(File baseDir, ExportOptions opts, Set<String> out, String prefix) {
+    private static void collectReferencedPhotosFlexible(File baseDir,
+                                                        ExportOptions opts,
+                                                        Set<String> out,
+                                                        String[] nameCandidates) {
         File[] top = baseDir.listFiles();
         if (top == null) return;
 
+        Set<String> exacts = new HashSet<>();
+        for (String c : nameCandidates) if (c.endsWith(".json")) exacts.add(c);
+
         for (File f : top) {
             String n = f.getName();
-            if (!(f.isFile() && n.startsWith(prefix) && n.endsWith(".json"))) continue;
+            if (!(f.isFile() && isCandidate(n, nameCandidates, exacts.toArray(new String[0])))) continue;
 
-            if (!opts.locationIds.isEmpty()) {
-                String maybeLoc = extractSuffixId(n);
-                if (maybeLoc != null && !opts.locationIds.contains(maybeLoc)) continue;
-            }
+            String suffix = extractSuffixId(n);
+            String locFromName = firstTokenOrSelf(suffix);
 
             JSONArray arr = readArray(f);
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject o = arr.optJSONObject(i);
                 if (o == null) continue;
 
+                boolean include = true;
                 if (!opts.locationIds.isEmpty()) {
                     String lid = o.optString("locationId", o.optString("locatieId", ""));
-                    if (!opts.locationIds.contains(lid)) continue;
-                }
-
-                for (Iterator<String> it = o.keys(); it.hasNext(); ) {
-                    String key = it.next();
-                    if (key.toLowerCase(Locale.ROOT).contains("photo")) {
-                        String v = o.optString(key, "");
-                        if (!v.isEmpty()) out.add(new File(v).getName());
+                    if (!lid.isEmpty()) {
+                        include = opts.locationIds.contains(lid);
+                    } else if (locFromName != null) {
+                        include = opts.locationIds.contains(locFromName);
+                    } else {
+                        include = false;
                     }
                 }
-
-                JSONArray photos = o.optJSONArray("photos");
-                if (photos != null) {
-                    for (int j = 0; j < photos.length(); j++) {
-                        String v = photos.optString(j, "");
-                        if (!v.isEmpty()) out.add(new File(v).getName());
-                    }
-                }
+                if (!include) continue;
+                collectPhotoNamesRecursive(o, out);
             }
         }
     }
+    private static void collectPhotoNamesRecursive(Object node, Set<String> out) {
+        if (node instanceof JSONObject) {
+            JSONObject obj = (JSONObject) node;
+            for (Iterator<String> it = obj.keys(); it.hasNext(); ) {
+                String key = it.next();
+                Object val = obj.opt(key);
+                String kl = key.toLowerCase(Locale.ROOT);
+                boolean looksLikePhotoKey = kl.contains("photo") || kl.contains("foto") || kl.contains("image") || kl.contains("afbeeld");
+                if (looksLikePhotoKey) {
+                    if (val instanceof String) addIfImageName((String) val, out);
+                    else if (val instanceof JSONArray || val instanceof JSONObject) collectPhotoNamesRecursive(val, out);
+                } else {
+                    if (val instanceof JSONArray || val instanceof JSONObject) collectPhotoNamesRecursive(val, out);
+                }
+            }
+        } else if (node instanceof JSONArray) {
+            JSONArray arr = (JSONArray) node;
+            for (int i = 0; i < arr.length(); i++) {
+                Object v = arr.opt(i);
+                if (v instanceof String) addIfImageName((String) v, out);
+                else if (v instanceof JSONArray || v instanceof JSONObject) collectPhotoNamesRecursive(v, out);
+            }
+        }
+    }
+    private static void addIfImageName(String path, Set<String> out) {
+        if (path == null || path.trim().isEmpty()) return;
+        String lower = path.toLowerCase(Locale.ROOT);
+        if (lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png")
+         || lower.endsWith(".webp") || lower.endsWith(".heic") || lower.endsWith(".bmp")) {
+            out.add(new File(path).getName());
+        }
+    }
 
-    private NenExporter() {}
-
-    /** Callback voor voortgang + annuleren */
     public interface ProgressCallback {
         void onProgress(String phase, int current, int total);
         boolean isCancelled();
     }
     private static String resolveBaseName(Context ctx, ExportOptions opts, File baseDir) {
-        // 1) Als de aanroeper een naam heeft meegegeven, gebruik die
-        if (opts.outputBaseName != null && !opts.outputBaseName.trim().isEmpty()) {
-            return opts.outputBaseName.trim();
-        }
-        // 2) Single-select? Probeer de naam uit locations.json te halen
+        if (opts.outputBaseName != null && !opts.outputBaseName.trim().isEmpty()) return opts.outputBaseName.trim();
         if (opts.locationIds != null && opts.locationIds.size() == 1) {
             String wantedId = opts.locationIds.iterator().next();
             File locFile = new File(baseDir, "locations.json");
@@ -414,25 +414,21 @@ public final class NenExporter {
             for (int i = 0; i < locs.length(); i++) {
                 JSONObject o = locs.optJSONObject(i);
                 if (o == null) continue;
-                String id  = o.optString("id", "");
+                String id = o.optString("id", "");
                 if (wantedId.equals(id)) {
                     String nm = o.optString("name", o.optString("naam", ""));
                     if (nm != null && !nm.trim().isEmpty()) return nm.trim();
                     break;
                 }
             }
-            // fallback op id als naam niet gevonden
             return wantedId;
         }
-        // 3) Multi-select of geen set -> algemene naam
         return "nen3140_export";
     }
-
-    /** Maak een veilige bestandsnaam (Windows/macOS/Linux) */
     private static String safeFileName(String s) {
-        // - verbied karakters: \\ / : * ? \" < > | en control characters
-        String cleaned = s.replaceAll("[\\\\/:*?\"<>|\\p{Cntrl}]", "_")
-                .replaceAll("\\s+", " ")   // normaliseer whitespace
+        // - verbied karakters: \ / : * ? " < > en control characters
+        String cleaned = s.replaceAll("[\\\\/:*?\\\"<>\\p{Cntrl}]", "_")
+                .replaceAll("\\s+", " ") // normaliseer whitespace
                 .trim();
         // - voorkom extreem lange namen
         if (cleaned.length() > 80) cleaned = cleaned.substring(0, 80);
