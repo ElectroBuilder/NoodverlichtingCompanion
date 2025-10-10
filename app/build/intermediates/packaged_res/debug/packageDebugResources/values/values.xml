@@ -14,10 +14,18 @@
     <color name="nen_blue_status">#0D47A1</color>
     <color name="nen_ok">#2E7D32</color>
     <color name="nen_on_blue">#FFFFFF</color>
+    <color name="nen_on_primary">#FFFFFF</color>
+    <color name="nen_on_surface">#212121</color>
+    <color name="nen_outline">#D0D0D0</color>
+    <color name="nen_primary">#1565C0</color>
+    <color name="nen_secondary">#03DAC6</color>
+    <color name="nen_surface">#F9FAFB</color>
     <color name="nen_warning">#D32F2F</color>
     <color name="nood_green">#2E7D32</color>
     <color name="nood_green_status">#1B5E20</color>
     <color name="nood_on_green">#FFFFFF</color>
+    <dimen name="thumb_icon">32dp</dimen>
+    <dimen name="thumb_size">120dp</dimen>
     <string name="action_add">Toevoegen</string>
     <string name="action_columns">Kolommen</string>
     <string name="action_export_csv">Exporteer CSV</string>
@@ -28,10 +36,13 @@
     <string name="action_save">Opslaan</string>
     <string name="action_show_defects">Gebreken tonen</string>
     <string name="add">toevoegen</string>
+    <string name="add_board">Verdeelinrichting toevoegen</string>
     <string name="app_name">Noodverlichting Companion</string>
     <string name="btn_cancel">Annuleren</string>
     <string name="btn_save">Opslaan</string>
     <string name="cancel">Annuleren</string>
+    <string name="cd_board_photo">Foto verdeelinrichting (kast)</string>
+    <string name="cd_info_photo">Typeplaatje / infofoto</string>
     <string name="content_open_locaties"> open locaties</string>
     <string name="content_status"> status</string>
     <string name="defect_foto"/>
@@ -39,6 +50,7 @@
     <string name="desc_kastfoto">Foto van de verdeelinrichting</string>
     <string name="desc_kastinfofoto">Foto van kastinformatie</string>
     <string name="dialog_add_defect_title">Gebrek toevoegen</string>
+    <string name="drag_handle">Versleep</string>
     <string name="error_invalid_number">Ongeldig getal: %1$s</string>
     <string name="error_required">Dit veld is verplicht</string>
     <string name="hint_defect_description">Omschrijving van het gebrek</string>
@@ -71,7 +83,12 @@
     <string name="msg_no_data_to_export">Geen data om te exporteren</string>
     <string name="msg_no_nen_scope">Geen NEN-scope, opslaan overgeslagen.</string>
     <string name="msg_path_exists">Pad: %1$s\nBestaat: %2$s  size: %3$s</string>
+    <string name="open_pdf">PDF openen</string>
+    <string name="page">Pagina</string>
+    <string name="photo_board">Foto van kast</string>
+    <string name="photo_info">Foto van info</string>
     <string name="save">Opslaan</string>
+    <string name="tap_to_add_photo">Tik om foto toe te voegen</string>
     <string name="title_fixtures">Armaturen</string>
     <string name="title_locations">Locaties</string>
     <string name="title_measurement_edit">Meting bewerken</string>
@@ -97,6 +114,14 @@
 
         
         
+    </style>
+    <style name="Theme.Noodverlichting.NEN" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/nen_primary</item>
+        <item name="colorOnPrimary">@color/nen_on_primary</item>
+        <item name="colorSecondary">@color/nen_secondary</item>
+        <item name="colorSurface">@color/nen_surface</item>
+        <item name="colorOnSurface">@color/nen_on_surface</item>
+        <item name="colorOutline">@color/nen_outline</item>
     </style>
     <style name="ThemeOverlay.Noodverlichting.Toolbar" parent="ThemeOverlay.Material3.ActionBar">
         <item name="colorSurface">@color/md3_surface</item>

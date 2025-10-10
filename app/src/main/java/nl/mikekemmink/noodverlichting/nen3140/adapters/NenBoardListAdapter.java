@@ -7,15 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.nen3140.NenBoard;
 import nl.mikekemmink.noodverlichting.nen3140.NenStorage;
 
 public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapter.VH> {
+
     public interface OnItemClick { void onClick(NenBoard board); }
     public interface OnItemLongClick { void onLongClick(NenBoard board); }
 
@@ -25,7 +29,11 @@ public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapte
     private final OnItemClick click;
     private final OnItemLongClick longClick;
 
-    public NenBoardListAdapter(List<NenBoard> items, String locationId, NenStorage storage, OnItemClick click, OnItemLongClick longClick) {
+    public NenBoardListAdapter(List<NenBoard> items,
+                               String locationId,
+                               NenStorage storage,
+                               OnItemClick click,
+                               OnItemLongClick longClick) {
         if (items != null) this.items = items; else this.items = new ArrayList<>();
         this.locationId = locationId;
         this.storage = storage;
@@ -50,14 +58,33 @@ public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapte
         h.title.setText(b.getName());
 
         boolean hasPhotos = storage.hasBoardPhotos(locationId, b.getId());
-        boolean hasSpd = storage.hasSpdValues(locationId, b.getId());
+        boolean hasSpd    = storage.hasSpdValues(locationId, b.getId());
+        boolean hasCurrent = storage.hasCurrentValues(locationId, b.getId());     // NIEUW
+        int defectCount    = storage.getDefectCount(locationId, b.getId());       // NIEUW
+
+        // Foto’s
         h.badgePhotos.setVisibility(hasPhotos ? View.VISIBLE : View.GONE);
+
+        // SPD
         h.badgeSpd.setVisibility(hasSpd ? View.VISIBLE : View.GONE);
 
+        // stroom (exact zo geschreven)
+        h.badgeStroom.setText("stroom");
+        h.badgeStroom.setVisibility(hasCurrent ? View.VISIBLE : View.GONE);
+
+        // Gebreken (N) - alleen tonen als N > 0
+        if (defectCount > 0) {
+            h.badgeDefects.setText("Gebreken (" + defectCount + ")");
+            h.badgeDefects.setVisibility(View.VISIBLE);
+        } else {
+            h.badgeDefects.setVisibility(View.GONE);
+        }
+
+        // Click & long-click
         h.itemView.setOnClickListener(v -> click.onClick(b));
         h.itemView.setOnLongClickListener(v -> { longClick.onLongClick(b); return true; });
 
-        // Drag starten met drag-handle
+        // Drag starten met de handle
         h.drag.setOnTouchListener((v, e) -> {
             if (e.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("viId", b.getId());
@@ -72,13 +99,16 @@ public class NenBoardListAdapter extends RecyclerView.Adapter<NenBoardListAdapte
     @Override public int getItemCount() { return items.size(); }
 
     static class VH extends RecyclerView.ViewHolder {
-        TextView title, badgePhotos, badgeSpd; ImageView drag;
+        TextView title, badgePhotos, badgeSpd, badgeStroom, badgeDefects;
+        ImageView drag;
         VH(@NonNull View itemView){
             super(itemView);
-            title = itemView.findViewById(R.id.tvTitle);
-            badgePhotos = itemView.findViewById(R.id.tvBadgePhotos);
-            badgeSpd = itemView.findViewById(R.id.tvBadgeSpd);
-            drag = itemView.findViewById(R.id.ivDrag);
+            title        = itemView.findViewById(R.id.tvTitle);
+            badgePhotos  = itemView.findViewById(R.id.tvBadgePhotos);
+            badgeSpd     = itemView.findViewById(R.id.tvBadgeSpd);
+            badgeStroom  = itemView.findViewById(R.id.tvBadgeStroom);   // NIEUW
+            badgeDefects = itemView.findViewById(R.id.tvBadgeDefects);  // NIEUW
+            drag         = itemView.findViewById(R.id.ivDrag);
         }
     }
 }

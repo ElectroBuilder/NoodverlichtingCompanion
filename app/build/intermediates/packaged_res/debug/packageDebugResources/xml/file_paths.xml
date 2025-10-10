@@ -5,4 +5,8 @@
 
     <!-- Kast- en infoto’s (externe app-opslag) -->
     <external-files-path name="nen_pictures" path="Pictures/nen3140/" />
+
+    <!-- NenExporter schrijft standaard naar getExternalFilesDir(null)/export -->
+    <external-files-path name="export" path="export/" />
+
 </paths>

@@ -299,7 +299,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialsymbolsoutlined/electric_bolt/outline_electric_bolt_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialsymbolsoutlined/drag_handle/outline_drag_handle_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -309,7 +309,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_bolt_24" />
+                            <entry key="outputName" value="ic_drag_handle" />
                             <entry key="sourceFile" value="C:\Users\MKk2\Android Apps\androidcompanion" />
                           </map>
                         </option>

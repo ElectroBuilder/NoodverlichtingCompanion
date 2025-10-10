@@ -39,7 +39,7 @@ public class DefectsActivity extends BaseToolbarActivity {
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentLayout(R.layout.nen_list_with_fab);
+        setContentLayout(R.layout.nen_locaties);
         setTitle("Gebreken");
         applyPalette(Palette.NEN);
         setUpEnabled(true);

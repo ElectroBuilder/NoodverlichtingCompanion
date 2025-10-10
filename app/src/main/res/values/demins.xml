@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="thumb_size">120dp</dimen>
+    <dimen name="thumb_icon">32dp</dimen>
+</resources>

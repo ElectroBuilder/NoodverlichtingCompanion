@@ -24,6 +24,9 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.VH> 
     private final OnItemClick onItemClick;
     private boolean isGrid;
 
+    public interface OnItemLongClick { void onLongClick(String locationName); }
+    private OnItemLongClick onItemLongClick;
+
     private final @LayoutRes int listLayoutRes;
     private final @LayoutRes int gridLayoutRes;
 
@@ -54,7 +57,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.VH> 
       notifyDataSetChanged();
     }
   }
-
+    public void setOnItemLongClick(OnItemLongClick handler) { this.onItemLongClick = handler; }
     @Override public long getItemId(int position) { return items.get(position).hashCode(); }
     @Override public int getItemViewType(int position) { return isGrid ? TYPE_GRID : TYPE_LIST; }
 
@@ -71,6 +74,15 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.VH> 
         String name = items.get(position);
         h.title.setText(name);
         h.card.setOnClickListener(v -> onItemClick.onClick(name));
+
+        if (onItemLongClick != null) {
+            h.card.setOnLongClickListener(v -> {
+                onItemLongClick.onLongClick(name);
+                return true;
+            });
+        } else {
+            h.card.setOnLongClickListener(null);
+        }
     }
 
     @Override public int getItemCount() { return items.size(); }

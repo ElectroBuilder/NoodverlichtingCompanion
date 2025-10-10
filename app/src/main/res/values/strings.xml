@@ -89,5 +89,17 @@
     <string name="msg_board_unknown">Board onbekend</string>
     <string name="msg_no_nen_scope">Geen NEN-scope, opslaan overgeslagen.</string>
     <string name="add">toevoegen</string>
+    <string name="drag_handle">Versleep</string>
+    <string name="open_pdf">PDF openen</string>
+    <string name="page">Pagina</string>
+    <string name="add_board">Verdeelinrichting toevoegen</string>
+
+    <string name="photo_board">Foto van kast</string>
+    <string name="photo_info">Foto van info</string>
+
+    <string name="cd_board_photo">Foto verdeelinrichting (kast)</string>
+    <string name="cd_info_photo">Typeplaatje / infofoto</string>
+    <string name="tap_to_add_photo">Tik om foto toe te voegen</string>
+
 
 </resources>

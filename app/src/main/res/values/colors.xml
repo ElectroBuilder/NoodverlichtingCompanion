@@ -13,4 +13,12 @@
     <!-- Extra -->
     <color name="nen_warning">#D32F2F</color>
     <color name="nen_ok">#2E7D32</color>
+
+    <!-- NEN3140 Palette -->
+    <color name="nen_primary">#1565C0</color>
+    <color name="nen_on_primary">#FFFFFF</color>
+    <color name="nen_secondary">#03DAC6</color>
+    <color name="nen_surface">#F9FAFB</color>
+    <color name="nen_on_surface">#212121</color>
+    <color name="nen_outline">#D0D0D0</color>
 </resources>

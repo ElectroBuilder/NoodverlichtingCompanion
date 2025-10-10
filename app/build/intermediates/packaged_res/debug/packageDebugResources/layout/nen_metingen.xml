@@ -161,68 +161,104 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Foto's naast elkaar -->
+
+        <!-- Foto's sectie -->
         <TextView
-            android:text="@string/label_fotos"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
+            android:id="@+id/tv_photos_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Foto's verdeelinrichting"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/img_board"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/desc_kastfoto"
-                android:background="#EEE" />
+            <!-- Board-foto -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp">
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/img_board"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:adjustViewBounds="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Foto verdeelinrichting (kast)"
+                    android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/img_info"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/desc_kastinfofoto"
-                android:background="#EEE" />
+                <LinearLayout
+                    android:id="@+id/phPhotoBoard"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_photo_camera_24"
+                        android:text="Tik om foto toe te voegen"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tik om foto toe te voegen"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Info-foto -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_info"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:adjustViewBounds="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Typeplaatje / infofoto"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:id="@+id/phPhotoInfo"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_photo_camera_24"
+                        android:text="Tik om foto toe te voegen"
+                        android:gravity="center"/>
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tik om foto toe te voegen"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
 
-        <!-- Knoppen voor foto's -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <Button
-                android:id="@+id/btn_photo_board"
-                android:text="@string/action_foto_kast_maken"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:id="@+id/btn_photo_info"
-                android:text="@string/action_foto_info_maken"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
 
         <!-- Acties -->
         <LinearLayout

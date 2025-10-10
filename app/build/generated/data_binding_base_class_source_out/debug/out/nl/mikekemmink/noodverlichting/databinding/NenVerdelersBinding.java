@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -18,10 +18,16 @@ import nl.mikekemmink.noodverlichting.R;
 
 public final class NenVerdelersBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final MaterialCardView rootView;
+
+  @NonNull
+  public final MaterialCardView cardRoot;
 
   @NonNull
   public final ImageView ivDrag;
+
+  @NonNull
+  public final TextView tvBadgeDefects;
 
   @NonNull
   public final TextView tvBadgePhotos;
@@ -30,20 +36,28 @@ public final class NenVerdelersBinding implements ViewBinding {
   public final TextView tvBadgeSpd;
 
   @NonNull
+  public final TextView tvBadgeStroom;
+
+  @NonNull
   public final TextView tvTitle;
 
-  private NenVerdelersBinding(@NonNull LinearLayout rootView, @NonNull ImageView ivDrag,
-      @NonNull TextView tvBadgePhotos, @NonNull TextView tvBadgeSpd, @NonNull TextView tvTitle) {
+  private NenVerdelersBinding(@NonNull MaterialCardView rootView,
+      @NonNull MaterialCardView cardRoot, @NonNull ImageView ivDrag,
+      @NonNull TextView tvBadgeDefects, @NonNull TextView tvBadgePhotos,
+      @NonNull TextView tvBadgeSpd, @NonNull TextView tvBadgeStroom, @NonNull TextView tvTitle) {
     this.rootView = rootView;
+    this.cardRoot = cardRoot;
     this.ivDrag = ivDrag;
+    this.tvBadgeDefects = tvBadgeDefects;
     this.tvBadgePhotos = tvBadgePhotos;
     this.tvBadgeSpd = tvBadgeSpd;
+    this.tvBadgeStroom = tvBadgeStroom;
     this.tvTitle = tvTitle;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public MaterialCardView getRoot() {
     return rootView;
   }
 
@@ -68,9 +82,17 @@ public final class NenVerdelersBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      MaterialCardView cardRoot = (MaterialCardView) rootView;
+
       id = R.id.ivDrag;
       ImageView ivDrag = ViewBindings.findChildViewById(rootView, id);
       if (ivDrag == null) {
+        break missingId;
+      }
+
+      id = R.id.tvBadgeDefects;
+      TextView tvBadgeDefects = ViewBindings.findChildViewById(rootView, id);
+      if (tvBadgeDefects == null) {
         break missingId;
       }
 
@@ -86,14 +108,20 @@ public final class NenVerdelersBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvBadgeStroom;
+      TextView tvBadgeStroom = ViewBindings.findChildViewById(rootView, id);
+      if (tvBadgeStroom == null) {
+        break missingId;
+      }
+
       id = R.id.tvTitle;
       TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
       if (tvTitle == null) {
         break missingId;
       }
 
-      return new NenVerdelersBinding((LinearLayout) rootView, ivDrag, tvBadgePhotos, tvBadgeSpd,
-          tvTitle);
+      return new NenVerdelersBinding((MaterialCardView) rootView, cardRoot, ivDrag, tvBadgeDefects,
+          tvBadgePhotos, tvBadgeSpd, tvBadgeStroom, tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

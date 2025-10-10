@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Optioneel: camera niet verplicht -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -19,6 +21,7 @@
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory">
 
+        <!-- Bestandsdeling voor camera/foto's -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -29,7 +32,29 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- Launcher / Startscherm -->
+        <activity
+            android:name=".ui.SelectInspectionActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
+        <!-- NEN3140 dashboard -->
+        <activity
+            android:name=".nen3140.Nen3140Activity"
+            android:exported="false"
+            android:parentActivityName=".ui.SelectInspectionActivity" />
+
+        <!-- Noodverlichting hoofdscherm -->
+        <activity
+            android:name=".noodverlichting.NoodverlichtingActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.SelectInspectionActivity" />
+
+        <!-- Noodverlichting lijsten -->
         <activity
             android:name="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity"
             android:exported="false"
@@ -41,50 +66,54 @@
             android:parentActivityName=".noodverlichting.LocationListActivity" />
 
         <activity android:name=".noodverlichting.columns.ColumnSettingsActivity" />
+
         <activity
             android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddDefectActivity"
             android:exported="false" />
 
         <activity
             android:name=".noodverlichting.DefectListActivity"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <!-- NEN3140 metingen -->
         <activity
-            android:name="nl.mikekemmink.noodverlichting.nen3140.MeasurementsActivity"
+            android:name=".nen3140.MeasurementsActivity"
             android:exported="false"
-            android:parentActivityName=".noodverlichting.NoodverlichtingActivity" />
+            android:parentActivityName=".noodverlichting.NoodverlichtingActivity"
+            android:theme="@style/Theme.Noodverlichting.NEN" />
 
-        <activity android:name=".nen3140.StroomOverzichtActivity" />
-
-        <!-- 1) Nieuwe launcher activity -->
+        <!-- NEN3140 stroomoverzicht -->
         <activity
-            android:name=".ui.SelectInspectionActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- 2) NEN3140 dashboard -->
-        <activity
-            android:name=".nen3140.Nen3140Activity"
+            android:name=".nen3140.StroomOverzichtActivity"
             android:exported="false"
-            android:parentActivityName=".ui.SelectInspectionActivity" />
+            android:theme="@style/Theme.Noodverlichting.NEN" />
 
-        <!-- 3) Noodverlichting hoofdscherm (na hernoemen van MainActivity) -->
+        <!-- NEN3140 locatiescherm (NIEUW THEMA) -->
         <activity
-            android:name=".noodverlichting.NoodverlichtingActivity"
+            android:name=".nen3140.NenLocationListActivity"
             android:exported="false"
-            android:parentActivityName=".ui.SelectInspectionActivity" />
+            android:parentActivityName=".ui.SelectInspectionActivity"
+            android:theme="@style/Theme.Noodverlichting.NEN" />
 
-        <activity android:name=".nen3140.NenLocationListActivity" />
-        <activity android:name=".nen3140.NenBoardsActivity" />
-        <activity android:name=".nen3140.DefectsActivity" />
+        <!-- NEN3140 bordenlijst -->
+        <activity
+            android:name=".nen3140.NenBoardsActivity"
+            android:exported="false"
+            android:parentActivityName=".nen3140.NenLocationListActivity"
+            android:theme="@style/Theme.Noodverlichting.NEN" />
+
+        <!-- NEN3140 gebreken -->
+        <activity
+            android:name=".nen3140.DefectsActivity"
+            android:exported="false"
+            android:parentActivityName=".nen3140.NenBoardsActivity"
+            android:theme="@style/Theme.Noodverlichting.NEN" />
+
+        <!-- NEN3140 fotovoorbeeld (mag ook app-hoofdthema houden als je wilt) -->
         <activity
             android:name=".nen3140.PhotoPreviewActivity"
             android:exported="false"
-            android:parentActivityName=".nen3140.DefectsActivity" />
-
+            android:parentActivityName=".nen3140.DefectsActivity"
+            android:theme="@style/Theme.Noodverlichting.NEN" />
     </application>
-
 </manifest>

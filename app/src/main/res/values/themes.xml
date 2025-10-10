@@ -40,4 +40,13 @@
         <item name="android:textColor">@color/md3_onPrimary</item>
         <item name="chipIconVisible">false</item>
     </style>
+
+    <style name="Theme.Noodverlichting.NEN" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/nen_primary</item>
+        <item name="colorOnPrimary">@color/nen_on_primary</item>
+        <item name="colorSecondary">@color/nen_secondary</item>
+        <item name="colorSurface">@color/nen_surface</item>
+        <item name="colorOnSurface">@color/nen_on_surface</item>
+        <item name="colorOutline">@color/nen_outline</item>
+    </style>
 </resources>

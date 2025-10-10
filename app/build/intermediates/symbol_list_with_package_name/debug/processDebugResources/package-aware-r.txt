@@ -2080,6 +2080,12 @@ color nen_blue
 color nen_blue_status
 color nen_ok
 color nen_on_blue
+color nen_on_primary
+color nen_on_surface
+color nen_outline
+color nen_primary
+color nen_secondary
+color nen_surface
 color nen_warning
 color nood_green
 color nood_green_status
@@ -2911,6 +2917,8 @@ dimen preference_seekbar_padding_vertical
 dimen preference_seekbar_value_minWidth
 dimen preferences_detail_width
 dimen preferences_header_width
+dimen thumb_icon
+dimen thumb_size
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -3001,8 +3009,13 @@ drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
 drawable badge_bg
+drawable bg_badge_current
+drawable bg_badge_defects
+drawable bg_badge_photos
 drawable bg_badge_rounded
+drawable bg_badge_spd
 drawable bg_chip_info
+drawable bg_photo_placeholder
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3020,6 +3033,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable ic_add_24
 drawable ic_arrow_back
 drawable ic_arrow_back_black_24
 drawable ic_arrow_down_24dp
@@ -3035,6 +3049,7 @@ drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_delete_24
 drawable ic_download_24
+drawable ic_drag_handle
 drawable ic_drag_handle_24
 drawable ic_edit_24
 drawable ic_gallery
@@ -3055,6 +3070,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_photo_camera_24
 drawable ic_placeholder
 drawable ic_refresh_24
 drawable ic_report
@@ -3222,6 +3238,7 @@ id action_refresh
 id action_settings
 id action_text
 id action_toggle_defects
+id action_toggle_layout
 id action_toggle_view
 id actions
 id activity_chooser_view_content
@@ -3258,8 +3275,6 @@ id btnOpslaan
 id btnSave
 id btnStart
 id btn_cancel
-id btn_photo_board
-id btn_photo_info
 id btn_save
 id buttonPanel
 id cancel_button
@@ -3293,6 +3308,7 @@ id compress
 id confirm_button
 id container
 id content
+id contentFrame
 id contentPanel
 id contiguous
 id coordinator
@@ -3335,7 +3351,10 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
+id emptyIcon
 id emptyState
+id emptySubtitle
+id emptyTitle
 id end
 id endToStart
 id enterAlways
@@ -3387,6 +3406,7 @@ id hideable
 id home
 id homeAsUp
 id honorRequest
+id hsFilters
 id hscrollHeader
 id hscrollRow
 id icon
@@ -3411,7 +3431,7 @@ id is_pooling_container_tag
 id italic
 id item_touch_helper_previous_elevation
 id ivDrag
-id ivIcon
+id ivFull
 id ivPage
 id jumpToEnd
 id jumpToStart
@@ -3538,6 +3558,8 @@ id pdfPlaceholder
 id pdfView
 id peekHeight
 id percent
+id phPhotoBoard
+id phPhotoInfo
 id pin
 id plattegrondContainer
 id pooling_container_listener_holder_tag
@@ -3563,6 +3585,7 @@ id rightToLeft
 id right_icon
 id right_side
 id root
+id rootColumn
 id rounded
 id rowContainer
 id rowRoot
@@ -3656,6 +3679,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3689,8 +3713,10 @@ id tvATS
 id tvAccuLeeftijd
 id tvAccuType
 id tvArtikelNr
+id tvBadgeDefects
 id tvBadgePhotos
 id tvBadgeSpd
+id tvBadgeStroom
 id tvCode
 id tvDate
 id tvDatum
@@ -3710,6 +3736,7 @@ id tvSummary
 id tvTitle
 id tvType
 id tvVerdieping
+id tv_photos_title
 id tvinspectieid
 id txtDate
 id txtFixture
@@ -3873,8 +3900,6 @@ layout gedeeld_toolbar_m3
 layout image_frame
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
-layout item_nen_location_row
-layout item_nen_location_title
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3930,7 +3955,9 @@ layout nen_boards_with_viewer
 layout nen_gebrek
 layout nen_item_nen_board_card
 layout nen_item_nen_simple
-layout nen_list_with_fab
+layout nen_locaties
+layout nen_locaties_grid
+layout nen_locaties_lijst
 layout nen_metingen
 layout nen_photo_preview
 layout nen_plattegrond
@@ -3974,11 +4001,13 @@ layout preference_widget_switch_compat
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout simple_fullscreen_image
 layout support_simple_spinner_dropdown_item
 menu menu_fixture_list
 menu menu_location_list
 menu menu_main
 menu menu_measurements
+menu menu_nen_locations
 menu menu_stroom_overzicht
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -4020,6 +4049,7 @@ string action_refresh
 string action_save
 string action_show_defects
 string add
+string add_board
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -4039,6 +4069,8 @@ string call_notification_incoming_text
 string call_notification_ongoing_text
 string call_notification_screening_text
 string cancel
+string cd_board_photo
+string cd_info_photo
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
@@ -4051,6 +4083,7 @@ string defect_photo
 string desc_kastfoto
 string desc_kastinfofoto
 string dialog_add_defect_title
+string drag_handle
 string error_a11y_label
 string error_icon_content_description
 string error_invalid_number
@@ -4193,11 +4226,15 @@ string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
 string not_set
+string open_pdf
+string page
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string photo_board
+string photo_info
 string preference_copied
 string save
 string search_menu_title
@@ -4208,6 +4245,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
 string summary_collapsed_preference_list
+string tap_to_add_photo
 string title_fixtures
 string title_locations
 string title_measurement_edit
@@ -4876,6 +4914,7 @@ style Theme_MaterialComponents_Light_NoActionBar_Bridge
 style Theme_MaterialComponents_NoActionBar
 style Theme_MaterialComponents_NoActionBar_Bridge
 style Theme_Noodverlichting
+style Theme_Noodverlichting_NEN
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar
 style ThemeOverlay_AppCompat_Dark

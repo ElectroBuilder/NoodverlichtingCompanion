@@ -252,6 +252,105 @@ public class NenStorage {
         } catch (Exception ignore) {}
         return null;
     }
+    // ====== STROOM: ROBUUSTE DETECTIE ======
+    public boolean hasCurrentValues(String locationId, String boardId) {
+        // 1) Dedicated currents/stroom bestand(en)
+        if (hasCurrentInFile(new File(baseDir, "currents_" + locationId + "_" + boardId + ".json"))) return true;
+        if (hasCurrentInFile(new File(baseDir, "stroom_"   + locationId + "_" + boardId + ".json")))   return true;
+
+        // 2) Laatste meting (measure_<loc>_<board>.json), direct op JSON-object
+        if (hasCurrentInMeasurements(locationId, boardId)) return true;
+
+        // 3) (optioneel) fallback via getLastMeasurement(...) raw JSON lezen
+        return false;
+    }
+
+    private boolean hasCurrentInFile(File f) {
+        try {
+            if (!f.exists()) return false;
+            JSONArray arr = readJsonArray(f);
+            if (arr.length() == 0) return false;
+
+            // Neem laatste record (meest recent)
+            JSONObject last = arr.getJSONObject(arr.length() - 1);
+
+            // Als wrapper "currents" bestaat, die eerst openen
+            if (last.has("currents") && !last.isNull("currents")) {
+                Object c = last.opt("currents");
+                if (c instanceof JSONObject) last = (JSONObject) c;
+            }
+
+            return hasAnyCurrentKeySet(last);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean hasCurrentInMeasurements(String locationId, String boardId) {
+        try {
+            JSONArray arr = readJsonArray(measurementsFile(locationId, boardId));
+            if (arr.length() == 0) return false;
+
+            JSONObject last = arr.getJSONObject(arr.length() - 1);
+
+            // Varianten:
+            // - direct in root: L1/L2/L3/N/PE of iL1/iL2/iL3/iN/iPE
+            // - genest onder "currents": { L1... } of { iL1... }
+            if (last.has("currents") && !last.isNull("currents")) {
+                Object c = last.opt("currents");
+                if (c instanceof JSONObject) {
+                    if (hasAnyCurrentKeySet((JSONObject) c)) return true;
+                }
+            }
+            return hasAnyCurrentKeySet(last);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /** Accepteert meerdere key-varianten en ziet '0' / 0 ook als 'ingevuld'. */
+    private static boolean hasAnyCurrentKeySet(JSONObject o) {
+        // Ondersteun beide naamgevingen:
+        String[] k1 = {"iL1","iL2","iL3","iN","iPE"};
+        String[] k2 = {"L1","L2","L3","N","PE"};
+
+        return hasAnyKeySet(o, k1) || hasAnyKeySet(o, k2);
+    }
+
+    private static boolean hasAnyKeySet(JSONObject o, String[] keys) {
+        for (String k : keys) {
+            if (!o.has(k) || o.isNull(k)) continue;
+            Object v = o.opt(k);
+            if (v == null) continue;
+
+            // Numeriek? Altijd 'aanwezig', óók als 0
+            if (v instanceof Number) return true;
+
+            // String? Niet-leeg => 'aanwezig' (ook "0", "0.0", etc.)
+            String s = String.valueOf(v).trim();
+            if (!s.isEmpty()) return true;
+        }
+        return false;
+    }
+
+
+    private static boolean hasNonEmpty(JSONObject o, String key) {
+        if (!o.has(key) || o.isNull(key)) return false;
+        Object v = o.opt(key);
+        if (v == null) return false;
+        if (v instanceof Number) return true;
+        String s = String.valueOf(v).trim();
+        return !s.isEmpty() && !"0".equals(s); // '0' telt hier als 'aanwezig' of niet? Kies wat bij je data past.
+    }
+
+    // === gebreken (count) ===
+    public int getDefectCount(String locationId, String boardId) {
+        try {
+            return readJsonArray(defectsFile(locationId, boardId)).length();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 
     public void updateDefectText(String locationId, String boardId, String defectId, @Nullable String text) {
         try {

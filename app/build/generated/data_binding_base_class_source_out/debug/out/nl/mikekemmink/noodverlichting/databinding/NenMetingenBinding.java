@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
@@ -23,12 +25,6 @@ public final class NenMetingenBinding implements ViewBinding {
 
   @NonNull
   public final Button btnCancel;
-
-  @NonNull
-  public final Button btnPhotoBoard;
-
-  @NonNull
-  public final Button btnPhotoInfo;
 
   @NonNull
   public final Button btnSave;
@@ -66,17 +62,28 @@ public final class NenMetingenBinding implements ViewBinding {
   @NonNull
   public final ImageView imgInfo;
 
+  @NonNull
+  public final LinearLayout phPhotoBoard;
+
+  @NonNull
+  public final LinearLayout phPhotoInfo;
+
+  @NonNull
+  public final TextView textView;
+
+  @NonNull
+  public final TextView tvPhotosTitle;
+
   private NenMetingenBinding(@NonNull NestedScrollView rootView, @NonNull Button btnCancel,
-      @NonNull Button btnPhotoBoard, @NonNull Button btnPhotoInfo, @NonNull Button btnSave,
-      @NonNull TextInputEditText etL1, @NonNull TextInputEditText etL2,
+      @NonNull Button btnSave, @NonNull TextInputEditText etL1, @NonNull TextInputEditText etL2,
       @NonNull TextInputEditText etL3, @NonNull TextInputEditText etN,
       @NonNull TextInputEditText etPe, @NonNull TextInputEditText etSpdL1,
       @NonNull TextInputEditText etSpdL2, @NonNull TextInputEditText etSpdL3,
-      @NonNull TextInputEditText etSpdN, @NonNull ImageView imgBoard, @NonNull ImageView imgInfo) {
+      @NonNull TextInputEditText etSpdN, @NonNull ImageView imgBoard, @NonNull ImageView imgInfo,
+      @NonNull LinearLayout phPhotoBoard, @NonNull LinearLayout phPhotoInfo,
+      @NonNull TextView textView, @NonNull TextView tvPhotosTitle) {
     this.rootView = rootView;
     this.btnCancel = btnCancel;
-    this.btnPhotoBoard = btnPhotoBoard;
-    this.btnPhotoInfo = btnPhotoInfo;
     this.btnSave = btnSave;
     this.etL1 = etL1;
     this.etL2 = etL2;
@@ -89,6 +96,10 @@ public final class NenMetingenBinding implements ViewBinding {
     this.etSpdN = etSpdN;
     this.imgBoard = imgBoard;
     this.imgInfo = imgInfo;
+    this.phPhotoBoard = phPhotoBoard;
+    this.phPhotoInfo = phPhotoInfo;
+    this.textView = textView;
+    this.tvPhotosTitle = tvPhotosTitle;
   }
 
   @Override
@@ -121,18 +132,6 @@ public final class NenMetingenBinding implements ViewBinding {
       id = R.id.btn_cancel;
       Button btnCancel = ViewBindings.findChildViewById(rootView, id);
       if (btnCancel == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_photo_board;
-      Button btnPhotoBoard = ViewBindings.findChildViewById(rootView, id);
-      if (btnPhotoBoard == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_photo_info;
-      Button btnPhotoInfo = ViewBindings.findChildViewById(rootView, id);
-      if (btnPhotoInfo == null) {
         break missingId;
       }
 
@@ -208,9 +207,33 @@ public final class NenMetingenBinding implements ViewBinding {
         break missingId;
       }
 
-      return new NenMetingenBinding((NestedScrollView) rootView, btnCancel, btnPhotoBoard,
-          btnPhotoInfo, btnSave, etL1, etL2, etL3, etN, etPe, etSpdL1, etSpdL2, etSpdL3, etSpdN,
-          imgBoard, imgInfo);
+      id = R.id.phPhotoBoard;
+      LinearLayout phPhotoBoard = ViewBindings.findChildViewById(rootView, id);
+      if (phPhotoBoard == null) {
+        break missingId;
+      }
+
+      id = R.id.phPhotoInfo;
+      LinearLayout phPhotoInfo = ViewBindings.findChildViewById(rootView, id);
+      if (phPhotoInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.textView;
+      TextView textView = ViewBindings.findChildViewById(rootView, id);
+      if (textView == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_photos_title;
+      TextView tvPhotosTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvPhotosTitle == null) {
+        break missingId;
+      }
+
+      return new NenMetingenBinding((NestedScrollView) rootView, btnCancel, btnSave, etL1, etL2,
+          etL3, etN, etPe, etSpdL1, etSpdL2, etSpdL3, etSpdN, imgBoard, imgInfo, phPhotoBoard,
+          phPhotoInfo, textView, tvPhotosTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
