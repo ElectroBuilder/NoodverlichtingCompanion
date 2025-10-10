@@ -57,7 +57,13 @@ public final class NenExporter {
         String stamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         File outDir = (outDirOrNull != null ? outDirOrNull : new File(ctx.getExternalFilesDir(null), "export"));
         if (!outDir.exists()) outDir.mkdirs();
-        File outZip = new File(outDir, "nen3140_export_" + stamp + ".zip");
+        // HUIDIG (oude naam)
+        // File outZip = new File(outDir, "nen3140_export_" + stamp + ".zip");
+
+        // NIEUW (locatieNaam + datum/tijd)
+        String baseName = resolveBaseName(ctx, opts, baseDir);       // <<-- helper hieronder
+        String fileName = safeFileName(baseName) + "_" + stamp + ".zip";
+        File outZip = new File(outDir, fileName);
 
         JSONObject manifest = new JSONObject();
         manifest.put("schema", 2);
@@ -394,5 +400,44 @@ public final class NenExporter {
     public interface ProgressCallback {
         void onProgress(String phase, int current, int total);
         boolean isCancelled();
+    }
+    private static String resolveBaseName(Context ctx, ExportOptions opts, File baseDir) {
+        // 1) Als de aanroeper een naam heeft meegegeven, gebruik die
+        if (opts.outputBaseName != null && !opts.outputBaseName.trim().isEmpty()) {
+            return opts.outputBaseName.trim();
+        }
+        // 2) Single-select? Probeer de naam uit locations.json te halen
+        if (opts.locationIds != null && opts.locationIds.size() == 1) {
+            String wantedId = opts.locationIds.iterator().next();
+            File locFile = new File(baseDir, "locations.json");
+            JSONArray locs = readArray(locFile);
+            for (int i = 0; i < locs.length(); i++) {
+                JSONObject o = locs.optJSONObject(i);
+                if (o == null) continue;
+                String id  = o.optString("id", "");
+                if (wantedId.equals(id)) {
+                    String nm = o.optString("name", o.optString("naam", ""));
+                    if (nm != null && !nm.trim().isEmpty()) return nm.trim();
+                    break;
+                }
+            }
+            // fallback op id als naam niet gevonden
+            return wantedId;
+        }
+        // 3) Multi-select of geen set -> algemene naam
+        return "nen3140_export";
+    }
+
+    /** Maak een veilige bestandsnaam (Windows/macOS/Linux) */
+    private static String safeFileName(String s) {
+        // - verbied karakters: \\ / : * ? \" < > | en control characters
+        String cleaned = s.replaceAll("[\\\\/:*?\"<>|\\p{Cntrl}]", "_")
+                .replaceAll("\\s+", " ")   // normaliseer whitespace
+                .trim();
+        // - voorkom extreem lange namen
+        if (cleaned.length() > 80) cleaned = cleaned.substring(0, 80);
+        // - lege fallback
+        if (cleaned.isEmpty()) cleaned = "nen3140_export";
+        return cleaned;
     }
 }

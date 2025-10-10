@@ -38,8 +38,10 @@ import nl.mikekemmink.noodverlichting.nen3140.export.NenExporter;
 import nl.mikekemmink.noodverlichting.ui.BaseToolbarActivity;
 import nl.mikekemmink.noodverlichting.ui.LocationsAdapterIds;
 import nl.mikekemmink.noodverlichting.ui.ProgressDialogFragment;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class NenLocationListActivity extends BaseToolbarActivity {
+public class NenLocationListActivity extends BaseToolbarActivity
+        implements ProgressDialogFragment.OnCancelRequested {
 
     private NenStorage storage;
     private LocationsAdapterIds adapter;
@@ -52,11 +54,15 @@ public class NenLocationListActivity extends BaseToolbarActivity {
     private ExecutorService exec;
     private Handler main;
     private AlertDialog progressDialog;
+
+    private final AtomicBoolean cancelFlag = new AtomicBoolean(false);
     // UI
     private RecyclerView rv;
     private View emptyState;
     private SwipeRefreshLayout swipe;
     private ChipGroup chips;
+
+
 
     // View state
     private boolean isGrid = false;
@@ -268,21 +274,43 @@ public class NenLocationListActivity extends BaseToolbarActivity {
                 .show();
     }
     private void exportOneLocation(String locationId, String locationName) {
-        showProgressDialog("Exporteren…", "Locatie: " + (locationName == null ? locationId : locationName));
+        cancelFlag.set(false); // reset bij start
+        showProgressDialog("Exporteren…", "Scannen…");
 
         exec.execute(() -> {
             try {
                 ExportOptions opts = new ExportOptions();
                 opts.locationIds.add(locationId);
                 opts.maxLongEdgePx = 1600;
-                opts.jpegQuality = 80;
+                opts.jpegQuality   = 80;
 
-                File zip = NenExporter.exportToZip(this, null, opts);
+                // (Nieuw) basisnaam voor de ZIP:
+                // - als je de UI-titel wil gebruiken:
+                opts.outputBaseName = (locationName != null && !locationName.trim().isEmpty())
+                        ? locationName.trim()
+                        : locationId; // fallback
+
+                File zip = NenExporter.exportToZip(
+                        this, /* outDirOrNull */ null, opts,
+                        new NenExporter.ProgressCallback() {
+                            @Override public void onProgress(String phase, int cur, int total) {
+                                // >>> HIER komt jouw visuele update <<<
+                                main.post(() -> updateProgressUI(phase, cur, total));
+                            }
+                            @Override public boolean isCancelled() {
+                                return cancelFlag.get();
+                            }
+                        });
 
                 main.post(() -> {
                     hideProgressDialog();
                     Toast.makeText(this, "Export gereed: " + zip.getName(), Toast.LENGTH_LONG).show();
                     shareZip(zip);
+                });
+            } catch (InterruptedException ie) {
+                main.post(() -> {
+                    hideProgressDialog();
+                    Toast.makeText(this, "Export geannuleerd", Toast.LENGTH_SHORT).show();
                 });
             } catch (Exception e) {
                 e.printStackTrace();
@@ -308,22 +336,6 @@ public class NenLocationListActivity extends BaseToolbarActivity {
         startActivity(Intent.createChooser(send, "NEN3140-export delen"));
     }
 
-    private void showProgress(String title, String message) {
-        hideProgress();
-        progressDialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setCancelable(false)
-                .create();
-        progressDialog.show();
-    }
-
-    private void hideProgress() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
-
     private void showProgressDialog(String title, String message) {
         androidx.fragment.app.FragmentManager fm = getSupportFragmentManager();
         nl.mikekemmink.noodverlichting.ui.ProgressDialogFragment old =
@@ -347,5 +359,9 @@ public class NenLocationListActivity extends BaseToolbarActivity {
                 (nl.mikekemmink.noodverlichting.ui.ProgressDialogFragment) getSupportFragmentManager()
                         .findFragmentByTag("export_progress");
         if (f != null) f.dismissAllowingStateLoss();
+    }
+    @Override
+    public void onCancelRequested() {
+        cancelFlag.set(true);
     }
 }
