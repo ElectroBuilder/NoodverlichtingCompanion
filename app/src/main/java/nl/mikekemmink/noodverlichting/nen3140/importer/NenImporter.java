@@ -80,6 +80,7 @@ public final class NenImporter {
                     JSONArray existing = readArray(dest);
                     res.locationsUpdated += mergeLocations(existing, incoming);
                     writeArray(dest, existing);
+
                 } else if (name.startsWith("nen3140/boards_") && name.endsWith(".json")) {
                     String fileName = name.substring("nen3140/".length());
                     File dest = new File(baseDir, fileName);
@@ -88,22 +89,143 @@ public final class NenImporter {
                     mergeBoards(existing, incoming);
                     writeArray(dest, existing);
                     res.boardsFiles++;
+
+                    /* ========== HIER INVOEGEN: varianten & split (NL/EN, per-loc, gecombineerd) ========== */
+                } else if (name.startsWith("nen3140/") && name.endsWith(".json")
+                        && !name.startsWith("nen3140/measure_")
+                        && !name.startsWith("nen3140/defects_")
+                        && !name.startsWith("nen3140/boards_")
+                        && !name.equals("nen3140/locations.json")) {
+                    String rel = name.substring("nen3140/".length());
+
+                    // --- Measurements varianten ---
+                    if (nameStarts(rel, "measure_", "measurement_", "metingen_")
+                            || nameIs(rel, "measure.json", "measurement.json", "measurements.json", "metingen.json")) {
+
+                        // 1) per-board: measurement_<loc>_<board>.json / metingen_<loc>_<board>.json
+                        if (rel.matches("(?i)(?:measure|measurement|metingen)_.+_.+\\.json")) {
+                            JSONArray incoming = readArrayEntry(zis);
+                            String[] lb = extractLocBoardFromName(rel);
+                            if (lb != null) {
+                                String locId = lb[0], boardId = lb[1];
+                                File dest = new File(baseDir, "measure_" + locId + "_" + boardId + ".json");
+                                JSONArray existing = readArray(dest);
+                                mergeById(existing, incoming);      // << dedup
+                                writeArray(dest, existing);
+                                res.measureFiles++;
+                            }
+
+                            // 2) per-loc: measurement_<loc>.json / metingen_<loc>.json  -> split naar per-board
+                        } else if (rel.matches("(?i)(measure|measurement|metingen)_.+\\.json")) {
+                            JSONArray incoming = readArrayEntry(zis);
+                            String locFromName = extractLocOnly(rel);
+                            for (int i = 0; i < incoming.length(); i++) {
+                                JSONObject o = incoming.optJSONObject(i); if (o == null) continue;
+                                String lid = o.optString("locationId", o.optString("locatieId",
+                                        locFromName == null ? "" : locFromName));
+                                String bid = o.optString("boardId", o.optString("kastId", ""));
+                                if (lid.isEmpty() || bid.isEmpty()) continue;
+                                File dest = new File(baseDir, "measure_" + lid + "_" + bid + ".json");
+                                JSONArray existing = readArray(dest);
+                                JSONArray one = new JSONArray().put(o);
+                                mergeById(existing, one);           // << dedup per record
+                                writeArray(dest, existing);
+                                res.measureFiles++;
+                            }
+
+                            // 3) gecombineerd: measurements.json / metingen.json  -> split naar per-board
+                        } else if (nameIs(rel, "measure.json", "measurement.json", "measurements.json", "metingen.json")) {
+                            JSONArray incoming = readArrayEntry(zis);
+                            for (int i = 0; i < incoming.length(); i++) {
+                                JSONObject o = incoming.optJSONObject(i); if (o == null) continue;
+                                String lid = o.optString("locationId", o.optString("locatieId", ""));
+                                String bid = o.optString("boardId", o.optString("kastId", ""));
+                                if (lid.isEmpty() || bid.isEmpty()) continue;
+                                File dest = new File(baseDir, "measure_" + lid + "_" + bid + ".json");
+                                JSONArray existing = readArray(dest);
+                                JSONArray one = new JSONArray().put(o);
+                                mergeById(existing, one);           // << dedup per record
+                                writeArray(dest, existing);
+                                res.measureFiles++;
+                            }
+                        }
+                    }
+
+                    // --- Defects varianten ---
+                    else if (nameStarts(rel, "defects_", "gebreken_", "defecten_")
+                            || nameIs(rel, "defects.json", "gebreken.json", "defecten.json")) {
+
+                        // 1) per-board: gebreken_<loc>_<board>.json / defecten_<loc>_<board>.json
+                        if (rel.matches("(?i)(defects|gebreken|defecten)_.+_.+\\.json")) {
+                            JSONArray incoming = readArrayEntry(zis);
+                            String[] lb = extractLocBoardFromName(rel);
+                            if (lb != null) {
+                                String locId = lb[0], boardId = lb[1];
+                                File dest = new File(baseDir, "defects_" + locId + "_" + boardId + ".json");
+                                JSONArray existing = readArray(dest);
+                                mergeById(existing, incoming);      // << dedup
+                                writeArray(dest, existing);
+                                res.defectFiles++;
+                            }
+
+                            // 2) per-loc: gebreken_<loc>.json / defecten_<loc>.json  -> split naar per-board
+                        } else if (rel.matches("(?i)(defects|gebreken|defecten)_.+\\.json")) {
+                            JSONArray incoming = readArrayEntry(zis);
+                            String locFromName = extractLocOnly(rel);
+                            for (int i = 0; i < incoming.length(); i++) {
+                                JSONObject o = incoming.optJSONObject(i); if (o == null) continue;
+                                String lid = o.optString("locationId", o.optString("locatieId",
+                                        locFromName == null ? "" : locFromName));
+                                String bid = o.optString("boardId", o.optString("kastId", ""));
+                                if (lid.isEmpty() || bid.isEmpty()) continue;
+                                File dest = new File(baseDir, "defects_" + lid + "_" + bid + ".json");
+                                JSONArray existing = readArray(dest);
+                                JSONArray one = new JSONArray().put(o);
+                                mergeById(existing, one);           // << dedup per record
+                                writeArray(dest, existing);
+                                res.defectFiles++;
+                            }
+
+                            // 3) gecombineerd: defects.json / gebreken.json / defecten.json -> split naar per-board
+                        } else if (nameIs(rel, "defects.json", "gebreken.json", "defecten.json")) {
+                            JSONArray incoming = readArrayEntry(zis);
+                            for (int i = 0; i < incoming.length(); i++) {
+                                JSONObject o = incoming.optJSONObject(i); if (o == null) continue;
+                                String lid = o.optString("locationId", o.optString("locatieId", ""));
+                                String bid = o.optString("boardId", o.optString("kastId", ""));
+                                if (lid.isEmpty() || bid.isEmpty()) continue;
+                                File dest = new File(baseDir, "defects_" + lid + "_" + bid + ".json");
+                                JSONArray existing = readArray(dest);
+                                JSONArray one = new JSONArray().put(o);
+                                mergeById(existing, one);           // << dedup per record
+                                writeArray(dest, existing);
+                                res.defectFiles++;
+                            }
+                        }
+                    }
+
+                    /* ========== EINDE NIEUW BLOK ========== */
+
                 } else if (name.startsWith("nen3140/measure_") && name.endsWith(".json")) {
+                    // BESTAANDE BRANCH: alleen regel hieronder vervangen
                     String fileName = name.substring("nen3140/".length());
                     File dest = new File(baseDir, fileName);
                     JSONArray incoming = readArrayEntry(zis);
                     JSONArray existing = readArray(dest);
-                    appendAll(existing, incoming);
+                    mergeById(existing, incoming);   // << vervangt appendAll(existing, incoming)
                     writeArray(dest, existing);
                     res.measureFiles++;
+
                 } else if (name.startsWith("nen3140/defects_") && name.endsWith(".json")) {
+                    // BESTAANDE BRANCH: alleen regel hieronder vervangen
                     String fileName = name.substring("nen3140/".length());
                     File dest = new File(baseDir, fileName);
                     JSONArray incoming = readArrayEntry(zis);
                     JSONArray existing = readArray(dest);
-                    appendAll(existing, incoming);
+                    mergeById(existing, incoming);   // << vervangt appendAll(existing, incoming)
                     writeArray(dest, existing);
                     res.defectFiles++;
+
                 } else if (name.startsWith("nen3140/photos/") && !e.isDirectory()) {
                     String fn = name.substring("nen3140/photos/".length());
                     if (!fn.isEmpty()) {
@@ -120,6 +242,8 @@ public final class NenImporter {
         }
         return res;
     }
+
+
 
     // -------- helpers --------
 
@@ -229,6 +353,54 @@ public final class NenImporter {
         }
         return -1;
     }
+// --- VARIANT- & DEDUP-HELPERS ---
 
+    private static boolean nameIs(String s, String... cands) {
+        for (String x : cands) if (s.equalsIgnoreCase(x)) return true;
+        return false;
+    }
+    private static boolean nameStarts(String s, String... prefixes) {
+        String low = s.toLowerCase(java.util.Locale.ROOT);
+        for (String p : prefixes) if (low.startsWith(p.toLowerCase(java.util.Locale.ROOT))) return true;
+        return false;
+    }
+    /** Haal <loc> en <board> uit namen als measure_<loc>_<board>.json / defects_<loc>_<board>.json / metingen_/gebreken_/defecten_ */
+    @Nullable
+    private static String[] extractLocBoardFromName(String n) {
+        int us1 = n.indexOf('_'); if (us1 < 0) return null;
+        int us2 = n.lastIndexOf('_'); if (us2 <= us1) return null;
+        int dot = n.lastIndexOf('.'); if (dot < 0 || dot <= us2) return null;
+        String loc = n.substring(us1 + 1, us2);
+        String board = n.substring(us2 + 1, dot);
+        if (loc.isEmpty() || board.isEmpty()) return null;
+        return new String[]{ loc, board };
+    }
+    /** Haal alleen <loc> uit namen als measure_<loc>.json / metingen_<loc>.json */
+    @Nullable
+    private static String extractLocOnly(String n) {
+        int us = n.indexOf('_'); if (us < 0) return null;
+        int dot = n.lastIndexOf('.'); if (dot < 0 || dot <= us) return null;
+        String loc = n.substring(us + 1, dot);
+        return loc.isEmpty() ? null : loc;
+    }
+
+    /** Merge op id: records met gelijke 'id' worden vervangen i.p.v. gedupliceerd. */
+    private static void mergeById(JSONArray existing, JSONArray incoming) {
+        java.util.LinkedHashMap<String, JSONObject> map = new java.util.LinkedHashMap<>();
+        int noId = 0;
+        for (int i = 0; i < existing.length(); i++) {
+            JSONObject o = existing.optJSONObject(i); if (o == null) continue;
+            String id = o.optString("id", null);
+            map.put(id == null || id.isEmpty() ? "__noid_existing__" + (noId++) : id, o);
+        }
+        for (int i = 0; i < incoming.length(); i++) {
+            JSONObject o = incoming.optJSONObject(i); if (o == null) continue;
+            String id = o.optString("id", null);
+            map.put(id == null || id.isEmpty() ? "__noid_incoming__" + (noId++) : id, o); // replace bij gelijke id
+        }
+        // schrijf terug naar 'existing'
+        while (existing.length() > 0) existing.remove(existing.length() - 1);
+        for (JSONObject o : map.values()) existing.put(o);
+    }
     private NenImporter() {}
 }
