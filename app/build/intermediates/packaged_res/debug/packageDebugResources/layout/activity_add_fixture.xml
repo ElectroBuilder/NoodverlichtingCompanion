@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Locatie (read-only, standaard ingevuld) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Locatie"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etLocatie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="text"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Nr. (alleen numeriek) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nr."
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etNr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Bijv. 12"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Code -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Code"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Vrij veld"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Soort -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Soort"
+            android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/spSoort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Verdieping (dropdown met bekende waarden, vrij veld, numeriek) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verdieping"
+            android:textStyle="bold" />
+        <AutoCompleteTextView
+            android:id="@+id/etVerdieping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Bijv. 0, 1, 2"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Ruimte (dropdown met bekende waarden, vrij veld) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ruimte"
+            android:textStyle="bold" />
+        <AutoCompleteTextView
+            android:id="@+id/etRuimte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:hint="Bijv. Gang, Meterkast"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Op tekening -->
+        <CheckBox
+            android:id="@+id/cbOpTekening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Op tekening"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Type -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Armatuur type"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Merk -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Merk"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etMerk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Montagewijze (Spinner) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Montagewijze"
+            android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/spMontage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Pictogram -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pictogram"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etPictogram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Accutype -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accutype"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etAccuType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Artikelnr. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Artikelnr."
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etArtikelNr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Accu leeftijd -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accu leeftijd"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etAccuLeeftijd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- ATS -->
+        <CheckBox
+            android:id="@+id/cbATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ATS (autotest)"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Duurtest (min) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Duurtest (min)"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etDuurtest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Bijv. 60"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Opmerking -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opmerking"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etOpmerking"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Actieknoppen -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <android.widget.Button
+                android:id="@+id/btnAnnuleren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Annuleren" />
+
+            <android.widget.Button
+                android:id="@+id/btnOpslaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opslaan"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
