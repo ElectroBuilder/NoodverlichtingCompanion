@@ -36,5 +36,8 @@ public class SelectInspectionActivity extends BaseToolbarActivity {
                 startActivity(new Intent(SelectInspectionActivity.this, Nen3140Activity.class));
             }
         });
+        nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncConfig.setServer(
+                this, "192.168.1.23", 8765, "mijn-super-key"   // <— pas aan
+        );
     }
 }

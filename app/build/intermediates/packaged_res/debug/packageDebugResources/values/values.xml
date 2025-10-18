@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="soort_values">
+        <item>VA</item>
+        <item>NV</item>
+        <item>VV</item>
+    </string-array>
     <bool name="isLightTheme">true</bool>
     <color name="md3_onPrimary">#FFFFFF</color>
     <color name="md3_onSecondary">#FFFFFF</color>

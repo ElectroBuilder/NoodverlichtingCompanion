@@ -67,6 +67,9 @@ public final class NvRowFixtureWideBinding implements ViewBinding {
   public final TextView tvPictogram;
 
   @NonNull
+  public final TextView tvRuimte;
+
+  @NonNull
   public final TextView tvSoort;
 
   @NonNull
@@ -84,8 +87,8 @@ public final class NvRowFixtureWideBinding implements ViewBinding {
       @NonNull TextView tvAccuType, @NonNull TextView tvArtikelNr, @NonNull TextView tvCode,
       @NonNull TextView tvDuurtest, @NonNull TextView tvMerk, @NonNull TextView tvMontagewijze,
       @NonNull TextView tvNr, @NonNull TextView tvOpTekening, @NonNull TextView tvOpmerking,
-      @NonNull TextView tvPictogram, @NonNull TextView tvSoort, @NonNull TextView tvType,
-      @NonNull TextView tvVerdieping, @NonNull TextView tvinspectieid) {
+      @NonNull TextView tvPictogram, @NonNull TextView tvRuimte, @NonNull TextView tvSoort,
+      @NonNull TextView tvType, @NonNull TextView tvVerdieping, @NonNull TextView tvinspectieid) {
     this.rootView = rootView;
     this.hscrollRow = hscrollRow;
     this.rowContainer = rowContainer;
@@ -102,6 +105,7 @@ public final class NvRowFixtureWideBinding implements ViewBinding {
     this.tvOpTekening = tvOpTekening;
     this.tvOpmerking = tvOpmerking;
     this.tvPictogram = tvPictogram;
+    this.tvRuimte = tvRuimte;
     this.tvSoort = tvSoort;
     this.tvType = tvType;
     this.tvVerdieping = tvVerdieping;
@@ -221,6 +225,12 @@ public final class NvRowFixtureWideBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvRuimte;
+      TextView tvRuimte = ViewBindings.findChildViewById(rootView, id);
+      if (tvRuimte == null) {
+        break missingId;
+      }
+
       id = R.id.tvSoort;
       TextView tvSoort = ViewBindings.findChildViewById(rootView, id);
       if (tvSoort == null) {
@@ -247,7 +257,7 @@ public final class NvRowFixtureWideBinding implements ViewBinding {
 
       return new NvRowFixtureWideBinding((FrameLayout) rootView, hscrollRow, rowContainer, rowRoot,
           tvATS, tvAccuLeeftijd, tvAccuType, tvArtikelNr, tvCode, tvDuurtest, tvMerk,
-          tvMontagewijze, tvNr, tvOpTekening, tvOpmerking, tvPictogram, tvSoort, tvType,
+          tvMontagewijze, tvNr, tvOpTekening, tvOpmerking, tvPictogram, tvRuimte, tvSoort, tvType,
           tvVerdieping, tvinspectieid);
     }
     String missingId = rootView.getResources().getResourceName(id);

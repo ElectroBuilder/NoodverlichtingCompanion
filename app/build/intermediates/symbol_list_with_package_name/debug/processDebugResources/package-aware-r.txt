@@ -77,6 +77,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array soort_values
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1316,8 +1317,12 @@ attr yearTodayStyle
 bool abc_action_bar_embed_tabs
 bool abc_config_actionMenuItemAllCaps
 bool config_materialPreferenceIconSpaceReserved
+bool enable_system_alarm_service_default
+bool enable_system_foreground_service_default
+bool enable_system_job_service_default
 bool isLightTheme
 bool mtrl_btn_textappearance_all_caps
+bool workmanager_test_configuration
 color abc_background_cache_hint_selector_material_dark
 color abc_background_cache_hint_selector_material_light
 color abc_btn_colored_borderless_text_material
@@ -3078,6 +3083,9 @@ drawable ic_save
 drawable ic_search_24
 drawable ic_search_black_24
 drawable ic_settings_24
+drawable ic_status_error
+drawable ic_status_ok
+drawable ic_status_unknown
 drawable ic_upload_24
 drawable ic_view_column
 drawable ic_warning
@@ -3211,7 +3219,6 @@ id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
 id action_about
-id action_add
 id action_add_defect
 id action_bar
 id action_bar_activity_content
@@ -3234,10 +3241,9 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
-id action_refresh
 id action_settings
+id action_sync_status
 id action_text
-id action_toggle_defects
 id action_toggle_layout
 id action_toggle_view
 id actions
@@ -3265,15 +3271,18 @@ id beginning
 id blocking
 id bottom
 id bounce
+id btnAnnuleren
 id btnCamera
 id btnDelete
 id btnExport
 id btnGalerij
 id btnImportZip
 id btnOpenPdf
+id btnOpenSyncStatus
 id btnOpslaan
 id btnSave
 id btnStart
+id btnSyncNow
 id btn_cancel
 id btn_save
 id buttonPanel
@@ -3283,6 +3292,8 @@ id cardNen
 id cardNood
 id cardRoot
 id cardStatus
+id cbATS
+id cbOpTekening
 id cbVisible
 id center
 id centerCrop
@@ -3308,6 +3319,7 @@ id compress
 id confirm_button
 id container
 id content
+id contentContainer
 id contentFrame
 id contentPanel
 id contiguous
@@ -3360,6 +3372,19 @@ id endToStart
 id enterAlways
 id enterAlwaysCollapsed
 id escape
+id etAccuLeeftijd
+id etAccuType
+id etArtikelNr
+id etCode
+id etDuurtest
+id etLocatie
+id etMerk
+id etNr
+id etOpmerking
+id etPictogram
+id etRuimte
+id etType
+id etVerdieping
 id et_l1
 id et_l2
 id et_l3
@@ -3373,7 +3398,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fab
-id fabPrimary
+id fabMain
 id fabToggleLayout
 id fade
 id fill
@@ -3569,6 +3594,7 @@ id preferences_detail
 id preferences_header
 id preferences_sliding_pane_layout
 id pressed
+id progress
 id progressImport
 id progress_circular
 id progress_horizontal
@@ -3586,6 +3612,7 @@ id right_icon
 id right_side
 id root
 id rootColumn
+id rootCoordinator
 id rounded
 id rowContainer
 id rowRoot
@@ -3604,6 +3631,7 @@ id screen
 id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
+id scrollRoot
 id scrollView
 id scrollable
 id search_badge
@@ -3632,8 +3660,10 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id spMontage
 id spOmschrijving
 id spPage
+id spSoort
 id spacer
 id special_effects_controller_view_tag
 id spinner
@@ -3722,7 +3752,10 @@ id tvDate
 id tvDatum
 id tvDefects
 id tvDuurtest
+id tvErrors
 id tvLabel
+id tvLastResult
+id tvLastSync
 id tvMerk
 id tvMontagewijze
 id tvName
@@ -3731,6 +3764,12 @@ id tvOmschrijving
 id tvOpTekening
 id tvOpmerking
 id tvPictogram
+id tvPushDefects
+id tvPushMarkers
+id tvQueueDefects
+id tvQueueMarkers
+id tvRuimte
+id tvServer
 id tvSoort
 id tvSummary
 id tvTitle
@@ -3875,7 +3914,9 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_add_fixture
 layout activity_nen_locations
+layout activity_sync_status
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3900,6 +3941,7 @@ layout gedeeld_toolbar_m3
 layout image_frame
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout include_sync_status_button
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4009,6 +4051,7 @@ menu menu_main
 menu menu_measurements
 menu menu_nen_locations
 menu menu_stroom_overzicht
+menu menu_sync_status
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -5585,3 +5628,4 @@ styleable ViewBackgroundHelper android_background backgroundTint backgroundTintM
 styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml file_paths
+xml network_security_config

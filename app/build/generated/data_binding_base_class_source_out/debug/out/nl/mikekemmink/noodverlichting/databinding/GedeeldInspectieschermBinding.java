@@ -15,7 +15,6 @@ import androidx.viewbinding.ViewBindings;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import java.lang.NullPointerException;
@@ -37,13 +36,13 @@ public final class GedeeldInspectieschermBinding implements ViewBinding {
   public final MaterialButton btnImportZip;
 
   @NonNull
+  public final MaterialButton btnOpenSyncStatus;
+
+  @NonNull
   public final MaterialButton btnStart;
 
   @NonNull
   public final MaterialCardView cardStatus;
-
-  @NonNull
-  public final FloatingActionButton fabPrimary;
 
   @NonNull
   public final ShapeableImageView imgStatus;
@@ -71,8 +70,8 @@ public final class GedeeldInspectieschermBinding implements ViewBinding {
 
   private GedeeldInspectieschermBinding(@NonNull CoordinatorLayout rootView,
       @NonNull AppBarLayout appbar, @NonNull MaterialButton btnExport,
-      @NonNull MaterialButton btnImportZip, @NonNull MaterialButton btnStart,
-      @NonNull MaterialCardView cardStatus, @NonNull FloatingActionButton fabPrimary,
+      @NonNull MaterialButton btnImportZip, @NonNull MaterialButton btnOpenSyncStatus,
+      @NonNull MaterialButton btnStart, @NonNull MaterialCardView cardStatus,
       @NonNull ShapeableImageView imgStatus, @NonNull TextView labelData,
       @NonNull TextView labelHoofd, @NonNull CircularProgressIndicator progressImport,
       @NonNull CoordinatorLayout root, @NonNull LinearLayout rowStroom,
@@ -81,9 +80,9 @@ public final class GedeeldInspectieschermBinding implements ViewBinding {
     this.appbar = appbar;
     this.btnExport = btnExport;
     this.btnImportZip = btnImportZip;
+    this.btnOpenSyncStatus = btnOpenSyncStatus;
     this.btnStart = btnStart;
     this.cardStatus = cardStatus;
-    this.fabPrimary = fabPrimary;
     this.imgStatus = imgStatus;
     this.labelData = labelData;
     this.labelHoofd = labelHoofd;
@@ -139,6 +138,12 @@ public final class GedeeldInspectieschermBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnOpenSyncStatus;
+      MaterialButton btnOpenSyncStatus = ViewBindings.findChildViewById(rootView, id);
+      if (btnOpenSyncStatus == null) {
+        break missingId;
+      }
+
       id = R.id.btnStart;
       MaterialButton btnStart = ViewBindings.findChildViewById(rootView, id);
       if (btnStart == null) {
@@ -148,12 +153,6 @@ public final class GedeeldInspectieschermBinding implements ViewBinding {
       id = R.id.cardStatus;
       MaterialCardView cardStatus = ViewBindings.findChildViewById(rootView, id);
       if (cardStatus == null) {
-        break missingId;
-      }
-
-      id = R.id.fabPrimary;
-      FloatingActionButton fabPrimary = ViewBindings.findChildViewById(rootView, id);
-      if (fabPrimary == null) {
         break missingId;
       }
 
@@ -202,7 +201,7 @@ public final class GedeeldInspectieschermBinding implements ViewBinding {
       }
 
       return new GedeeldInspectieschermBinding((CoordinatorLayout) rootView, appbar, btnExport,
-          btnImportZip, btnStart, cardStatus, fabPrimary, imgStatus, labelData, labelHoofd,
+          btnImportZip, btnOpenSyncStatus, btnStart, cardStatus, imgStatus, labelData, labelHoofd,
           progressImport, root, rowStroom, scroll, txtInfo);
     }
     String missingId = rootView.getResources().getResourceName(id);

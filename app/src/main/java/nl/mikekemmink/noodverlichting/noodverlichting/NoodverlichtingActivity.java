@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ import nl.mikekemmink.noodverlichting.R;
 import nl.mikekemmink.noodverlichting.noodverlichting.data.DBField;
 import nl.mikekemmink.noodverlichting.noodverlichting.data.DBInspecties;
 import nl.mikekemmink.noodverlichting.export.ExportHelper;
+import nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncClient;
+import nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncConfig;
 import nl.mikekemmink.noodverlichting.ui.BaseToolbarActivity;
 import nl.mikekemmink.noodverlichting.nen3140.Measurement;
 
@@ -102,13 +105,35 @@ public class NoodverlichtingActivity extends BaseToolbarActivity {
         setContentLayout(R.layout.gedeeld_inspectiescherm);       // <— content onder de basetoolbar
         applyPalette(BaseToolbarActivity.Palette.NOOD); // <— kleurt de basetoolbar en statusbar
         setUpEnabled(true);                            // <— optioneel: geen up/back in dit hoofdscherm
+        SyncConfig.setServer(this, "192.168.2.34", 8765, "mijn-super-key");
+
+        new Thread(() -> {
+            try {
+                SyncClient client = new SyncClient(getApplicationContext());
+                String result = client.ping();
+                Log.i("SyncTest", "Ping OK: " + result);
+            } catch (Exception e) {
+                Log.e("SyncTest", "Ping failed", e);
+            }
+        }).start();
 
     txtInfo = findViewById(R.id.txtInfo);
         Button btnImportZip = findViewById(R.id.btnImportZip);
         //Button btnImport = findViewById(R.id.btnImport);
         Button btnStart = findViewById(R.id.btnStart);
         Button btnExport = findViewById(R.id.btnExport);
+        // éénmalig plannen
+        androidx.work.PeriodicWorkRequest req =
+                new androidx.work.PeriodicWorkRequest.Builder(
+                        nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncWorker.class,
+                        java.time.Duration.ofMinutes(15)) // min 15m op Android
+                        .build();
+        androidx.work.WorkManager.getInstance(this)
+                .enqueueUniquePeriodicWork("sync", androidx.work.ExistingPeriodicWorkPolicy.KEEP, req);
 
+        // Optioneel: nu meteen éénmalig
+        androidx.work.WorkManager.getInstance(this)
+                .enqueue(new androidx.work.OneTimeWorkRequest.Builder(nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncWorker.class).build());
         // 1) Exportpakket importeren (korte tap = laatste export proberen, anders picker)
         btnImportZip.setOnClickListener(v -> importLastExportOrPick());
         // Long-press = altijd handmatig ZIP kiezen
@@ -145,6 +170,7 @@ public class NoodverlichtingActivity extends BaseToolbarActivity {
                 txtInfo.setText("Status: importeer eerst inspecties.db of een exportpakket");
             }
         }
+
     }
 
     /** Controleer of de geïmporteerde dataset (DB + markers + ten minste één PDF) aanwezig is. */
@@ -164,7 +190,13 @@ public class NoodverlichtingActivity extends BaseToolbarActivity {
         // In jouw flow is DB + markers + ≥1 PDF representatief voor "compleet".
         return hasMarkers && hasAtLeastOnePdf;
     }
-
+    // in NoodverlichtingActivity (of de Activity die dit layout gebruikt)
+    public void onOpenSyncStatusClick(android.view.View v) {
+        startActivity(new android.content.Intent(
+                this,
+                nl.mikekemmink.noodverlichting.noodverlichting.sync.ui.SyncStatusActivity.class
+        ));
+    }
     /* =========================
        EXPORT
        ========================= */

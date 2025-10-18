@@ -1,126 +1,138 @@
 [
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_item_nen_board_card.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_item_nen_board_card.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/gedeeld_hoofdscherm.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/gedeeld_hoofdscherm.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/gedeeld_hoofdscherm.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/gedeeld_hoofdscherm.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/simple_fullscreen_image.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/simple_fullscreen_image.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/gedeeld_toolbar.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/gedeeld_toolbar.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_gebreken.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_gebreken.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_gebrek.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_gebrek.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_armaturen.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_armaturen.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_boards_with_viewer.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_boards_with_viewer.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_metingen.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_metingen.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_photo_preview.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_photo_preview.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_locaties.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_locaties.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_locaties_lijst.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_locaties_lijst.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_plattegrond.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_plattegrond.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_locaties_grid.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_locaties_grid.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_gebrek.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_gebrek.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_locaties_lijst.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_locaties_lijst.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_fragment_armaturen.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_fragment_armaturen.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_header_fixture_columns.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_header_fixture_columns.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_fragment_plattegrond.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_fragment_plattegrond.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_kolommen.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_kolommen.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/gedeeld_toolbar.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/gedeeld_toolbar.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_row_column_item.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_row_column_item.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_item_nen_simple.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_item_nen_simple.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/gedeeld_toolbar_m3.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/gedeeld_toolbar_m3.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_fragment_locaties.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_fragment_locaties.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_fragment_armaturen.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_fragment_armaturen.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/gedeeld_inspectiescherm.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/gedeeld_inspectiescherm.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_item_nen_simple.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_item_nen_simple.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_locaties_grid.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_locaties_grid.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_gebrek_toevoegen.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_gebrek_toevoegen.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/gedeeld_toolbar_m3.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/gedeeld_toolbar_m3.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_fragment_locaties.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_fragment_locaties.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_header_fixture_columns.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_header_fixture_columns.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_locaties.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_locaties.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_verdelers.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_verdelers.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_plattegrond.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_plattegrond.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_boards_with_viewer.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_boards_with_viewer.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_locaties.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_locaties.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/activity_add_fixture.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/activity_add_fixture.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_locaties_grid.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_locaties_grid.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_gebrek_toevoegen.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_gebrek_toevoegen.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/simple_fullscreen_image.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/simple_fullscreen_image.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_locaties_grid.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_locaties_grid.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_gebrek.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_gebrek.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/activity_nen_locations.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/activity_nen_locations.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/activity_nen_locations.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/activity_nen_locations.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_row_fixture_wide.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_row_fixture_wide.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_verdelers.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_verdelers.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/include_sync_status_button.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/include_sync_status_button.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_row_fixture_wide.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_row_fixture_wide.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_photo_preview.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_photo_preview.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_armaturen.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_armaturen.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_kolommen.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_kolommen.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nen_metingen.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nen_metingen.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_gebrek.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_gebrek.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_gebreken.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_gebreken.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/activity_sync_status.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/activity_sync_status.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/gedeeld_inspectiescherm.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/gedeeld_inspectiescherm.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_item_nen_board_card.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_item_nen_board_card.xml"
     },
     {
-        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-41:/layout/nv_fragment_plattegrond.xml",
-        "source": "nl.mikekemmink.noodverlichting.app-main-44:/layout/nv_fragment_plattegrond.xml"
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_row_column_item.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_row_column_item.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_locaties.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_locaties.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nen_locaties_lijst.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nen_locaties_lijst.xml"
+    },
+    {
+        "merged": "nl.mikekemmink.noodverlichting.app-mergeDebugResources-47:/layout/nv_locaties_lijst.xml",
+        "source": "nl.mikekemmink.noodverlichting.app-main-50:/layout/nv_locaties_lijst.xml"
     }
 ]

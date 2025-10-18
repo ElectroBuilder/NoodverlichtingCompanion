@@ -306,12 +306,14 @@ public class FixtureRowAdapter extends CursorAdapter {
     }
 
     private static final String[] ALIAS = new String[] {
-            "inspectieid","nr","code","soort","verdieping","op_tekening","type","merk","montagewijze",
+            "inspectieid","nr","code","soort","verdieping","ruimte","op_tekening","type","merk","montagewijze",
             "pictogram","accutype","artikelnr","accu_leeftijd","ats","duurtest","opmerking"
     };
+
     private static final int[] VIEW_ID = new int[] {
-            R.id.tvinspectieid, R.id.tvNr, R.id.tvCode, R.id.tvSoort, R.id.tvVerdieping, R.id.tvOpTekening, R.id.tvType, R.id.tvMerk, R.id.tvMontagewijze,
-            R.id.tvPictogram, R.id.tvAccuType, R.id.tvArtikelNr, R.id.tvAccuLeeftijd, R.id.tvATS, R.id.tvDuurtest, R.id.tvOpmerking
+            R.id.tvinspectieid, R.id.tvNr, R.id.tvCode, R.id.tvSoort, R.id.tvVerdieping, R.id.tvRuimte, R.id.tvOpTekening,
+            R.id.tvType, R.id.tvMerk, R.id.tvMontagewijze, R.id.tvPictogram, R.id.tvAccuType, R.id.tvArtikelNr,
+            R.id.tvAccuLeeftijd, R.id.tvATS, R.id.tvDuurtest, R.id.tvOpmerking
     };
     private static int indexOfAlias(String alias) {
         if (alias == null) return -1;

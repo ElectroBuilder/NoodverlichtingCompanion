@@ -4,42 +4,48 @@ nl.mikekemmink.noodverlichting.app-lifecycle-livedata-core-ktx-2.6.2-2 C:\Users\
 nl.mikekemmink.noodverlichting.app-android-pdf-viewer-3.2.0-beta.3-3 C:\Users\MKk2\.gradle\caches\8.13\transforms\11aa7f576fdb8eba1c49d59a85cac7ee\transformed\android-pdf-viewer-3.2.0-beta.3\res
 nl.mikekemmink.noodverlichting.app-appcompat-resources-1.7.0-4 C:\Users\MKk2\.gradle\caches\8.13\transforms\19b095360640f691ba3bb287ec99086c\transformed\appcompat-resources-1.7.0\res
 nl.mikekemmink.noodverlichting.app-customview-poolingcontainer-1.0.0-5 C:\Users\MKk2\.gradle\caches\8.13\transforms\224b800c1688334a890b1de02422e3bf\transformed\customview-poolingcontainer-1.0.0\res
-nl.mikekemmink.noodverlichting.app-lifecycle-livedata-2.6.2-6 C:\Users\MKk2\.gradle\caches\8.13\transforms\2bb3e09ad01818e2df13bfbc5a720f4c\transformed\lifecycle-livedata-2.6.2\res
-nl.mikekemmink.noodverlichting.app-swiperefreshlayout-1.1.0-7 C:\Users\MKk2\.gradle\caches\8.13\transforms\3d4b77c0c97f6933429f66fd55403b57\transformed\swiperefreshlayout-1.1.0\res
-nl.mikekemmink.noodverlichting.app-lifecycle-runtime-2.6.2-8 C:\Users\MKk2\.gradle\caches\8.13\transforms\59360f0aa22020e08b1737e29c99fd44\transformed\lifecycle-runtime-2.6.2\res
-nl.mikekemmink.noodverlichting.app-savedstate-ktx-1.2.1-9 C:\Users\MKk2\.gradle\caches\8.13\transforms\5c7b98458604a3c5b05f1aa2a36567c9\transformed\savedstate-ktx-1.2.1\res
-nl.mikekemmink.noodverlichting.app-appcompat-1.7.0-10 C:\Users\MKk2\.gradle\caches\8.13\transforms\5e5fbbfb4b0b4e48e19cf63c5c9d01a4\transformed\appcompat-1.7.0\res
-nl.mikekemmink.noodverlichting.app-recyclerview-1.3.2-11 C:\Users\MKk2\.gradle\caches\8.13\transforms\5e8e676973dd6420e8a1841c163da5e4\transformed\recyclerview-1.3.2\res
-nl.mikekemmink.noodverlichting.app-emoji2-1.3.0-12 C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\res
-nl.mikekemmink.noodverlichting.app-drawerlayout-1.1.1-13 C:\Users\MKk2\.gradle\caches\8.13\transforms\6b9cf71954bc686e7f8b234592e75955\transformed\drawerlayout-1.1.1\res
-nl.mikekemmink.noodverlichting.app-annotation-experimental-1.4.0-14 C:\Users\MKk2\.gradle\caches\8.13\transforms\6d807a7cf2cc570e05fa748024ab8764\transformed\annotation-experimental-1.4.0\res
-nl.mikekemmink.noodverlichting.app-material-1.12.0-15 C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\res
-nl.mikekemmink.noodverlichting.app-core-runtime-2.2.0-16 C:\Users\MKk2\.gradle\caches\8.13\transforms\760271c1be6ee8eb92cdcdda54cbec95\transformed\core-runtime-2.2.0\res
-nl.mikekemmink.noodverlichting.app-cardview-1.0.0-17 C:\Users\MKk2\.gradle\caches\8.13\transforms\7cc47f0b94bc2d3b8b4978daea54b4a6\transformed\cardview-1.0.0\res
-nl.mikekemmink.noodverlichting.app-activity-1.8.0-18 C:\Users\MKk2\.gradle\caches\8.13\transforms\8cfc0490c8a75d719a5c23dad5380cd7\transformed\activity-1.8.0\res
-nl.mikekemmink.noodverlichting.app-activity-ktx-1.8.0-19 C:\Users\MKk2\.gradle\caches\8.13\transforms\8e4436bc4b4af11b3c2ce91a176a620d\transformed\activity-ktx-1.8.0\res
-nl.mikekemmink.noodverlichting.app-lifecycle-viewmodel-2.6.2-20 C:\Users\MKk2\.gradle\caches\8.13\transforms\965d2514ff02a7db223df96540fb96e8\transformed\lifecycle-viewmodel-2.6.2\res
-nl.mikekemmink.noodverlichting.app-fragment-1.5.4-21 C:\Users\MKk2\.gradle\caches\8.13\transforms\96d83a90e935e8207db7777237e3b74a\transformed\fragment-1.5.4\res
-nl.mikekemmink.noodverlichting.app-preference-1.2.1-22 C:\Users\MKk2\.gradle\caches\8.13\transforms\98e7611b41537aa1b28ef979efd4d737\transformed\preference-1.2.1\res
-nl.mikekemmink.noodverlichting.app-lifecycle-livedata-core-2.6.2-23 C:\Users\MKk2\.gradle\caches\8.13\transforms\99d72b0fa1038dc2fc6652a90bd46df7\transformed\lifecycle-livedata-core-2.6.2\res
-nl.mikekemmink.noodverlichting.app-profileinstaller-1.3.1-24 C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\res
-nl.mikekemmink.noodverlichting.app-coordinatorlayout-1.2.0-25 C:\Users\MKk2\.gradle\caches\8.13\transforms\b9ece81579f5ab4d45cff9abc21242c3\transformed\coordinatorlayout-1.2.0\res
-nl.mikekemmink.noodverlichting.app-lifecycle-runtime-ktx-2.6.2-26 C:\Users\MKk2\.gradle\caches\8.13\transforms\bc9ad36e6a7160c09e4f4a1a081d5807\transformed\lifecycle-runtime-ktx-2.6.2\res
-nl.mikekemmink.noodverlichting.app-lifecycle-process-2.6.2-27 C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\res
-nl.mikekemmink.noodverlichting.app-viewpager2-1.1.0-beta02-28 C:\Users\MKk2\.gradle\caches\8.13\transforms\d1055924bc6c8880a90083c87343b545\transformed\viewpager2-1.1.0-beta02\res
-nl.mikekemmink.noodverlichting.app-core-1.13.0-29 C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\res
-nl.mikekemmink.noodverlichting.app-startup-runtime-1.1.1-30 C:\Users\MKk2\.gradle\caches\8.13\transforms\d4abcbd69790774a976c2bc3b1513bfd\transformed\startup-runtime-1.1.1\res
-nl.mikekemmink.noodverlichting.app-emoji2-views-helper-1.3.0-31 C:\Users\MKk2\.gradle\caches\8.13\transforms\ebcd65553985db597c0e29695780e684\transformed\emoji2-views-helper-1.3.0\res
-nl.mikekemmink.noodverlichting.app-constraintlayout-2.0.1-32 C:\Users\MKk2\.gradle\caches\8.13\transforms\ee210f75d0f39382ea427d00dc0432c9\transformed\constraintlayout-2.0.1\res
-nl.mikekemmink.noodverlichting.app-lifecycle-viewmodel-savedstate-2.6.2-33 C:\Users\MKk2\.gradle\caches\8.13\transforms\f18c6e922bcc72ed0ad2472306ae41ed\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
-nl.mikekemmink.noodverlichting.app-transition-1.5.0-34 C:\Users\MKk2\.gradle\caches\8.13\transforms\f34e8143b689aa16de3a372ddd0eb8ba\transformed\transition-1.5.0\res
-nl.mikekemmink.noodverlichting.app-window-1.0.0-35 C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\res
-nl.mikekemmink.noodverlichting.app-core-ktx-1.13.0-36 C:\Users\MKk2\.gradle\caches\8.13\transforms\fc3504e5be0632fda1a325bcc77fa109\transformed\core-ktx-1.13.0\res
-nl.mikekemmink.noodverlichting.app-lifecycle-viewmodel-ktx-2.6.2-37 C:\Users\MKk2\.gradle\caches\8.13\transforms\ff45d893486c24a6d154db6488ccee55\transformed\lifecycle-viewmodel-ktx-2.6.2\res
-nl.mikekemmink.noodverlichting.app-resValues-38 C:\Users\MKk2\Android Apps\androidcompanion\app\build\generated\res\resValues\debug
-nl.mikekemmink.noodverlichting.app-updated_navigation_xml-39 C:\Users\MKk2\Android Apps\androidcompanion\app\build\generated\updated_navigation_xml\debug
-nl.mikekemmink.noodverlichting.app-packageDebugResources-40 C:\Users\MKk2\Android Apps\androidcompanion\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-nl.mikekemmink.noodverlichting.app-packageDebugResources-41 C:\Users\MKk2\Android Apps\androidcompanion\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-nl.mikekemmink.noodverlichting.app-debug-42 C:\Users\MKk2\Android Apps\androidcompanion\app\build\intermediates\merged_res\debug\mergeDebugResources
-nl.mikekemmink.noodverlichting.app-debug-43 C:\Users\MKk2\Android Apps\androidcompanion\app\src\debug\res
-nl.mikekemmink.noodverlichting.app-main-44 C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\res
+nl.mikekemmink.noodverlichting.app-sqlite-framework-2.3.0-6 C:\Users\MKk2\.gradle\caches\8.13\transforms\26258f0b69b16d4e7470c8f84daedad8\transformed\sqlite-framework-2.3.0\res
+nl.mikekemmink.noodverlichting.app-lifecycle-livedata-2.6.2-7 C:\Users\MKk2\.gradle\caches\8.13\transforms\2bb3e09ad01818e2df13bfbc5a720f4c\transformed\lifecycle-livedata-2.6.2\res
+nl.mikekemmink.noodverlichting.app-swiperefreshlayout-1.1.0-8 C:\Users\MKk2\.gradle\caches\8.13\transforms\3d4b77c0c97f6933429f66fd55403b57\transformed\swiperefreshlayout-1.1.0\res
+nl.mikekemmink.noodverlichting.app-lifecycle-runtime-2.6.2-9 C:\Users\MKk2\.gradle\caches\8.13\transforms\59360f0aa22020e08b1737e29c99fd44\transformed\lifecycle-runtime-2.6.2\res
+nl.mikekemmink.noodverlichting.app-savedstate-ktx-1.2.1-10 C:\Users\MKk2\.gradle\caches\8.13\transforms\5c7b98458604a3c5b05f1aa2a36567c9\transformed\savedstate-ktx-1.2.1\res
+nl.mikekemmink.noodverlichting.app-appcompat-1.7.0-11 C:\Users\MKk2\.gradle\caches\8.13\transforms\5e5fbbfb4b0b4e48e19cf63c5c9d01a4\transformed\appcompat-1.7.0\res
+nl.mikekemmink.noodverlichting.app-recyclerview-1.3.2-12 C:\Users\MKk2\.gradle\caches\8.13\transforms\5e8e676973dd6420e8a1841c163da5e4\transformed\recyclerview-1.3.2\res
+nl.mikekemmink.noodverlichting.app-emoji2-1.3.0-13 C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\res
+nl.mikekemmink.noodverlichting.app-work-runtime-2.9.1-14 C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\res
+nl.mikekemmink.noodverlichting.app-drawerlayout-1.1.1-15 C:\Users\MKk2\.gradle\caches\8.13\transforms\6b9cf71954bc686e7f8b234592e75955\transformed\drawerlayout-1.1.1\res
+nl.mikekemmink.noodverlichting.app-annotation-experimental-1.4.0-16 C:\Users\MKk2\.gradle\caches\8.13\transforms\6d807a7cf2cc570e05fa748024ab8764\transformed\annotation-experimental-1.4.0\res
+nl.mikekemmink.noodverlichting.app-material-1.12.0-17 C:\Users\MKk2\.gradle\caches\8.13\transforms\7040a89a8db52e92bbe03b3038864297\transformed\material-1.12.0\res
+nl.mikekemmink.noodverlichting.app-core-runtime-2.2.0-18 C:\Users\MKk2\.gradle\caches\8.13\transforms\760271c1be6ee8eb92cdcdda54cbec95\transformed\core-runtime-2.2.0\res
+nl.mikekemmink.noodverlichting.app-cardview-1.0.0-19 C:\Users\MKk2\.gradle\caches\8.13\transforms\7cc47f0b94bc2d3b8b4978daea54b4a6\transformed\cardview-1.0.0\res
+nl.mikekemmink.noodverlichting.app-activity-1.8.0-20 C:\Users\MKk2\.gradle\caches\8.13\transforms\8cfc0490c8a75d719a5c23dad5380cd7\transformed\activity-1.8.0\res
+nl.mikekemmink.noodverlichting.app-activity-ktx-1.8.0-21 C:\Users\MKk2\.gradle\caches\8.13\transforms\8e4436bc4b4af11b3c2ce91a176a620d\transformed\activity-ktx-1.8.0\res
+nl.mikekemmink.noodverlichting.app-lifecycle-viewmodel-2.6.2-22 C:\Users\MKk2\.gradle\caches\8.13\transforms\965d2514ff02a7db223df96540fb96e8\transformed\lifecycle-viewmodel-2.6.2\res
+nl.mikekemmink.noodverlichting.app-fragment-1.5.4-23 C:\Users\MKk2\.gradle\caches\8.13\transforms\96d83a90e935e8207db7777237e3b74a\transformed\fragment-1.5.4\res
+nl.mikekemmink.noodverlichting.app-preference-1.2.1-24 C:\Users\MKk2\.gradle\caches\8.13\transforms\98e7611b41537aa1b28ef979efd4d737\transformed\preference-1.2.1\res
+nl.mikekemmink.noodverlichting.app-lifecycle-livedata-core-2.6.2-25 C:\Users\MKk2\.gradle\caches\8.13\transforms\99d72b0fa1038dc2fc6652a90bd46df7\transformed\lifecycle-livedata-core-2.6.2\res
+nl.mikekemmink.noodverlichting.app-sqlite-2.3.0-26 C:\Users\MKk2\.gradle\caches\8.13\transforms\ab9fd54709eb425ed12588ce529187cd\transformed\sqlite-2.3.0\res
+nl.mikekemmink.noodverlichting.app-profileinstaller-1.3.1-27 C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\res
+nl.mikekemmink.noodverlichting.app-coordinatorlayout-1.2.0-28 C:\Users\MKk2\.gradle\caches\8.13\transforms\b9ece81579f5ab4d45cff9abc21242c3\transformed\coordinatorlayout-1.2.0\res
+nl.mikekemmink.noodverlichting.app-lifecycle-runtime-ktx-2.6.2-29 C:\Users\MKk2\.gradle\caches\8.13\transforms\bc9ad36e6a7160c09e4f4a1a081d5807\transformed\lifecycle-runtime-ktx-2.6.2\res
+nl.mikekemmink.noodverlichting.app-lifecycle-process-2.6.2-30 C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\res
+nl.mikekemmink.noodverlichting.app-viewpager2-1.1.0-beta02-31 C:\Users\MKk2\.gradle\caches\8.13\transforms\d1055924bc6c8880a90083c87343b545\transformed\viewpager2-1.1.0-beta02\res
+nl.mikekemmink.noodverlichting.app-core-1.13.0-32 C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\res
+nl.mikekemmink.noodverlichting.app-startup-runtime-1.1.1-33 C:\Users\MKk2\.gradle\caches\8.13\transforms\d4abcbd69790774a976c2bc3b1513bfd\transformed\startup-runtime-1.1.1\res
+nl.mikekemmink.noodverlichting.app-lifecycle-service-2.6.2-34 C:\Users\MKk2\.gradle\caches\8.13\transforms\e558945e9f5a0b073a87de278591d202\transformed\lifecycle-service-2.6.2\res
+nl.mikekemmink.noodverlichting.app-emoji2-views-helper-1.3.0-35 C:\Users\MKk2\.gradle\caches\8.13\transforms\ebcd65553985db597c0e29695780e684\transformed\emoji2-views-helper-1.3.0\res
+nl.mikekemmink.noodverlichting.app-constraintlayout-2.0.1-36 C:\Users\MKk2\.gradle\caches\8.13\transforms\ee210f75d0f39382ea427d00dc0432c9\transformed\constraintlayout-2.0.1\res
+nl.mikekemmink.noodverlichting.app-room-ktx-2.5.0-37 C:\Users\MKk2\.gradle\caches\8.13\transforms\ee590e156ccabd364575a2fae037a453\transformed\room-ktx-2.5.0\res
+nl.mikekemmink.noodverlichting.app-lifecycle-viewmodel-savedstate-2.6.2-38 C:\Users\MKk2\.gradle\caches\8.13\transforms\f18c6e922bcc72ed0ad2472306ae41ed\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+nl.mikekemmink.noodverlichting.app-transition-1.5.0-39 C:\Users\MKk2\.gradle\caches\8.13\transforms\f34e8143b689aa16de3a372ddd0eb8ba\transformed\transition-1.5.0\res
+nl.mikekemmink.noodverlichting.app-room-runtime-2.5.0-40 C:\Users\MKk2\.gradle\caches\8.13\transforms\f5a0a6db31d15d0fa253961a500e1681\transformed\room-runtime-2.5.0\res
+nl.mikekemmink.noodverlichting.app-window-1.0.0-41 C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\res
+nl.mikekemmink.noodverlichting.app-core-ktx-1.13.0-42 C:\Users\MKk2\.gradle\caches\8.13\transforms\fc3504e5be0632fda1a325bcc77fa109\transformed\core-ktx-1.13.0\res
+nl.mikekemmink.noodverlichting.app-lifecycle-viewmodel-ktx-2.6.2-43 C:\Users\MKk2\.gradle\caches\8.13\transforms\ff45d893486c24a6d154db6488ccee55\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+nl.mikekemmink.noodverlichting.app-resValues-44 C:\Users\MKk2\Android Apps\androidcompanion\app\build\generated\res\resValues\debug
+nl.mikekemmink.noodverlichting.app-updated_navigation_xml-45 C:\Users\MKk2\Android Apps\androidcompanion\app\build\generated\updated_navigation_xml\debug
+nl.mikekemmink.noodverlichting.app-packageDebugResources-46 C:\Users\MKk2\Android Apps\androidcompanion\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+nl.mikekemmink.noodverlichting.app-packageDebugResources-47 C:\Users\MKk2\Android Apps\androidcompanion\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+nl.mikekemmink.noodverlichting.app-debug-48 C:\Users\MKk2\Android Apps\androidcompanion\app\build\intermediates\merged_res\debug\mergeDebugResources
+nl.mikekemmink.noodverlichting.app-debug-49 C:\Users\MKk2\Android Apps\androidcompanion\app\src\debug\res
+nl.mikekemmink.noodverlichting.app-main-50 C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\res

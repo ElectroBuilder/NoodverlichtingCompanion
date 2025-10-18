@@ -155,6 +155,19 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp" />
 
+            <!-- NIEUW: Sync status (onder 'Server status') -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenSyncStatus"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Sync status"
+                app:icon="@drawable/ic_info_24"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:onClick="onOpenSyncStatusClick" />
+
             <!-- Loader -->
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progressImport"
@@ -166,17 +179,5 @@
                 android:visibility="gone" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Meest gebruikte actie -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/content_open_locaties"
-        app:srcCompat="@drawable/ic_map_24"
-        app:tint="@android:color/white"
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom|end"
-        app:backgroundTint="?attr/colorPrimary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

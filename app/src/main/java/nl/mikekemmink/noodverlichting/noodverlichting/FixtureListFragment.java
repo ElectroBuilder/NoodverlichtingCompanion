@@ -79,40 +79,4 @@ public class FixtureListFragment extends Fragment
         return R.menu.menu_fixture_list;
     }
 
-    @Override
-    public void onPrepareToolbarMenu(@NonNull Menu menu) {
-        // Voorbeeld: toggle-knop check-state bijwerken
-        MenuItem toggle = menu.findItem(R.id.action_toggle_defects);
-        if (toggle != null) {
-            toggle.setChecked(showDefects);
-            toggle.setTitle(showDefects
-                    ? R.string.action_hide_defects
-                    : R.string.action_show_defects);
-        }
-    }
-
-    @Override
-    public boolean onToolbarItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_add) {
-            // TODO: nieuw armatuur toevoegen (navigeer naar detail of dialoog openen)
-            // NavController/FragmentTransaction hier
-            return true;
-        } else if (id == R.id.action_toggle_defects) {
-            showDefects = !showDefects;
-            item.setChecked(showDefects);
-            item.setTitle(showDefects
-                    ? R.string.action_hide_defects
-                    : R.string.action_show_defects);
-
-            // TODO: filter je adapter of herlaad de lijst zodat gebreken zichtbaar/verborgen zijn
-            // adapter.setShowDefects(showDefects); adapter.notifyDataSetChanged();
-
-            return true;
-        } else if (id == R.id.action_refresh) {
-            // TODO: data herladen
-            return true;
-        }
-        return false; // niet afgehandeld -> BaseToolbarActivity laat het door naar super
-    }
 }

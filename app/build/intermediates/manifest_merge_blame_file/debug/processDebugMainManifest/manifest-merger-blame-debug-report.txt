@@ -22,276 +22,504 @@
 17    <uses-permission android:name="android.permission.CAMERA" />
 17-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:5-65
 17-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:12:22-62
-18
-19    <permission
-19-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
-20        android:name="nl.mikekemmink.noodverlichting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-20-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
-21        android:protectionLevel="signature" />
-21-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
-22
-23    <uses-permission android:name="nl.mikekemmink.noodverlichting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-23-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
-23-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
-24
-25    <application
-25-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:14:5-118:19
-26        android:allowBackup="true"
-26-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:15:9-35
-27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-27-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:22:9-77
-28        android:debuggable="true"
-29        android:extractNativeLibs="false"
-30        android:icon="@mipmap/ic_launcher"
-30-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:17:9-43
-31        android:label="Noodverlichting Companion"
-31-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:16:9-50
-32        android:roundIcon="@mipmap/ic_launcher_round"
-32-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:18:9-54
-33        android:supportsRtl="true"
-33-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:19:9-35
-34        android:testOnly="true"
-35        android:theme="@style/Theme.Noodverlichting" >
-35-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:20:9-53
-36
-37        <!-- Bestandsdeling voor camera/foto's -->
-38        <provider
-39            android:name="androidx.core.content.FileProvider"
-39-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:26:13-62
-40            android:authorities="nl.mikekemmink.noodverlichting.fileprovider"
-40-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:27:13-64
-41            android:exported="false"
-41-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:28:13-37
-42            android:grantUriPermissions="true" >
-42-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:29:13-47
-43            <meta-data
-43-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:30:13-32:54
-44                android:name="android.support.FILE_PROVIDER_PATHS"
-44-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:31:17-67
-45                android:resource="@xml/file_paths" />
-45-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:32:17-51
-46        </provider>
-47
-48        <!-- Launcher / Startscherm -->
-49        <activity
-49-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:36:9-43:20
-50            android:name="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity"
-50-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:37:13-56
-51            android:exported="true" >
-51-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:38:13-36
-52            <intent-filter>
-52-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:39:13-42:29
-53                <action android:name="android.intent.action.MAIN" />
-53-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:40:17-69
-53-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:40:25-66
+18    <uses-permission android:name="android.permission.INTERNET" />
+18-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:13:5-66
+18-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:13:22-64
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:23:5-68
+19-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:23:22-65
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:24:5-79
+20-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:24:22-76
+21    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+21-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:25:5-81
+21-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:25:22-78
+22    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+22-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:26:5-77
+22-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:26:22-74
+23
+24    <permission
+24-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+25        android:name="nl.mikekemmink.noodverlichting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+25-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+26        android:protectionLevel="signature" />
+26-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
+27
+28    <uses-permission android:name="nl.mikekemmink.noodverlichting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+28-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+28-->[androidx.core:core:1.13.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\d115fb15f09a2deca6409087d5fef1dc\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
+29
+30    <application
+30-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:15:5-130:19
+31        android:allowBackup="true"
+31-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:20:9-35
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:27:9-77
+33        android:debuggable="true"
+34        android:extractNativeLibs="false"
+35        android:icon="@mipmap/ic_launcher"
+35-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:22:9-43
+36        android:label="Noodverlichting Companion"
+36-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:21:9-50
+37        android:networkSecurityConfig="@xml/network_security_config"
+37-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:18:9-69
+38        android:roundIcon="@mipmap/ic_launcher_round"
+38-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:23:9-54
+39        android:supportsRtl="true"
+39-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:24:9-35
+40        android:testOnly="true"
+41        android:theme="@style/Theme.Noodverlichting"
+41-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:25:9-53
+42        android:usesCleartextTraffic="true" >
+42-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:17:9-44
+43
+44        <!-- Bestandsdeling voor camera/foto's -->
+45        <provider
+46            android:name="androidx.core.content.FileProvider"
+46-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:31:13-62
+47            android:authorities="nl.mikekemmink.noodverlichting.fileprovider"
+47-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:32:13-64
+48            android:exported="false"
+48-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:33:13-37
+49            android:grantUriPermissions="true" >
+49-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:34:13-47
+50            <meta-data
+50-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:35:13-37:54
+51                android:name="android.support.FILE_PROVIDER_PATHS"
+51-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:36:17-67
+52                android:resource="@xml/file_paths" />
+52-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:37:17-51
+53        </provider>
 54
-55                <category android:name="android.intent.category.LAUNCHER" />
-55-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:41:17-77
-55-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:41:27-74
-56            </intent-filter>
-57        </activity>
-58
-59        <!-- NEN3140 dashboard -->
-60        <activity
-60-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:46:9-49:73
-61            android:name="nl.mikekemmink.noodverlichting.nen3140.Nen3140Activity"
-61-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:47:13-52
-62            android:exported="false"
-62-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:48:13-37
-63            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
-63-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:49:13-70
-64
-65        <!-- Noodverlichting hoofdscherm -->
-66        <activity
-66-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:9-55:73
-67            android:name="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity"
-67-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:53:13-68
-68            android:exported="false"
-68-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:54:13-37
-69            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
-69-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:55:13-70
-70
-71        <!-- Noodverlichting lijsten -->
-72        <activity
-72-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:58:9-61:85
-73            android:name="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity"
-73-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:59:13-95
-74            android:exported="false"
-74-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:60:13-37
-75            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity" />
-75-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:61:13-82
-76        <activity
-76-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:63:9-66:82
-77            android:name="nl.mikekemmink.noodverlichting.noodverlichting.FixtureListActivity"
-77-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:64:13-94
-78            android:exported="false"
-78-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:65:13-37
-79            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity" />
-79-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:66:13-79
-80        <activity android:name="nl.mikekemmink.noodverlichting.noodverlichting.columns.ColumnSettingsActivity" />
-80-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:68:9-84
-80-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:68:19-81
-81        <activity
-81-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:70:9-72:40
-82            android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddDefectActivity"
-82-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:71:13-92
-83            android:exported="false" />
-83-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:72:13-37
-84        <activity
-84-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:74:9-76:40
-85            android:name="nl.mikekemmink.noodverlichting.noodverlichting.DefectListActivity"
-85-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:75:13-63
-86            android:exported="false" />
-86-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:76:13-37
-87
-88        <!-- NEN3140 metingen -->
-89        <activity
-89-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:79:9-83:64
-90            android:name="nl.mikekemmink.noodverlichting.nen3140.MeasurementsActivity"
-90-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:80:13-57
-91            android:exported="false"
-91-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:81:13-37
-92            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity"
-92-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:82:13-82
-93            android:theme="@style/Theme.Noodverlichting.NEN" />
-93-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:83:13-61
+55        <!-- Launcher / Startscherm -->
+56        <activity
+56-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:41:9-48:20
+57            android:name="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity"
+57-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:42:13-56
+58            android:exported="true" >
+58-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:43:13-36
+59            <intent-filter>
+59-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:44:13-47:29
+60                <action android:name="android.intent.action.MAIN" />
+60-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:45:17-69
+60-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:45:25-66
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:46:17-77
+62-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:46:27-74
+63            </intent-filter>
+64        </activity>
+65
+66        <!-- NEN3140 dashboard -->
+67        <activity
+67-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:51:9-54:73
+68            android:name="nl.mikekemmink.noodverlichting.nen3140.Nen3140Activity"
+68-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:52:13-52
+69            android:exported="false"
+69-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:53:13-37
+70            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
+70-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:54:13-70
+71
+72        <!-- Noodverlichting hoofdscherm -->
+73        <activity
+73-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:57:9-60:73
+74            android:name="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity"
+74-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:58:13-68
+75            android:exported="false"
+75-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:59:13-37
+76            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity" />
+76-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:60:13-70
+77
+78        <!-- Noodverlichting lijsten -->
+79        <activity
+79-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:63:9-66:85
+80            android:name="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity"
+80-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:64:13-95
+81            android:exported="false"
+81-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:65:13-37
+82            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity" />
+82-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:66:13-82
+83        <activity
+83-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:68:9-71:82
+84            android:name="nl.mikekemmink.noodverlichting.noodverlichting.FixtureListActivity"
+84-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:69:13-94
+85            android:exported="false"
+85-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:70:13-37
+86            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.LocationListActivity" />
+86-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:71:13-79
+87        <activity android:name="nl.mikekemmink.noodverlichting.noodverlichting.columns.ColumnSettingsActivity" />
+87-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:73:9-84
+87-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:73:19-81
+88        <activity
+88-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:75:9-77:40
+89            android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddDefectActivity"
+89-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:76:13-92
+90            android:exported="false" />
+90-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:77:13-37
+91        <activity
+91-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:79:9-81:40
+92            android:name="nl.mikekemmink.noodverlichting.noodverlichting.DefectListActivity"
+92-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:80:13-63
+93            android:exported="false" />
+93-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:81:13-37
 94
-95        <!-- NEN3140 stroomoverzicht -->
+95        <!-- NEN3140 metingen -->
 96        <activity
-96-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:86:9-89:64
-97            android:name="nl.mikekemmink.noodverlichting.nen3140.StroomOverzichtActivity"
-97-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:87:13-60
+96-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:84:9-88:64
+97            android:name="nl.mikekemmink.noodverlichting.nen3140.MeasurementsActivity"
+97-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:85:13-57
 98            android:exported="false"
-98-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:88:13-37
-99            android:theme="@style/Theme.Noodverlichting.NEN" />
-99-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:89:13-61
-100
-101        <!-- NEN3140 locatiescherm (NIEUW THEMA) -->
-102        <activity
-102-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:92:9-96:64
-103            android:name="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity"
-103-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:93:13-60
-104            android:exported="false"
-104-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:94:13-37
-105            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity"
-105-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:95:13-70
+98-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:86:13-37
+99            android:parentActivityName="nl.mikekemmink.noodverlichting.noodverlichting.NoodverlichtingActivity"
+99-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:87:13-82
+100            android:theme="@style/Theme.Noodverlichting.NEN" />
+100-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:88:13-61
+101
+102        <!-- NEN3140 stroomoverzicht -->
+103        <activity
+103-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:91:9-94:64
+104            android:name="nl.mikekemmink.noodverlichting.nen3140.StroomOverzichtActivity"
+104-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:92:13-60
+105            android:exported="false"
+105-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:93:13-37
 106            android:theme="@style/Theme.Noodverlichting.NEN" />
-106-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:96:13-61
+106-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:94:13-61
 107
-108        <!-- NEN3140 bordenlijst -->
+108        <!-- NEN3140 locatiescherm (NIEUW THEMA) -->
 109        <activity
-109-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:99:9-103:64
-110            android:name="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity"
-110-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:100:13-54
+109-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:97:9-101:64
+110            android:name="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity"
+110-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:98:13-60
 111            android:exported="false"
-111-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:101:13-37
-112            android:parentActivityName="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity"
-112-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:102:13-74
+111-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:99:13-37
+112            android:parentActivityName="nl.mikekemmink.noodverlichting.ui.SelectInspectionActivity"
+112-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:100:13-70
 113            android:theme="@style/Theme.Noodverlichting.NEN" />
-113-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:103:13-61
+113-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:101:13-61
 114
-115        <!-- NEN3140 gebreken -->
+115        <!-- NEN3140 bordenlijst -->
 116        <activity
-116-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:106:9-110:64
-117            android:name="nl.mikekemmink.noodverlichting.nen3140.DefectsActivity"
-117-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:107:13-52
+116-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:104:9-108:64
+117            android:name="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity"
+117-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:105:13-54
 118            android:exported="false"
-118-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:108:13-37
-119            android:parentActivityName="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity"
-119-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:109:13-68
+118-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:106:13-37
+119            android:parentActivityName="nl.mikekemmink.noodverlichting.nen3140.NenLocationListActivity"
+119-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:107:13-74
 120            android:theme="@style/Theme.Noodverlichting.NEN" />
-120-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:110:13-61
+120-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:108:13-61
 121
-122        <!-- NEN3140 fotovoorbeeld (mag ook app-hoofdthema houden als je wilt) -->
+122        <!-- NEN3140 gebreken -->
 123        <activity
-123-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:113:9-117:64
-124            android:name="nl.mikekemmink.noodverlichting.nen3140.PhotoPreviewActivity"
-124-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:114:13-57
+123-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:111:9-115:64
+124            android:name="nl.mikekemmink.noodverlichting.nen3140.DefectsActivity"
+124-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:112:13-52
 125            android:exported="false"
-125-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:115:13-37
-126            android:parentActivityName="nl.mikekemmink.noodverlichting.nen3140.DefectsActivity"
-126-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:116:13-66
+125-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:113:13-37
+126            android:parentActivityName="nl.mikekemmink.noodverlichting.nen3140.NenBoardsActivity"
+126-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:114:13-68
 127            android:theme="@style/Theme.Noodverlichting.NEN" />
-127-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:117:13-61
+127-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:115:13-61
 128
-129        <provider
-129-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-130            android:name="androidx.startup.InitializationProvider"
-130-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-131            android:authorities="nl.mikekemmink.noodverlichting.androidx-startup"
-131-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-132            android:exported="false" >
-132-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-133            <meta-data
-133-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-134                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-134-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-135                android:value="androidx.startup" />
-135-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
-136            <meta-data
-136-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
-137                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-137-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
-138                android:value="androidx.startup" />
-138-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
-139            <meta-data
-139-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
-140                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-140-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
-141                android:value="androidx.startup" />
-141-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
-142        </provider>
-143
-144        <uses-library
-144-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
-145            android:name="androidx.window.extensions"
-145-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
-146            android:required="false" />
-146-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
-147        <uses-library
-147-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
-148            android:name="androidx.window.sidecar"
-148-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
-149            android:required="false" />
-149-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
-150
-151        <receiver
-151-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
-152            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-152-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
-153            android:directBootAware="false"
-153-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
-154            android:enabled="true"
-154-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
-155            android:exported="true"
-155-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
-156            android:permission="android.permission.DUMP" >
-156-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
-157            <intent-filter>
-157-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
-158                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-158-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
-158-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
-159            </intent-filter>
-160            <intent-filter>
-160-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
-161                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-161-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
-161-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
-162            </intent-filter>
-163            <intent-filter>
-163-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
-164                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-164-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
-164-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
-165            </intent-filter>
-166            <intent-filter>
-166-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
-167                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-167-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
-167-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
-168            </intent-filter>
-169        </receiver>
-170    </application>
-171
-172</manifest>
+129        <!-- NEN3140 fotovoorbeeld (mag ook app-hoofdthema houden als je wilt) -->
+130        <activity
+130-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:118:9-122:64
+131            android:name="nl.mikekemmink.noodverlichting.nen3140.PhotoPreviewActivity"
+131-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:119:13-57
+132            android:exported="false"
+132-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:120:13-37
+133            android:parentActivityName="nl.mikekemmink.noodverlichting.nen3140.DefectsActivity"
+133-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:121:13-66
+134            android:theme="@style/Theme.Noodverlichting.NEN" />
+134-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:122:13-61
+135        <activity
+135-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:123:9-125:39
+136            android:name="nl.mikekemmink.noodverlichting.noodverlichting.AddFixtureActivity"
+136-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:124:13-63
+137            android:exported="false" />
+137-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:125:13-37
+138        <activity
+138-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:126:9-128:43
+139            android:name="nl.mikekemmink.noodverlichting.noodverlichting.sync.ui.SyncStatusActivity"
+139-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:126:19-107
+140            android:exported="false"
+140-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:127:13-37
+141            android:label="Sync status" />
+141-->C:\Users\MKk2\Android Apps\androidcompanion\app\src\main\AndroidManifest.xml:128:13-40
+142
+143        <provider
+143-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:29:9-37:20
+144            android:name="androidx.startup.InitializationProvider"
+144-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:30:13-67
+145            android:authorities="nl.mikekemmink.noodverlichting.androidx-startup"
+145-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:31:13-68
+146            android:exported="false" >
+146-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:32:13-37
+147            <meta-data
+147-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:34:13-36:52
+148                android:name="androidx.work.WorkManagerInitializer"
+148-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:35:17-68
+149                android:value="androidx.startup" />
+149-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:36:17-49
+150            <meta-data
+150-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+151                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+151-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+152                android:value="androidx.startup" />
+152-->[androidx.emoji2:emoji2:1.3.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\5ebbda2aea1a9c141eb1fced99ab754a\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+153            <meta-data
+153-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+154                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+154-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+155                android:value="androidx.startup" />
+155-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\MKk2\.gradle\caches\8.13\transforms\c9310d50e842bd41829c6474192fe9e0\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+156            <meta-data
+156-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+157                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+157-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+158                android:value="androidx.startup" />
+158-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+159        </provider>
+160
+161        <service
+161-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:39:9-45:35
+162            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+162-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:40:13-88
+163            android:directBootAware="false"
+163-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:41:13-44
+164            android:enabled="@bool/enable_system_alarm_service_default"
+164-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:42:13-72
+165            android:exported="false" />
+165-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:43:13-37
+166        <service
+166-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:46:9-52:35
+167            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+167-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:47:13-84
+168            android:directBootAware="false"
+168-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:48:13-44
+169            android:enabled="@bool/enable_system_job_service_default"
+169-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:49:13-70
+170            android:exported="true"
+170-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:50:13-36
+171            android:permission="android.permission.BIND_JOB_SERVICE" />
+171-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:51:13-69
+172        <service
+172-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:53:9-59:35
+173            android:name="androidx.work.impl.foreground.SystemForegroundService"
+173-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:54:13-81
+174            android:directBootAware="false"
+174-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:55:13-44
+175            android:enabled="@bool/enable_system_foreground_service_default"
+175-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:56:13-77
+176            android:exported="false" />
+176-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:57:13-37
+177
+178        <receiver
+178-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:61:9-66:35
+179            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+179-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:62:13-88
+180            android:directBootAware="false"
+180-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:63:13-44
+181            android:enabled="true"
+181-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:64:13-35
+182            android:exported="false" />
+182-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:65:13-37
+183        <receiver
+183-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:67:9-77:20
+184            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+184-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:68:13-106
+185            android:directBootAware="false"
+185-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:69:13-44
+186            android:enabled="false"
+186-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:70:13-36
+187            android:exported="false" >
+187-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:71:13-37
+188            <intent-filter>
+188-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:73:13-76:29
+189                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+189-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:74:17-87
+189-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:74:25-84
+190                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+190-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:75:17-90
+190-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:75:25-87
+191            </intent-filter>
+192        </receiver>
+193        <receiver
+193-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:78:9-88:20
+194            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+194-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:79:13-104
+195            android:directBootAware="false"
+195-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:80:13-44
+196            android:enabled="false"
+196-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:81:13-36
+197            android:exported="false" >
+197-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:82:13-37
+198            <intent-filter>
+198-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:84:13-87:29
+199                <action android:name="android.intent.action.BATTERY_OKAY" />
+199-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:85:17-77
+199-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:85:25-74
+200                <action android:name="android.intent.action.BATTERY_LOW" />
+200-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:86:17-76
+200-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:86:25-73
+201            </intent-filter>
+202        </receiver>
+203        <receiver
+203-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:89:9-99:20
+204            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+204-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:90:13-104
+205            android:directBootAware="false"
+205-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:91:13-44
+206            android:enabled="false"
+206-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:92:13-36
+207            android:exported="false" >
+207-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:93:13-37
+208            <intent-filter>
+208-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:95:13-98:29
+209                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+209-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:96:17-83
+209-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:96:25-80
+210                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+210-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:97:17-82
+210-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:97:25-79
+211            </intent-filter>
+212        </receiver>
+213        <receiver
+213-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:100:9-109:20
+214            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+214-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:101:13-103
+215            android:directBootAware="false"
+215-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:102:13-44
+216            android:enabled="false"
+216-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:103:13-36
+217            android:exported="false" >
+217-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:104:13-37
+218            <intent-filter>
+218-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:106:13-108:29
+219                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+219-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:107:17-79
+219-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:107:25-76
+220            </intent-filter>
+221        </receiver>
+222        <receiver
+222-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:110:9-121:20
+223            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+223-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:111:13-88
+224            android:directBootAware="false"
+224-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:112:13-44
+225            android:enabled="false"
+225-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:113:13-36
+226            android:exported="false" >
+226-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:114:13-37
+227            <intent-filter>
+227-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:116:13-120:29
+228                <action android:name="android.intent.action.BOOT_COMPLETED" />
+228-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:117:17-79
+228-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:117:25-76
+229                <action android:name="android.intent.action.TIME_SET" />
+229-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:118:17-73
+229-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:118:25-70
+230                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+230-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:119:17-81
+230-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:119:25-78
+231            </intent-filter>
+232        </receiver>
+233        <receiver
+233-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:122:9-131:20
+234            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+234-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:123:13-99
+235            android:directBootAware="false"
+235-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:124:13-44
+236            android:enabled="@bool/enable_system_alarm_service_default"
+236-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:125:13-72
+237            android:exported="false" >
+237-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:126:13-37
+238            <intent-filter>
+238-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:128:13-130:29
+239                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+239-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:129:17-98
+239-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:129:25-95
+240            </intent-filter>
+241        </receiver>
+242        <receiver
+242-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:132:9-142:20
+243            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+243-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:133:13-78
+244            android:directBootAware="false"
+244-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:134:13-44
+245            android:enabled="true"
+245-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:135:13-35
+246            android:exported="true"
+246-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:136:13-36
+247            android:permission="android.permission.DUMP" >
+247-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:137:13-57
+248            <intent-filter>
+248-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:139:13-141:29
+249                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+249-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:140:17-88
+249-->[androidx.work:work-runtime:2.9.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\67f69d61dc3cb9da5f5c59d1c142c431\transformed\work-runtime-2.9.1\AndroidManifest.xml:140:25-85
+250            </intent-filter>
+251        </receiver>
+252
+253        <uses-library
+253-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+254            android:name="androidx.window.extensions"
+254-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+255            android:required="false" />
+255-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+256        <uses-library
+256-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+257            android:name="androidx.window.sidecar"
+257-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+258            android:required="false" />
+258-->[androidx.window:window:1.0.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\fb3b411ccef4cd5175f336f200e60ba4\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+259
+260        <receiver
+260-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+261            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+261-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+262            android:directBootAware="false"
+262-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+263            android:enabled="true"
+263-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+264            android:exported="true"
+264-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+265            android:permission="android.permission.DUMP" >
+265-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+266            <intent-filter>
+266-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+267                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+267-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+267-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+268            </intent-filter>
+269            <intent-filter>
+269-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+270                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+270-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+270-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+271            </intent-filter>
+272            <intent-filter>
+272-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+273                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+273-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+273-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+274            </intent-filter>
+275            <intent-filter>
+275-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+276                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+276-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+276-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\MKk2\.gradle\caches\8.13\transforms\b00789bbb7cd2d0b03937ecaa55127df\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+277            </intent-filter>
+278        </receiver>
+279
+280        <service
+280-->[androidx.room:room-runtime:2.5.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\f5a0a6db31d15d0fa253961a500e1681\transformed\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
+281            android:name="androidx.room.MultiInstanceInvalidationService"
+281-->[androidx.room:room-runtime:2.5.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\f5a0a6db31d15d0fa253961a500e1681\transformed\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
+282            android:directBootAware="true"
+282-->[androidx.room:room-runtime:2.5.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\f5a0a6db31d15d0fa253961a500e1681\transformed\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
+283            android:exported="false" />
+283-->[androidx.room:room-runtime:2.5.0] C:\Users\MKk2\.gradle\caches\8.13\transforms\f5a0a6db31d15d0fa253961a500e1681\transformed\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
+284    </application>
+285
+286</manifest>

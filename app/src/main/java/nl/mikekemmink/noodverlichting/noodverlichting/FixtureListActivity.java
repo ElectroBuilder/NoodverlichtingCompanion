@@ -17,6 +17,7 @@ import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -79,6 +80,7 @@ public class FixtureListActivity extends BaseToolbarActivity {
             pdfView.postInvalidateOnAnimation();
         }
     }
+    // Laatste touch-positie (view-coördinaten, px) voor long-press menu
 
     // Animatie voor pulserende ring
     private android.animation.ValueAnimator markerPulse;
@@ -92,7 +94,10 @@ public class FixtureListActivity extends BaseToolbarActivity {
     private boolean didWarmOpen = false;
 
     private static final String TAG = "FixtureListActivity";
-    private static final String PREFS = "app_prefs";
+    
+    // Sync-now toolbar item ID
+    private static final int MENU_SYNC_NOW = 10001;
+private static final String PREFS = "app_prefs";
     private static final String KEY_LAST_LOCATIE = "last_locatie";
 
     private List<MarkerData> alleMarkers = new ArrayList<>();
@@ -113,10 +118,21 @@ public class FixtureListActivity extends BaseToolbarActivity {
     private Map<Integer, MarkerData> markerMap = new HashMap<>();
 
     // === BESTANDSLOCATIES ===
-    private File getMarkersDir() { return new File(getFilesDir(), "markers"); }
-    private File getPlattegrondenDir() { return new File(getFilesDir(), "plattegronden"); }
-    private File markersJsonFile() { return new File(getMarkersDir(), "markers.json"); }
-    private File pdfFileForName(String pdfNaam) { return new File(getPlattegrondenDir(), pdfNaam); }
+    private File getMarkersDir() {
+        return new File(getFilesDir(), "markers");
+    }
+
+    private File getPlattegrondenDir() {
+        return new File(getFilesDir(), "plattegronden");
+    }
+
+    private File markersJsonFile() {
+        return new File(getMarkersDir(), "markers.json");
+    }
+
+    private File pdfFileForName(String pdfNaam) {
+        return new File(getPlattegrondenDir(), pdfNaam);
+    }
 
     // Viewer/state
     private View plattegrondView;
@@ -126,24 +142,35 @@ public class FixtureListActivity extends BaseToolbarActivity {
     private ImageView pdfPlaceholder;
 
     // markers index per (pdf+page)
+
+    // Marker‑edit state
+    private boolean markerMoveMode = false;
+    @Nullable
+    private MarkerData draggingMarker = null;
+
     private final Map<String, List<MarkerData>> markersByPdfPage = new HashMap<>();
+
     private static String key(String pdfNaam, int pageIndex) {
         return (pdfNaam == null ? "" : pdfNaam).toLowerCase(Locale.ROOT) + "::" + pageIndex;
     }
+
     // Cache: inspectieId -> heeftGebreken (true/false)
     private final Map<Integer, Boolean> defectFlagCache = new HashMap<>();
     // --- Puls-config ---
-    private static final long  PULSE_DURATION_MS       = 5000; // duur van één puls (ms)
-    private static final int   PULSE_PULSES            = 5;     // aantal pulsen: 1..3 gebruikelijk
-    private static final float RING_START_SCALE        = 1.12f; // ring start 12% groter dan marker
-    private static final float RING_MAX_EXTRA_SCALE    = 0.95f; // extra groei t.o.v. start (0.95 ≈ 95%)
-    private static final float RING_STROKE_DP          = 3.5f;  // dikte van de ringlijn
-    private static final int   RING_ALPHA_MIN          = 48;    // minimale zichtbaarheid (0..255)
-    private static final float ALPHA_EASE_EXP          = 1.2f;  // lager = langzamere fade
+    private static final long PULSE_DURATION_MS = 5000; // duur van één puls (ms)
+    private static final int PULSE_PULSES = 5;     // aantal pulsen: 1..3 gebruikelijk
+    private static final float RING_START_SCALE = 1.12f; // ring start 12% groter dan marker
+    private static final float RING_MAX_EXTRA_SCALE = 0.95f; // extra groei t.o.v. start (0.95 ≈ 95%)
+    private static final float RING_STROKE_DP = 3.5f;  // dikte van de ringlijn
+    private static final int RING_ALPHA_MIN = 48;    // minimale zichtbaarheid (0..255)
+    private static final float ALPHA_EASE_EXP = 1.2f;  // lager = langzamere fade
 
     // Interne vlag: is er een puls bezig?
     private boolean pulseActive = false;
-    /** Puls-animatie starten en vloeiend redraw forceren. */
+
+    /**
+     * Puls-animatie starten en vloeiend redraw forceren.
+     */
     private void startMarkerPulse() {
         if (markerPulse != null) markerPulse.cancel();
 
@@ -160,11 +187,14 @@ public class FixtureListActivity extends BaseToolbarActivity {
         });
 
         markerPulse.addListener(new android.animation.AnimatorListenerAdapter() {
-            @Override public void onAnimationEnd(android.animation.Animator animation) {
+            @Override
+            public void onAnimationEnd(android.animation.Animator animation) {
                 pulseActive = false;
                 if (pdfView != null) pdfView.postInvalidateOnAnimation();
             }
-            @Override public void onAnimationCancel(android.animation.Animator animation) {
+
+            @Override
+            public void onAnimationCancel(android.animation.Animator animation) {
                 pulseActive = false;
                 if (pdfView != null) pdfView.postInvalidateOnAnimation();
             }
@@ -180,24 +210,23 @@ public class FixtureListActivity extends BaseToolbarActivity {
         File pdfFile = pdfFileForName(lastPdfName);
         if (pdfFile == null || !pdfFile.exists()) return;
 
-        // Zorg dat de plattegrond-view bestaat, maar laat de container onzichtbaar
         FrameLayout container = findViewById(R.id.plattegrondContainer);
         if (container == null) return;
         int originalVisibility = container.getVisibility(); // meestal GONE
         ensurePlattegrondView(container);
         container.setVisibility(View.GONE);
 
-        // Zet state en warm-open de PDF inclusief marker overlay
         currentPdf = pdfFile;
         currentPageIndex = Math.max(0, lastPage);
 
         pdfView.recycle();
         pdfView.fromFile(currentPdf)
                 .defaultPage(currentPageIndex)
-                .enableSwipe(false)
+                .enableSwipe(true)
+                .enableDoubletap(true)
                 .fitEachPage(true)
                 .spacing(0)
-                // ✔ Gedeelde overlay (incl. puls)
+                // Overlay (incl. puls)
                 .onDraw((canvas, pageWidth, pageHeight, displayedPage) ->
                         drawMarkersOverlay(canvas, pageWidth, pageHeight, displayedPage))
                 .onLoad(nb -> {
@@ -206,8 +235,34 @@ public class FixtureListActivity extends BaseToolbarActivity {
                     pdfView.setMaxZoom(8.0f);
                     pdfView.enableAntialiasing(true);
                 })
-                // ✔ Tap-selectie marker → lijstselectie
+                // Tap: verplaatsen indien verplaatsmodus; anders marker selecteren
                 .onTap(e -> {
+                    if (markerMoveMode && draggingMarker != null) {
+                        final float zoom = Math.max(1f, pdfView.getZoom());
+                        final float curX = pdfView.getCurrentXOffset();
+                        final float curY = pdfView.getCurrentYOffset();
+
+                        float docX = (e.getX() - curX) / zoom;
+                        float docY = (e.getY() - curY) / zoom;
+
+                        int page = pdfView.getCurrentPage();
+                        float pageTopDocY = 0f;
+                        for (int i = 0; i < page; i++)
+                            pageTopDocY += pdfView.getPageSize(i).getHeight();
+
+                        float pageW = pdfView.getPageSize(page).getWidth();
+                        float pageH = pdfView.getPageSize(page).getHeight();
+
+                        double xN = Math.max(0.0, Math.min(1.0, docX / pageW));
+                        double yN = Math.max(0.0, Math.min(1.0, (docY - pageTopDocY) / pageH));
+
+                        moveMarker(draggingMarker, xN, yN);
+                        markerMoveMode = false;
+                        draggingMarker = null;
+                        pdfView.postInvalidateOnAnimation();
+                        return true;
+                    }
+
                     MarkerData hit = hitTestMarker(e.getX(), e.getY());
                     if (hit != null) {
                         selectFromMarker(hit);
@@ -215,17 +270,19 @@ public class FixtureListActivity extends BaseToolbarActivity {
                     }
                     return false;
                 })
+                // Long‑press: contextmenu op de event‑coördinaten
+                .onLongPress(e -> showMarkerPopup(e.getX(), e.getY()))
                 .load();
 
-        // Prefetch de actuele pagina naar disk-cache (best-effort)
+        // Prefetch (best‑effort)
         final int w = getResources().getDisplayMetrics().widthPixels;
         new Thread(() -> {
             try {
-                PdfPageCache.prefetch(this, currentPdf, new int[]{ currentPageIndex }, w);
-            } catch (Throwable ignore) {}
+                PdfPageCache.prefetch(this, currentPdf, new int[]{currentPageIndex}, w);
+            } catch (Throwable ignore) {
+            }
         }).start();
 
-        // container zichtbaar laten zoals hij stond
         container.setVisibility(originalVisibility);
     }
 
@@ -252,55 +309,302 @@ public class FixtureListActivity extends BaseToolbarActivity {
         try {
             if (!dest.getParentFile().exists()) dest.getParentFile().mkdirs();
             InputStream in;
-            try { in = getAssets().open("markers/markers.json"); }
-            catch (Exception e1) { in = getAssets().open("markers.json"); }
-            try (InputStream is = in; OutputStream out = new FileOutputStream(dest)) {
-                byte[] buf = new byte[4096]; int n; while ((n = is.read(buf)) > 0) out.write(buf, 0, n);
+            try {
+                in = getAssets().open("markers/markers.json");
+            } catch (Exception e1) {
+                in = getAssets().open("markers.json");
             }
-        } catch (Exception e) { Log.e(TAG, "Kon markers.json niet beschikbaar maken", e); }
+            try (InputStream is = in; OutputStream out = new FileOutputStream(dest)) {
+                byte[] buf = new byte[4096];
+                int n;
+                while ((n = is.read(buf)) > 0) out.write(buf, 0, n);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Kon markers.json niet beschikbaar maken", e);
+        }
+    }
+
+    /**
+     * Toon marker‑contextmenu op weergave‑coördinaat (px).
+     */
+    private void showMarkerPopup(float vx, float vy) {
+        if (pdfView == null) return;
+
+        // Hit‑test: zit hier een marker?
+        MarkerData hit = hitTestMarker(vx, vy);
+
+        // PopupMenu aan de PDF‑view
+        android.widget.PopupMenu pm = new android.widget.PopupMenu(this, pdfView);
+        if (hit != null) {
+            pm.getMenu().add(0, 1, 0, "Verplaatsen");
+            pm.getMenu().add(0, 2, 1, "Verwijderen");
+            // eventueel: "Naar dit armatuur springen" e.d.
+
+            pm.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == 1) {
+                    // verplaatsmodus: sleep tot loslaten
+                    draggingMarker = hit;
+                    markerMoveMode = true;
+                    startMarkerPulse();
+                    return true;
+                } else if (id == 2) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Marker verwijderen")
+                            .setMessage("Marker ontkoppelen en verwijderen?")
+                            .setPositiveButton("Verwijderen", (d, w) -> removeMarker(hit))
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
+                    return true;
+                }
+                return false;
+            });
+        } else {
+            // Lege plek: marker toevoegen (koppelen aan geselecteerde armatuur)
+            pm.getMenu().add(0, 3, 0, "Marker toevoegen (koppelen aan selectie)");
+            pm.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == 3) {
+                    // view -> doc
+                    final float zoom = Math.max(1f, pdfView.getZoom());
+                    final float curX = pdfView.getCurrentXOffset();
+                    final float curY = pdfView.getCurrentYOffset();
+                    float docX = (vx - curX) / zoom;
+                    float docY = (vy - curY) / zoom;
+                    addMarkerForSelectedAtDoc(docX, docY);
+                    return true;
+                }
+                return false;
+            });
+        }
+        pm.show();
     }
 
     private void loadMarkersFromJson() {
-        markerMap.clear(); alleMarkers.clear(); markersByPdfPage.clear();
+        markerMap.clear();
+        alleMarkers.clear();
+        markersByPdfPage.clear();
         ensureMarkersAvailable();
-        File f = markersJsonFile(); if (!f.exists() || f.length()==0) return;
+        File f = markersJsonFile();
+        if (!f.exists() || f.length() == 0) return;
         String json;
         try (InputStream in = new FileInputStream(f);
              InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
              BufferedReader br = new BufferedReader(isr)) {
-            StringBuilder sb = new StringBuilder(); String line;
+            StringBuilder sb = new StringBuilder();
+            String line;
             while ((line = br.readLine()) != null) sb.append(line).append('\n');
             json = sb.toString();
-        } catch (Exception e) { Log.e(TAG, "Lezen markers.json mislukt", e); return; }
+        } catch (Exception e) {
+            Log.e(TAG, "Lezen markers.json mislukt", e);
+            return;
+        }
 
         try {
             if (json.startsWith("\uFEFF")) json = json.substring(1);
             json = json.trim();
             JSONArray array = json.startsWith("[") ? new JSONArray(json) : new JSONArray().put(new JSONObject(json));
-            for (int i=0;i<array.length();i++) {
+            for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);
-                long idL = optLongAny(obj, new String[]{"inspectie_id","inspectieId","id","fixture_id","armatuur_id"}, -1L);
-                int id = (idL>=Integer.MIN_VALUE && idL<=Integer.MAX_VALUE) ? (int) idL : -1;
-                String rawPdf = optStringAny(obj, new String[]{"pdf_naam","pdfNaam","pdf","pdfName"}, "");
-                String pdfNaam = rawPdf!=null? rawPdf.trim():"";
-                int pageIndex = 0; int page1 = optIntAny(obj, new String[]{"page","pagina","pageIndex1"}, 0);
-                if (page1>0) pageIndex = Math.max(0, page1-1);
+                long idL = optLongAny(obj, new String[]{"inspectie_id", "inspectieId", "id", "fixture_id", "armatuur_id"}, -1L);
+                int id = (idL >= Integer.MIN_VALUE && idL <= Integer.MAX_VALUE) ? (int) idL : -1;
+                String rawPdf = optStringAny(obj, new String[]{"pdf_naam", "pdfNaam", "pdf", "pdfName"}, "");
+                String pdfNaam = rawPdf != null ? rawPdf.trim() : "";
+                int pageIndex = 0;
+                int page1 = optIntAny(obj, new String[]{"page", "pagina", "pageIndex1"}, 0);
+                if (page1 > 0) pageIndex = Math.max(0, page1 - 1);
                 int hash = pdfNaam.lastIndexOf("#p");
-                if (hash>=0 && hash+2<pdfNaam.length()) {
-                    try { int oneBased = Integer.parseInt(pdfNaam.substring(hash+2)); pageIndex=Math.max(0,oneBased-1); pdfNaam=pdfNaam.substring(0,hash);} catch(Exception ignore){}
+                if (hash >= 0 && hash + 2 < pdfNaam.length()) {
+                    try {
+                        int oneBased = Integer.parseInt(pdfNaam.substring(hash + 2));
+                        pageIndex = Math.max(0, oneBased - 1);
+                        pdfNaam = pdfNaam.substring(0, hash);
+                    } catch (Exception ignore) {
+                    }
                 }
-                if (!pdfNaam.toLowerCase(Locale.ROOT).endsWith(".pdf") && !pdfNaam.isEmpty()) pdfNaam += ".pdf";
-                double x = optDoubleAny(obj,new String[]{"x","fx","px"},Double.NaN);
-                double y = optDoubleAny(obj,new String[]{"y","fy","py"},Double.NaN);
+                if (!pdfNaam.toLowerCase(Locale.ROOT).endsWith(".pdf") && !pdfNaam.isEmpty())
+                    pdfNaam += ".pdf";
+                double x = optDoubleAny(obj, new String[]{"x", "fx", "px"}, Double.NaN);
+                double y = optDoubleAny(obj, new String[]{"y", "fy", "py"}, Double.NaN);
                 if (Double.isNaN(x) || Double.isNaN(y) || pdfNaam.isEmpty()) continue;
-                MarkerData md = new MarkerData(pdfNaam,x,y,pageIndex,id);
-                alleMarkers.add(md); if (id>=0) markerMap.put(id, md);
-                String k = key(pdfNaam,pageIndex); List<MarkerData> lst = markersByPdfPage.get(k);
-                if (lst==null){lst=new ArrayList<>(); markersByPdfPage.put(k,lst);} lst.add(md);
+                MarkerData md = new MarkerData(pdfNaam, x, y, pageIndex, id);
+                alleMarkers.add(md);
+                if (id >= 0) markerMap.put(id, md);
+                String k = key(pdfNaam, pageIndex);
+                List<MarkerData> lst = markersByPdfPage.get(k);
+                if (lst == null) {
+                    lst = new ArrayList<>();
+                    markersByPdfPage.put(k, lst);
+                }
+                lst.add(md);
             }
-        } catch (Exception e) { Log.e(TAG, "Fout in markers.json", e); }
+        } catch (Exception e) {
+            Log.e(TAG, "Fout in markers.json", e);
+        }
     }
 
+    /**
+     * Schrijf alle markers terug naar markers.json.
+     */
+    private void saveMarkersToJson() {
+        try {
+            File f = markersJsonFile();
+            if (!f.getParentFile().exists()) f.getParentFile().mkdirs();
+            JSONArray arr = new JSONArray();
+            for (MarkerData m : alleMarkers) {
+                JSONObject o = new JSONObject();
+                o.put("inspectie_id", m.inspectieid);
+                o.put("pdf_naam", m.pdfNaam);            // zonder #p; we schrijven pagina los weg
+                o.put("page", m.pageIndex + 1);          // 1‑based in JSON
+                o.put("x", m.x);
+                o.put("y", m.y);
+                arr.put(o);
+            }
+            try (OutputStream out = new FileOutputStream(f)) {
+                byte[] bytes = arr.toString(2).getBytes(StandardCharsets.UTF_8);
+                out.write(bytes);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Schrijven markers.json mislukt", e);
+            Toast.makeText(this, "Markers opslaan mislukt", Toast.LENGTH_SHORT).show();
+        }
+        // na save: overlay refresh
+        if (pdfView != null) pdfView.postInvalidateOnAnimation();
+    }
+
+    /**
+     * Verwijder 1 marker uit indexes en JSON (ontkoppel armatuur).
+     */
+    private void removeMarker(@Nullable MarkerData m) {
+        if (m == null) return;
+        alleMarkers.remove(m);
+        markerMap.remove(m.inspectieid);
+        List<MarkerData> lst = markersByPdfPage.get(key(m.pdfNaam, m.pageIndex));
+        if (lst != null) lst.remove(m);
+        saveMarkersToJson();
+        invalidateDefectCachesAndRefresh(); // lijst/overlay hertekenen
+    }
+
+    /**
+     * Verplaats marker naar nieuwe doc‑coördinaten (genormaliseerd 0..1 per pagina).
+     */
+    private void moveMarker(MarkerData m, double xNorm, double yNorm) {
+        m.x = Math.max(0.0, Math.min(1.0, xNorm));
+        m.y = Math.max(0.0, Math.min(1.0, yNorm));
+        saveMarkersToJson();
+        // Queue for sync: UPSERT marker
+        new nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncRepository(this)
+            .queueMarkerUpsert(m.inspectieid, m.pdfNaam, m.pageIndex + 1, m.x, m.y);
+
+    }
+
+    /**
+     * Voeg (of vervang) marker voor geselecteerde armatuur op huidige PDF/pagina.
+     */
+    private void addMarkerForSelectedAtDoc(float docX, float docY) {
+        if (geselecteerdeInspectieId <= 0) {
+            Toast.makeText(this, "Selecteer eerst een armatuur in de lijst.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (currentPdf == null || pdfView == null) return;
+
+        int pageIndex = pdfView.getCurrentPage();
+        float pageW = pdfView.getPageSize(pageIndex).getWidth();
+        float pageH = pdfView.getPageSize(pageIndex).getHeight();
+
+        // normaliseer naar 0..1 binnen deze pagina
+        float pageTopDocY = 0f;
+        for (int i = 0; i < pageIndex; i++) pageTopDocY += pdfView.getPageSize(i).getHeight();
+        double xN = Math.max(0.0, Math.min(1.0, (docX) / pageW));
+        double yN = Math.max(0.0, Math.min(1.0, (docY - pageTopDocY) / pageH));
+
+        // Bestaat er al een marker voor dit armatuur? → verplaatsen i.p.v. extra aanmaken
+        MarkerData existing = markerMap.get(geselecteerdeInspectieId);
+        if (existing != null) {
+            // Als PDF/pagina verandert, verplaats in index‑map
+            if (!currentPdf.getName().equalsIgnoreCase(existing.pdfNaam) || existing.pageIndex != pageIndex) {
+                List<MarkerData> lstOld = markersByPdfPage.get(key(existing.pdfNaam, existing.pageIndex));
+                if (lstOld != null) lstOld.remove(existing);
+                existing.pdfNaam = currentPdf.getName();
+                existing.pageIndex = pageIndex;
+                List<MarkerData> lstNew = markersByPdfPage.get(key(existing.pdfNaam, existing.pageIndex));
+                if (lstNew == null) {
+                    lstNew = new ArrayList<>();
+                    markersByPdfPage.put(key(existing.pdfNaam, existing.pageIndex), lstNew);
+                }
+                lstNew.add(existing);
+            }
+            moveMarker(existing, xN, yN);
+            geselecteerdeInspectieId = existing.inspectieid; // focus
+        } else {
+            MarkerData m = new MarkerData(currentPdf.getName(), xN, yN, pageIndex, geselecteerdeInspectieId);
+            alleMarkers.add(m);
+            markerMap.put(geselecteerdeInspectieId, m);
+            List<MarkerData> lst = markersByPdfPage.get(key(m.pdfNaam, m.pageIndex));
+            if (lst == null) {
+                lst = new ArrayList<>();
+                markersByPdfPage.put(key(m.pdfNaam, m.pageIndex), lst);
+            }
+            lst.add(m);
+            saveMarkersToJson();
+        // Queue for sync: UPSERT new marker
+        new nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncRepository(this)
+            .queueMarkerUpsert(geselecteerdeInspectieId, currentPdf.getName(), pageIndex + 1, xN, yN);
+        }
+        // overlay/focus
+        startMarkerPulse();
+        if (pdfView != null) pdfView.postInvalidateOnAnimation();
+    }
+
+    /**
+     * Toon een klein popupmenu vanaf de FAB met de 2 acties.
+     */
+    private void showFabMenu(View anchor) {
+        android.widget.PopupMenu pm = new android.widget.PopupMenu(this, anchor);
+        pm.getMenu().add(0, 1, 0, "Armatuur toevoegen");
+        pm.getMenu().add(0, 2, 1, "Gebrek toevoegen");
+
+        pm.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == 1) {
+                startAddFixture();        // zie helper hieronder
+                return true;
+            } else if (id == 2) {
+                // Gebruik huidige selectie; zonder selectie melden we het netjes.
+                if (geselecteerdeInspectieId <= 0) {
+                    Toast.makeText(this, "Selecteer eerst een armatuur in de lijst.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                // Haal evt. code op voor titel (optioneel)
+                String code = null;
+                Cursor c = (adapter != null) ? adapter.getCursor() : null;
+                if (c != null) {
+                    int pos = findPositionByInspectieId(geselecteerdeInspectieId);
+                    if (pos >= 0 && c.moveToPosition(pos)) {
+                        int idx = c.getColumnIndex("code");
+                        if (idx >= 0) code = c.getString(idx);
+                    }
+                }
+                startAddDefect(geselecteerdeInspectieId, code);
+                return true;
+            }
+            return false;
+        });
+        pm.show();
+    }
+
+
+    private void startAddFixture() {
+        String locatie = getIntent() != null
+                ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE) : null;
+        if (locatie == null || locatie.trim().isEmpty()) {
+            locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
+        }
+        Intent i = new Intent(this, AddFixtureActivity.class);
+        if (locatie != null) i.putExtra(LocationListActivity.EXTRA_LOCATIE, locatie);
+        // We herladen in onResume al, dus geen startActivityForResult nodig
+        startActivity(i);
+
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -308,6 +612,11 @@ public class FixtureListActivity extends BaseToolbarActivity {
 
         // 1) Alleen je content inflaten onder de gedeelde toolbar
         setContentLayout(R.layout.nv_armaturen);
+        // === FAB met + menu ===
+        View fab = findViewById(R.id.fabMain);
+        if (fab != null) {
+            fab.setOnClickListener(v -> showFabMenu(v));
+        }
 
         // 2) Toolbar-titel/palet/up-knop via BaseToolbarActivity
         setTitle("Armaturen");                 // wordt zo meteen overschreven door locatie-naam
@@ -315,13 +624,17 @@ public class FixtureListActivity extends BaseToolbarActivity {
         setUpEnabled(true);
 
         // --- vanaf hier je bestaande init (ongelaten) ---
-        String locatie = getIntent()!=null ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE): null;
-        if (locatie==null || locatie.trim().isEmpty())
+        String locatie = getIntent() != null ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE) : null;
+        if (locatie == null || locatie.trim().isEmpty())
             locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
-        if (locatie==null || locatie.trim().isEmpty()) { startActivity(new Intent(this, LocationListActivity.class)); finish(); return; }
+        if (locatie == null || locatie.trim().isEmpty()) {
+            startActivity(new Intent(this, LocationListActivity.class));
+            finish();
+            return;
+        }
         getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(KEY_LAST_LOCATIE, locatie).apply();
 
-        if (getSupportActionBar()!=null) getSupportActionBar().setTitle(locatie);
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle(locatie);
 
         dbHelper = new DBHelper(this);
         defectProvider = new DefectProvider(this);
@@ -331,7 +644,8 @@ public class FixtureListActivity extends BaseToolbarActivity {
         list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (adapter == null) return;
                 Cursor c = (Cursor) adapter.getItem(position);
                 if (c == null) return;
@@ -353,11 +667,19 @@ public class FixtureListActivity extends BaseToolbarActivity {
         });
 
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (adapter==null) return true; Cursor c = (Cursor) adapter.getItem(position); if (c==null) return true;
-                int idxId = c.getColumnIndex("inspectieid"); if (idxId<0) return true; int idxCode = c.getColumnIndex("code");
-                int inspectieid = c.getInt(idxId); String fixtureCode = (idxCode>=0? c.getString(idxCode): null);
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS); showRowMenu(inspectieid, fixtureCode); return true;
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (adapter == null) return true;
+                Cursor c = (Cursor) adapter.getItem(position);
+                if (c == null) return true;
+                int idxId = c.getColumnIndex("inspectieid");
+                if (idxId < 0) return true;
+                int idxCode = c.getColumnIndex("code");
+                int inspectieid = c.getInt(idxId);
+                String fixtureCode = (idxCode >= 0 ? c.getString(idxCode) : null);
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                showRowMenu(inspectieid, fixtureCode);
+                return true;
             }
         });
 
@@ -367,7 +689,12 @@ public class FixtureListActivity extends BaseToolbarActivity {
         load(locatie);
     }
 
-    @Override protected void onNewIntent(Intent intent) { super.onNewIntent(intent); setIntent(intent); reload(); }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        reload();
+    }
 
     @Override
     protected void onResume() {
@@ -380,23 +707,34 @@ public class FixtureListActivity extends BaseToolbarActivity {
         if (pdfView != null) pdfView.postInvalidateOnAnimation(); // marker overlay
 
 
-        if (!didWarmOpen) { warmOpenLastPdfIfAny(); didWarmOpen = true; }
+        if (!didWarmOpen) {
+            warmOpenLastPdfIfAny();
+            didWarmOpen = true;
+        }
         reload();
     }
 
-    @Override protected void onPause() { super.onPause(); }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
     private void ensurePlattegrondView(FrameLayout container) {
-        if (plattegrondView!=null && plattegrondView.getParent()==container && pdfView!=null) return;
+        if (plattegrondView != null && plattegrondView.getParent() == container && pdfView != null)
+            return;
         container.removeAllViews();
         plattegrondView = getLayoutInflater().inflate(R.layout.nv_fragment_plattegrond, container, false);
         container.addView(plattegrondView);
         pdfView = plattegrondView.findViewById(R.id.pdfView);
-        pdfView = plattegrondView.findViewById(R.id.pdfView);
+
+        // Belangrijk: GEEN eigen touch/longclick‑listeners hier,
+        // zodat PDFView alle pan/zoom/tap‑gestures kan afhandelen.
         pdfPlaceholder = plattegrondView.findViewById(R.id.pdfPlaceholder);
     }
 
-    /** Overlay voor markers + pulserende ring. */
+    /**
+     * Overlay voor markers + pulserende ring.
+     */
     private void drawMarkersOverlay(android.graphics.Canvas canvas,
                                     float pageWidth, float pageHeight, int displayedPage) {
         if (pdfView == null || currentPdf == null) return;
@@ -468,10 +806,9 @@ public class FixtureListActivity extends BaseToolbarActivity {
     private void showPlattegrondWithMarker(int inspectieid) {
         MarkerData marker = markerMap.get(inspectieid);
         FrameLayout container = findViewById(R.id.plattegrondContainer);
-        geselecteerdeInspectieId = inspectieid;
 
-        // Start puls voor visuele feedback
-        startMarkerPulse();
+        geselecteerdeInspectieId = inspectieid;
+        startMarkerPulse(); // visuele feedback
 
         if (container == null) return;
         container.setVisibility(View.VISIBLE);
@@ -492,7 +829,7 @@ public class FixtureListActivity extends BaseToolbarActivity {
             return;
         }
 
-        // SNELTAK: zelfde PDF -> NIET herladen, alleen naar pagina + centreren
+        // Zelfde PDF? Snel wisselen/centreren zonder reload
         if (currentPdf != null && currentPdf.equals(pdfFile)) {
             if (pdfPlaceholder != null) pdfPlaceholder.setVisibility(View.GONE);
             if (pdfView.getCurrentPage() != marker.pageIndex) {
@@ -504,16 +841,14 @@ public class FixtureListActivity extends BaseToolbarActivity {
                 centerOnMarkerDocSpace(m);
             });
             currentPageIndex = marker.pageIndex;
-            // Forceer overlay redraw (blauw + puls)
             pdfView.postInvalidateOnAnimation();
             return;
         }
 
-        // ANDERE PDF -> placeholder + laden
+        // Andere PDF: placeholder + laden
         currentPdf = pdfFile;
         currentPageIndex = marker.pageIndex;
 
-        // 1) Placeholder uit cache (best-effort)
         if (pdfPlaceholder != null) {
             pdfPlaceholder.setVisibility(View.VISIBLE);
             pdfPlaceholder.setImageDrawable(null);
@@ -530,18 +865,18 @@ public class FixtureListActivity extends BaseToolbarActivity {
                             pdfPlaceholder.setImageBitmap(bmp);
                         }
                     });
-                } catch (Exception ignore) { /* placeholder is best-effort */ }
+                } catch (Exception ignore) { /* best‑effort */ }
             }).start();
         }
 
-        // 2) Echte PDF laden met overlay + tap
         pdfView.recycle();
         pdfView.fromFile(currentPdf)
                 .defaultPage(currentPageIndex)
-                .enableSwipe(false)
+                .enableSwipe(true)
+                .enableDoubletap(true)
                 .fitEachPage(true)
                 .spacing(0)
-                // ✔ Gedeelde overlay (incl. puls)
+                // Overlay (incl. puls)
                 .onDraw((canvas, pageWidth, pageHeight, displayedPage) ->
                         drawMarkersOverlay(canvas, pageWidth, pageHeight, displayedPage))
                 .onLoad(nb -> {
@@ -550,8 +885,34 @@ public class FixtureListActivity extends BaseToolbarActivity {
                     pdfView.setMaxZoom(8.0f);
                     pdfView.enableAntialiasing(true);
                 })
-                // ✔ Tap-selectie marker → lijstselectie
+                // Tap: verplaatsen indien verplaatsmodus; anders marker selecteren
                 .onTap(e -> {
+                    if (markerMoveMode && draggingMarker != null) {
+                        final float zoom = Math.max(1f, pdfView.getZoom());
+                        final float curX = pdfView.getCurrentXOffset();
+                        final float curY = pdfView.getCurrentYOffset();
+
+                        float docX = (e.getX() - curX) / zoom;
+                        float docY = (e.getY() - curY) / zoom;
+
+                        int page = pdfView.getCurrentPage();
+                        float pageTopDocY = 0f;
+                        for (int i = 0; i < page; i++)
+                            pageTopDocY += pdfView.getPageSize(i).getHeight();
+
+                        float pageW = pdfView.getPageSize(page).getWidth();
+                        float pageH = pdfView.getPageSize(page).getHeight();
+
+                        double xN = Math.max(0.0, Math.min(1.0, docX / pageW));
+                        double yN = Math.max(0.0, Math.min(1.0, (docY - pageTopDocY) / pageH));
+
+                        moveMarker(draggingMarker, xN, yN);
+                        markerMoveMode = false;
+                        draggingMarker = null;
+                        pdfView.postInvalidateOnAnimation();
+                        return true;
+                    }
+
                     MarkerData hit = hitTestMarker(e.getX(), e.getY());
                     if (hit != null) {
                         selectFromMarker(hit);
@@ -559,6 +920,8 @@ public class FixtureListActivity extends BaseToolbarActivity {
                     }
                     return false;
                 })
+                // Long‑press: contextmenu
+                .onLongPress(e -> showMarkerPopup(e.getX(), e.getY()))
                 .onRender(nb -> pdfView.post(() -> {
                     ensureMinZoomForCenter(3.0f);
                     centerOnMarkerDocSpace(marker);
@@ -577,12 +940,18 @@ public class FixtureListActivity extends BaseToolbarActivity {
                 .apply();
     }
 
+
     private void ensureMinZoomForCenter(float minZoom) {
         float z = pdfView.getZoom();
-        if (z < minZoom) { pdfView.zoomTo(minZoom); pdfView.loadPages(); }
+        if (z < minZoom) {
+            pdfView.zoomTo(minZoom);
+            pdfView.loadPages();
+        }
     }
 
-    /** Centreer op basis van absolute document-coördinaten (verticale stapeling). */
+    /**
+     * Centreer op basis van absolute document-coördinaten (verticale stapeling).
+     */
     private void centerOnMarkerDocSpace(MarkerData marker) {
         if (pdfView == null) return;
         int page = marker.pageIndex;
@@ -596,64 +965,101 @@ public class FixtureListActivity extends BaseToolbarActivity {
         float pageW = pdfView.getPageSize(page).getWidth();
         float pageH = pdfView.getPageSize(page).getHeight();
 
-        float docX = (float)marker.x * pageW * zoom; // binnen pagina
-        float docY = (sumHeights + (float)marker.y * pageH) * zoom; // totaal document
+        float docX = (float) marker.x * pageW * zoom; // binnen pagina
+        float docY = (sumHeights + (float) marker.y * pageH) * zoom; // totaal document
 
-        float vx = pdfView.getWidth()/2f; float vy = pdfView.getHeight()/2f;
-        float newX = vx - docX; float newY = vy - docY;
+        float vx = pdfView.getWidth() / 2f;
+        float vy = pdfView.getHeight() / 2f;
+        float newX = vx - docX;
+        float newY = vy - docY;
 
-        pdfView.moveTo(newX, newY); pdfView.loadPages();
-        Log.d(TAG, "centerDoc: page="+page+" zoom="+zoom+" doc=(" + docX + "," + docY + ") off=(" + newX + "," + newY + ")");
+        pdfView.moveTo(newX, newY);
+        pdfView.loadPages();
+        Log.d(TAG, "centerDoc: page=" + page + " zoom=" + zoom + " doc=(" + docX + "," + docY + ") off=(" + newX + "," + newY + ")");
     }
 
     private void load(String locatie) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase(); Set<String> cols = getColumns(db, "inspecties");
-        String inspectieid = firstExisting(cols, "inspectie_id", "id", "inspectieId", "inspectie", "_id", "Inspectie-ID");
-        String locCol = firstExisting(cols, "Locatie","locatie","Location","location");
-        String nrCol = firstExisting(cols, "Nr.","Nr","nr.","nr","Nummer","nummer","ArmatuurNr","armatuur_nr","armatuurnr");
-        String codeCol = firstExisting(cols, "Code","code","ArmatuurCode","armatuurcode","arm_code");
-        String soortCol = firstExisting(cols, "Soort","soort","Type","type");
-        String verdiepingCol = firstExisting(cols, "Verdieping","verdieping","Floor","floor","Etage","etage");
-        String opTekCol = firstExisting(cols, "Op tekening","Op_Tekening","OpTekening","op_tekening","optekening");
-        String typeCol = firstExisting(cols, "Type","type", "Armatuur type");
-        String merkCol = firstExisting(cols, "Merk","merk","Armatuur merk","armatuur_merk","ArmatuurMerk");
-        String montageCol = firstExisting(cols, "Montagewijze","montagewijze","Montage","montage");
-        String pictogramCol = firstExisting(cols, "Pictogram","pictogram");
-        String accuTypeCol = firstExisting(cols, "Accutype","accutype","Accu type","accu_type","Batterijtype","batterijtype");
-        String artikelNrCol = firstExisting(cols, "Artikelnr","ArtikelNr","Artikelnr.","artikelnummer","Artikelnummer","artikelnr","artikelnr.");
-        String accuLeeftCol = firstExisting(cols, "Accu leeftijd","AccuLeeftijd","accu_leeftijd","Accu (leeftijd)","accu leeftijd");
-        String atsCol = firstExisting(cols, "ATS","ats","Autotest","autotest");
-        String duurtestCol = firstExisting(cols, "Duurtest","duurtest","Duurtest (min)","duurtest_min");
-        String opmCol = firstExisting(cols, "Opmerking","opmerking","Notitie","notitie","Notes","notes");
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Set<String> cols = getColumns(db, "inspecties");
 
-        if (locCol==null) { Toast.makeText(this, "Kolom 'Locatie' niet gevonden", Toast.LENGTH_LONG).show(); return; }
+        String inspectieid = firstExisting(cols, "inspectie_id", "id", "inspectieId", "inspectie", "_id", "Inspectie-ID");
+        String locCol = firstExisting(cols, "Locatie", "locatie", "Location", "location");
+        String nrCol = firstExisting(cols, "Nr.", "Nr", "nr.", "nr", "Nummer", "nummer", "ArmatuurNr", "armatuur_nr", "armatuurnr");
+        String codeCol = firstExisting(cols, "Code", "code", "ArmatuurCode", "armatuurcode", "arm_code");
+        String soortCol = firstExisting(cols, "Soort", "soort", "Type", "type");
+        String verdiepingCol = firstExisting(cols, "Verdieping", "verdieping", "Floor", "floor", "Etage", "etage");
+        // ⬇️ NIEUW: Ruimte
+        String ruimteCol = firstExisting(cols, "Ruimte", "ruimte", "Room", "room", "Kamer", "kamer");
+        String opTekCol = firstExisting(cols, "Op tekening", "Op_Tekening", "OpTekening", "op_tekening", "optekening");
+        String typeCol = firstExisting(cols, "Type", "type", "Armatuur type");
+        String merkCol = firstExisting(cols, "Merk", "merk", "Armatuur merk", "armatuur_merk", "ArmatuurMerk");
+        String montageCol = firstExisting(cols, "Montagewijze", "montagewijze", "Montage", "montage");
+        String pictogramCol = firstExisting(cols, "Pictogram", "pictogram");
+        String accuTypeCol = firstExisting(cols, "Accutype", "accutype", "Accu type", "accu_type", "Batterijtype", "batterijtype");
+        String artikelNrCol = firstExisting(cols, "Artikelnr", "ArtikelNr", "Artikelnr.", "artikelnummer", "Artikelnummer", "artikelnr", "artikelnr.");
+        String accuLeeftCol = firstExisting(cols, "Accu leeftijd", "AccuLeeftijd", "accu_leeftijd", "Accu (leeftijd)", "accu leeftijd");
+        String atsCol = firstExisting(cols, "ATS", "ats", "Autotest", "autotest");
+        String duurtestCol = firstExisting(cols, "Duurtest", "duurtest", "Duurtest (min)", "duurtest_min");
+        String opmCol = firstExisting(cols, "Opmerking", "opmerking", "Notitie", "notitie", "Notes", "notes");
+
+        if (locCol == null) {
+            Toast.makeText(this, "Kolom 'Locatie' niet gevonden", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         String sql = "SELECT rowid AS _id, "
-                + sel(inspectieid, "inspectieid") +", "+ sel(nrCol, "nr") +", "+ sel(codeCol, "code") +", "+ sel(soortCol, "soort") +", "
-                + sel(verdiepingCol, "verdieping") +", "+ sel(opTekCol, "op_tekening") +", "+ sel(typeCol, "type") +", "+ sel(merkCol, "merk") +", "+ sel(montageCol, "montagewijze") +", "
-                + sel(pictogramCol, "pictogram") +", "+ sel(accuTypeCol, "accutype") +", "+ sel(artikelNrCol, "artikelnr") +", "+ sel(accuLeeftCol, "accu_leeftijd") +", "
-                + sel(atsCol, "ats") +", "+ sel(duurtestCol, "duurtest") +", "+ sel(opmCol, "opmerking")
-                + " FROM inspecties WHERE " + q(locCol) + " = ? ORDER BY " + (nrCol != null ? q(nrCol) : (codeCol != null ? q(codeCol) : "rowid"));
+                + sel(inspectieid, "inspectieid") + ", "
+                + sel(nrCol, "nr") + ", "
+                + sel(codeCol, "code") + ", "
+                + sel(soortCol, "soort") + ", "
+                + sel(verdiepingCol, "verdieping") + ", "
+                + sel(ruimteCol, "ruimte") + ", "          // ⬅️ NIEUW
+                + sel(opTekCol, "op_tekening") + ", "
+                + sel(typeCol, "type") + ", "
+                + sel(merkCol, "merk") + ", "
+                + sel(montageCol, "montagewijze") + ", "
+                + sel(pictogramCol, "pictogram") + ", "
+                + sel(accuTypeCol, "accutype") + ", "
+                + sel(artikelNrCol, "artikelnr") + ", "
+                + sel(accuLeeftCol, "accu_leeftijd") + ", "
+                + sel(atsCol, "ats") + ", "
+                + sel(duurtestCol, "duurtest") + ", "
+                + sel(opmCol, "opmerking")
+                + " FROM inspecties WHERE " + q(locCol) + " = ? ORDER BY "
+                + (nrCol != null ? q(nrCol) : (codeCol != null ? q(codeCol) : "rowid"));
 
-        if (list.getAdapter()!=null) list.setAdapter(null);
+        if (list.getAdapter() != null) list.setAdapter(null);
 
-        Map<String,Integer> colWidthsPx = computeColumnWidthsPx();
-        List<ColumnConfig> cfg = ColumnConfigManager.load(this); boolean any=false; for (ColumnConfig c0: cfg){ if (c0.visible){ any=true; break; }}
-        if (!any) { cfg = ColumnConfigManager.getDefault(); ColumnConfigManager.save(this, cfg); }
+        Map<String, Integer> colWidthsPx = computeColumnWidthsPx();
+
+        List<ColumnConfig> cfg = ColumnConfigManager.load(this);
+        boolean any = false;
+        for (ColumnConfig c0 : cfg) {
+            if (c0.visible) {
+                any = true;
+                break;
+            }
+        }
+        if (!any) {
+            cfg = ColumnConfigManager.getDefault();
+            ColumnConfigManager.save(this, cfg);
+        }
 
         buildHeader(cfg, colWidthsPx, showDefects);
 
-        if (cursor!=null && !cursor.isClosed()) cursor.close();
-        cursor = db.rawQuery(sql, new String[]{ locatie });
+        if (cursor != null && !cursor.isClosed()) cursor.close();
+        cursor = db.rawQuery(sql, new String[]{locatie});
 
-        if (cursor!=null && cursor.getCount()>0) {
-            adapter = new FixtureRowAdapter(this, cursor, cfg, syncManager,
+        if (cursor != null && cursor.getCount() > 0) {
+            adapter = new FixtureRowAdapter(
+                    this, cursor, cfg, syncManager,
                     (id, fixtureCode, position) -> showRowMenu(id, fixtureCode),
                     null, // klik via ListView's OnItemClickListener
-                    colWidthsPx, defectProvider, showDefects);
+                    colWidthsPx, defectProvider, showDefects
+            );
             list.setAdapter(adapter);
 
-            // ▼ Herstel de laatst gekozen selectie (blijvende highlight)
+            // herstel selectie
             if (geselecteerdeInspectieId != -1) {
                 adapter.setActivatedInspectieId(geselecteerdeInspectieId);
                 int pos = findPositionByInspectieId(geselecteerdeInspectieId);
@@ -661,55 +1067,82 @@ public class FixtureListActivity extends BaseToolbarActivity {
                     list.setItemChecked(pos, true);
                 }
             }
-        } else { adapter=null; list.setAdapter(null); Toast.makeText(this, "Geen armaturen voor: "+locatie, Toast.LENGTH_SHORT).show(); }
+        } else {
+            adapter = null;
+            list.setAdapter(null);
+            Toast.makeText(this, "Geen armaturen voor: " + locatie, Toast.LENGTH_SHORT).show();
+        }
 
-        getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(KEY_LAST_LOCATIE, locatie).apply();
+        getSharedPreferences(PREFS, MODE_PRIVATE)
+                .edit()
+                .putString(KEY_LAST_LOCATIE, locatie)
+                .apply();
     }
 
     private void showRowMenu(final int inspectieid, final String fixtureCode) {
-        CharSequence[] items = new CharSequence[]{"Gebreken bekijken","Gebrek toevoegen","Inspectie-ID kopiëren"};
+        CharSequence[] items = new CharSequence[]{"Gebreken bekijken", "Armatuur verwijderen"};
         new AlertDialog.Builder(this)
-                .setTitle(fixtureCode!=null && !fixtureCode.isEmpty()? fixtureCode : ("Inspectie #"+inspectieid))
+                .setTitle(fixtureCode != null && !fixtureCode.isEmpty()
+                        ? fixtureCode : ("Inspectie #" + inspectieid))
                 .setItems(items, (dialog, which) -> {
-                    if (which==0) startDefectList(inspectieid, fixtureCode);
-                    else if (which==1) startAddDefect(inspectieid, fixtureCode);
-                    else {
-                        ClipboardManager cm=(ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
-                        if (cm!=null) cm.setPrimaryClip(ClipData.newPlainText("inspectie_id", String.valueOf(inspectieid)));
-                        Toast.makeText(this, "Inspectie-ID gekopieerd", Toast.LENGTH_SHORT).show();
+                    if (which == 0) {
+                        startDefectList(inspectieid, fixtureCode);
+                    } else if (which == 1) {
+                        confirmAndDeleteFixture(inspectieid, fixtureCode);
                     }
-                }).show();
+                })
+                .show();
     }
+
 
     private void startAddDefect(int inspectieid, String fixtureCode) {
         Intent i = new Intent(this, AddDefectActivity.class);
         i.putExtra(AddDefectActivity.EXTRA_INSPECTIE_ID, inspectieid);
-        i.putExtra(AddDefectActivity.EXTRA_TITEL, (fixtureCode!=null && !fixtureCode.isEmpty())? ("Armatuur: "+fixtureCode): ("Armatuur #"+inspectieid));
-        String locatie = getIntent()!=null? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE): null; if (locatie==null) locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
-        if (locatie!=null) i.putExtra(LocationListActivity.EXTRA_LOCATIE, locatie);
+        i.putExtra(AddDefectActivity.EXTRA_TITEL, (fixtureCode != null && !fixtureCode.isEmpty()) ? ("Armatuur: " + fixtureCode) : ("Armatuur #" + inspectieid));
+        String locatie = getIntent() != null ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE) : null;
+        if (locatie == null)
+            locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
+        if (locatie != null) i.putExtra(LocationListActivity.EXTRA_LOCATIE, locatie);
         startActivity(i);
     }
 
     private void startDefectList(int inspectieid, String fixtureCode) {
         Intent i = new Intent(this, DefectListActivity.class);
         i.putExtra(DefectListActivity.EXTRA_INSPECTIE_ID, inspectieid);
-        i.putExtra(DefectListActivity.EXTRA_TITEL, (fixtureCode!=null? ("Gebreken - "+fixtureCode): ("Gebreken #"+inspectieid)));
-        String locatie = getIntent()!=null? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE): null; if (locatie==null) locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
-        if (locatie!=null) i.putExtra(LocationListActivity.EXTRA_LOCATIE, locatie);
+        i.putExtra(DefectListActivity.EXTRA_TITEL, (fixtureCode != null ? ("Gebreken - " + fixtureCode) : ("Gebreken #" + inspectieid)));
+        String locatie = getIntent() != null ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE) : null;
+        if (locatie == null)
+            locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
+        if (locatie != null) i.putExtra(LocationListActivity.EXTRA_LOCATIE, locatie);
         startActivity(i);
     }
 
     private void reload() {
-        String locatie = getIntent()!=null? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE): null;
-        if (locatie==null || locatie.trim().isEmpty()) locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
-        if (locatie!=null) { if (getSupportActionBar()!=null) getSupportActionBar().setTitle(locatie); load(locatie); }
+        String locatie = getIntent() != null ? getIntent().getStringExtra(LocationListActivity.EXTRA_LOCATIE) : null;
+        if (locatie == null || locatie.trim().isEmpty())
+            locatie = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_LOCATIE, null);
+        if (locatie != null) {
+            if (getSupportActionBar() != null) getSupportActionBar().setTitle(locatie);
+            load(locatie);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home) { finish(); return true; }
+        
+    if (id == MENU_SYNC_NOW) {
+        androidx.work.WorkManager.getInstance(this).enqueue(
+            new androidx.work.OneTimeWorkRequest.Builder(
+                nl.mikekemmink.noodverlichting.noodverlichting.sync.SyncWorker.class).build());
+        android.widget.Toast.makeText(this, "Sync gestart", android.widget.Toast.LENGTH_SHORT).show();
+        return true;
+    }
+if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
 
         if (id == R.id.action_columns) {
             startActivity(new Intent(this, ColumnSettingsActivity.class));
@@ -723,7 +1156,7 @@ public class FixtureListActivity extends BaseToolbarActivity {
 
             // Update state + UI
             showDefects = newState;
-            Map<String,Integer> colW = computeColumnWidthsPx();
+            Map<String, Integer> colW = computeColumnWidthsPx();
             List<ColumnConfig> cfg = ColumnConfigManager.load(this);
             buildHeader(cfg, colW, showDefects);
             if (adapter != null) adapter.setShowDefects(showDefects);
@@ -733,6 +1166,7 @@ public class FixtureListActivity extends BaseToolbarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_fixture_list, menu);
@@ -741,12 +1175,70 @@ public class FixtureListActivity extends BaseToolbarActivity {
         MenuItem m = menu.findItem(R.id.action_defects);
         if (m != null) m.setChecked(showDefects);
 
-        return true;
+        
+    // Add programmatic 'Sync nu' item
+    MenuItem syncItem = menu.add(0, MENU_SYNC_NOW, 1000, "Sync nu");
+    try { syncItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM); } catch (Throwable ignore) {}
+return true;
     }
-    @Override protected void onDestroy() { super.onDestroy(); if (cursor!=null && !cursor.isClosed()) cursor.close(); }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (cursor != null && !cursor.isClosed()) cursor.close();
+    }
 
     // === Helpers ===
-    private boolean hasDefects(int inspectieid) {
+    private void confirmAndDeleteFixture(final int inspectieid, @Nullable final String fixtureCode) {
+        new AlertDialog.Builder(this)
+                .setTitle("Armatuur verwijderen")
+                .setMessage("Weet je zeker dat je dit armatuur" +
+                        (fixtureCode != null && !fixtureCode.isEmpty() ? (" (" + fixtureCode + ")") : "") +
+                        " wilt verwijderen? Gerelateerde gebreken en marker worden ook verwijderd.")
+                .setPositiveButton("Verwijderen", (d, w) -> deleteFixture(inspectieid))
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void deleteFixture(final int inspectieid) {
+        // 1) Marker verwijderen/ontkoppelen (uit JSON + overlay)
+        MarkerData m = markerMap.get(inspectieid);
+        if (m != null) {
+            removeMarker(m); // deze werkt al: past JSON/index aan en refresht overlay
+        }
+
+        // 2) Gebreken uit field.db verwijderen (indien aanwezig)
+        try {
+            android.database.sqlite.SQLiteDatabase fdb =
+                    nl.mikekemmink.noodverlichting.noodverlichting.data.DBField
+                            .getInstance(this).getWritableDatabase();
+            fdb.delete("gebreken", "inspectie_id = ?", new String[]{String.valueOf(inspectieid)});
+        } catch (Throwable ignore) {
+            // Geen field.db of geen tabel? Stil doorgaan.
+        }
+
+        // 3) Armatuur uit inspecties-tabel verwijderen
+        try {
+            android.database.sqlite.SQLiteDatabase db = dbHelper.getWritableDatabase();
+            java.util.Set<String> cols = getColumns(db, "inspecties");
+            String pkCol = firstExisting(cols, "inspectie_id", "id", "inspectieId", "inspectie", "_id", "Inspectie-ID");
+            if (pkCol == null) pkCol = "rowid"; // laatste redmiddel
+            db.delete("inspecties", pkCol + " = ?", new String[]{String.valueOf(inspectieid)});
+        } catch (Throwable t) {
+            Toast.makeText(this, "Verwijderen mislukt", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 4) UI verversen
+        defectFlagCache.remove(inspectieid);
+        geselecteerdeInspectieId = -1;
+
+        Toast.makeText(this, "Armatuur verwijderd", Toast.LENGTH_SHORT).show();
+        reload(); // bouwt de lijst opnieuw op
+    }
+
+
+        private boolean hasDefects(int inspectieid) {
         // Cache-hit?
         Boolean cached = defectFlagCache.get(inspectieid);
         if (cached != null) return cached;
@@ -866,11 +1358,37 @@ public class FixtureListActivity extends BaseToolbarActivity {
     private static String q(String ident){ return "`"+ident+"`"; }
     private static String sel(String sourceCol, String alias){ return (sourceCol!=null)? (q(sourceCol)+" AS "+alias) : ("NULL AS "+alias); }
 
-    private int widthFor(String alias){ if ("nr".equals(alias)) return 72; if ("code".equals(alias)) return 128; if ("soort".equals(alias)) return 96; if ("verdieping".equals(alias)) return 110; if ("op_tekening".equals(alias)) return 130; if ("type".equals(alias)) return 96; if ("merk".equals(alias)) return 128; if ("montagewijze".equals(alias)) return 160; if ("pictogram".equals(alias)) return 120; if ("accutype".equals(alias)) return 120; if ("artikelnr".equals(alias)) return 120; if ("accu_leeftijd".equals(alias)) return 140; if ("ats".equals(alias)) return 80; if ("duurtest".equals(alias)) return 110; if ("opmerking".equals(alias)) return 220; if ("gebreken".equals(alias)) return 200; return 120; }
-    private int dp(int v){ return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, getResources().getDisplayMetrics()); }
+    private int widthFor(String alias) {
+        if ("nr".equals(alias))            return 72;
+        if ("code".equals(alias))          return 128;
+        if ("soort".equals(alias))         return 96;
+        if ("verdieping".equals(alias))    return 110;
+        if ("ruimte".equals(alias))        return 160;
+        if ("op_tekening".equals(alias))   return 130;
+        if ("type".equals(alias))          return 96;
+        if ("merk".equals(alias))          return 128;
+        if ("montagewijze".equals(alias))  return 160;
+        if ("pictogram".equals(alias))     return 120;
+        if ("accutype".equals(alias))      return 120;
+        if ("artikelnr".equals(alias))     return 120;
+        if ("accu_leeftijd".equals(alias)) return 140;
+        if ("ats".equals(alias))           return 80;
+        if ("duurtest".equals(alias))      return 110;
+        if ("opmerking".equals(alias))     return 220;
+        if ("gebreken".equals(alias))      return 200;
+        return 120;
+    }    private int dp(int v){ return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, getResources().getDisplayMetrics()); }
     private int px(int vDp){ return dp(vDp); }
 
-    private Map<String,Integer> computeColumnWidthsPx(){ HashMap<String,Integer> m=new HashMap<>(); String[] aliases = new String[]{"nr","code","soort","verdieping","op_tekening","type","merk","montagewijze","pictogram","accutype","artikelnr","accu_leeftijd","ats","duurtest","opmerking","gebreken"}; for (String a: aliases) m.put(a, px(widthFor(a))); return m; }
+    private Map<String,Integer> computeColumnWidthsPx() {
+        HashMap<String,Integer> m = new HashMap<>();
+        String[] aliases = new String[]{
+                "nr","code","soort","verdieping","ruimte","op_tekening","type","merk","montagewijze",
+                "pictogram","accutype","artikelnr","accu_leeftijd","ats","duurtest","opmerking","gebreken"
+        };
+        for (String a : aliases) m.put(a, px(widthFor(a)));
+        return m;
+    }
 
     private void buildHeader(List<ColumnConfig> cfg, Map<String,Integer> colWidthsPx, boolean withDefects){
         if (headerView==null){ headerView=findViewById(R.id.hscrollHeader);}

@@ -1,35 +1,49 @@
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootCoordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <!-- Sticky header -->
-    <include layout="@layout/nv_header_fixture_columns" />
-
-    <!-- Scrollbare lijst -->
-
-    <!-- Onderste helft: plattegrondviewer -->
-
-    <ListView
-
-        android:id="@+id/listArmaturen"
+    <!-- JOUW bestaande content als één container -->
+    <LinearLayout
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        android:choiceMode="singleChoice"
-        android:clickable="false"
-        android:drawSelectorOnTop="false"
+        <include layout="@layout/nv_header_fixture_columns" />
 
-        android:listSelector="@android:color/transparent"
+        <ListView
+            android:id="@+id/listArmaturen"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:choiceMode="singleChoice"
+            android:clickable="false"
+            android:drawSelectorOnTop="false"
+            android:listSelector="@android:color/transparent" />
 
-        />
+        <FrameLayout
+            android:id="@+id/plattegrondContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:background="#eeeeee"/>
+    </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/plattegrondContainer"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_weight="1"
-        android:background="#eeeeee" />
-</LinearLayout>
+    <!-- FAB: ANCHOR AAN contentContainer (broer), NIET aan rootCoordinator -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_add_24"
+        app:tint="@android:color/white"
+        app:layout_anchor="@id/contentContainer"
+        app:layout_anchorGravity="bottom|end|right"
+        app:useCompatPadding="true"
+        app:backgroundTint="@color/nood_green"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

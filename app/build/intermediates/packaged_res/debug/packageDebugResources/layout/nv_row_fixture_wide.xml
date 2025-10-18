@@ -57,6 +57,18 @@
                 android:ellipsize="end"
                 android:singleLine="true" />
 
+
+            <!-- Ruimte -->
+            <TextView
+                android:id="@+id/tvRuimte"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:textColor="#333"
+                android:ellipsize="end"
+                android:singleLine="true" />
+
+
             <!-- Soort -->
             <TextView
                 android:id="@+id/tvSoort"

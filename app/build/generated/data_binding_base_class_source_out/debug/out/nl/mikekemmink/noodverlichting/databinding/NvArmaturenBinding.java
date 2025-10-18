@@ -9,8 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -18,7 +20,13 @@ import nl.mikekemmink.noodverlichting.R;
 
 public final class NvArmaturenBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
+
+  @NonNull
+  public final LinearLayout contentContainer;
+
+  @NonNull
+  public final FloatingActionButton fabMain;
 
   @NonNull
   public final ListView listArmaturen;
@@ -26,16 +34,24 @@ public final class NvArmaturenBinding implements ViewBinding {
   @NonNull
   public final FrameLayout plattegrondContainer;
 
-  private NvArmaturenBinding(@NonNull LinearLayout rootView, @NonNull ListView listArmaturen,
-      @NonNull FrameLayout plattegrondContainer) {
+  @NonNull
+  public final CoordinatorLayout rootCoordinator;
+
+  private NvArmaturenBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull LinearLayout contentContainer, @NonNull FloatingActionButton fabMain,
+      @NonNull ListView listArmaturen, @NonNull FrameLayout plattegrondContainer,
+      @NonNull CoordinatorLayout rootCoordinator) {
     this.rootView = rootView;
+    this.contentContainer = contentContainer;
+    this.fabMain = fabMain;
     this.listArmaturen = listArmaturen;
     this.plattegrondContainer = plattegrondContainer;
+    this.rootCoordinator = rootCoordinator;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -60,6 +76,18 @@ public final class NvArmaturenBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.contentContainer;
+      LinearLayout contentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (contentContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.fabMain;
+      FloatingActionButton fabMain = ViewBindings.findChildViewById(rootView, id);
+      if (fabMain == null) {
+        break missingId;
+      }
+
       id = R.id.listArmaturen;
       ListView listArmaturen = ViewBindings.findChildViewById(rootView, id);
       if (listArmaturen == null) {
@@ -72,7 +100,10 @@ public final class NvArmaturenBinding implements ViewBinding {
         break missingId;
       }
 
-      return new NvArmaturenBinding((LinearLayout) rootView, listArmaturen, plattegrondContainer);
+      CoordinatorLayout rootCoordinator = (CoordinatorLayout) rootView;
+
+      return new NvArmaturenBinding((CoordinatorLayout) rootView, contentContainer, fabMain,
+          listArmaturen, plattegrondContainer, rootCoordinator);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
